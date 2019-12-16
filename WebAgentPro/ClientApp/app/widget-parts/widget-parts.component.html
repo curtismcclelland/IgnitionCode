@@ -1,0 +1,11 @@
+<h4>Parts for Widget {{ widgetID }}</h4>
+<table *ngIf="parts">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr *ngFor="let p of parts">
+        <td> {{ p.name }} </td>
+        <td> {{ p.description }} </td>
+    </tr>
+</table>

@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-12">
+        <h1>Widgets</h1>
+        <!-- Action buttons in the list are disabled when a Widget is being edited-->
+        <button (click)="createWidget()" [disabled]="editing" class="btn btn-primary">Create</button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- first column contains the list of widgets -->
+    <div class="col-9">
+        <!-- Displays cards if there are widgets. -->
+        <div class="card-deck" *ngIf="widgets">
+            <div class="card m-2" *ngFor="let w of widgets">
+                <div class="card-header">
+                    <h5 class="card-title"> {{ w.name }} </h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-text">Description</h6>
+                    <div class="card-text">{{ w.description }}</div>
+                    <br />
+                    <h6 class="card-text">Last Design Review</h6>
+                    <div class="card-text">{{ w.lastDesignReview }}</div>
+                    <br />
+                    <!-- creates a link that passes in the WidgetID to another component -->
+                    <a class="card-text" [routerLink]="['/widget-parts', w.id]">View Parts</a>
+                </div>
+                <div class="card-footer">
+                    <button (click)="editWidget(w.id)" [disabled]="editing" class="btn btn-primary">Edit</button>
+                    <button (click)="deleteWidget(w.id)" [disabled]="editing" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second column contains the add/edit form -->
+    <div class="col-3">
+        <!-- Sets up template variable #widgetForm, submission method onSubmit(),
+            and only displays if there is a widget to add/edit. -->
+        <form #widgetForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="widgetEdit">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Widget {{ widgetEdit.id }} Info</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Text box for Name property with validation. -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" #name="ngModel" [(ngModel)]="widgetEdit.name" type="text" class="form-control" required />
+                        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required.</div>
+                    </div>
+
+                    <!-- Text box for Description property with validation. -->
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input id="description" name="description" #description="ngModel" [(ngModel)]="widgetEdit.description" type="text" class="form-control" required />
+                        <div [hidden]="description.valid || description.pristine" class="alert alert-danger">Description is required.</div>
+                    </div>
+
+                    <!-- Text box for Last Design Review property with validation. -->
+                    <div class="form-group">
+                        <label for="lastDesignReview">Last Design Review</label>
+                        <input id="lastDesignReview" name="lastDesignReview" #lastDesignReview="ngModel" [(ngModel)]="widgetEdit.lastDesignReview" type="text" class="form-control" required />
+                        <div [hidden]="lastDesignReview.valid || lastDesignReview.pristine" class="alert alert-danger">Last Design Review is required.</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <!-- Cancel and Submit buttons. Can't submit unless for is passing validation. -->
+                    <div class="form-group">
+                        <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" [disabled]="!widgetForm.form.valid" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
