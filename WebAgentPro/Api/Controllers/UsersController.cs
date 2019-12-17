@@ -52,22 +52,22 @@ namespace WebAgentPro.Controllers
                 IList<WapUser> allUsers = await _userManager
                     .Users.AsNoTracking().ToListAsync();
 
-                    foreach(WapUser wapUser in allUsers)
+                foreach (WapUser wapUser in allUsers)
+                {
+                    var user = _mapper.Map<User>(wapUser);
+                    if (user.IsActive)
                     {
-                        var user = _mapper.Map<User>(wapUser);
-                        if (user.IsActive)
+                        var userRole = _userManager.GetRolesAsync(wapUser).Result.FirstOrDefault();
+                        if (userRole == null)
                         {
-                            var userRole = _userManager.GetRolesAsync(wapUser).Result.FirstOrDefault();
-                            if (userRole == null)
-                            {
-                                const string defaultRole = "Registered";
-                                var roleResult = _userManager.AddToRoleAsync(wapUser, defaultRole).Result;
-                                userRole = defaultRole;
-                            }
-                            user.Roles.Add(userRole);
+                            const string defaultRole = "Registered";
+                            var roleResult = _userManager.AddToRoleAsync(wapUser, defaultRole).Result;
+                            userRole = defaultRole;
                         }
-                        userViews.Add(user);
-                    };
+                        user.Roles.Add(userRole);
+                    }
+                    userViews.Add(user);
+                };
             }
             else if (userStatusRole == "Inactive")
             {
@@ -108,7 +108,10 @@ namespace WebAgentPro.Controllers
         public async Task<IActionResult> SetUserStatusRole([FromBody] UserStatusRole userStatusRole)
         {
             var selectedUser = await _userManager.Users.SingleOrDefaultAsync(u => u.UserName == userStatusRole.UserName);
-            if (selectedUser == null) return BadRequest($"User {userStatusRole.UserName} not found in database.");
+            if (selectedUser == null)
+            {
+                return BadRequest($"User {userStatusRole.UserName} not found in database.");
+            }
 
             var currentRoles = await _userManager.GetRolesAsync(selectedUser);
             foreach (var currentRole in currentRoles)
@@ -118,7 +121,10 @@ namespace WebAgentPro.Controllers
                 {
                     var appEx = new WapException("Unable to remove role.");
                     foreach (IdentityError error in removeResult.Errors)
+                    {
                         appEx.Details.Add(error.Description);
+                    }
+
                     throw appEx;
                 }
             }
@@ -136,7 +142,10 @@ namespace WebAgentPro.Controllers
             {
                 var appEx = new WapException("Unable to set user's role to Agent.");
                 foreach (var error in roleResult.Errors)
+                {
                     appEx.Details.Add(error.Description);
+                }
+
                 throw appEx;
             }
             return Ok(userStatusRole.StatusRole);

@@ -6,13 +6,13 @@ using WebAgentProTemplate.Api.Models;
 namespace WebAgentPro.Data
 {
     public class WapDbContext : IdentityDbContext<WapUser>
-  {
-    public WapDbContext(DbContextOptions<WapDbContext> options)
-         : base(options)
     {
-    }
+        public WapDbContext(DbContextOptions<WapDbContext> options)
+             : base(options)
+        {
+        }
 
-    public DbSet<Widget> Widgets { get; set; }
-    public DbSet<WidgetPart> WidgetParts { get; set; }
-  }
+        public DbSet<Widget> Widgets { get; set; }
+        public DbSet<WidgetPart> WidgetParts { get; set; }
+    }
 }

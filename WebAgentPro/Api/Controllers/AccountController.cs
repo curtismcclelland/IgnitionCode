@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
 using WebAgentPro.ViewModels;
@@ -36,7 +36,7 @@ namespace WebAgentPro.Controllers
         public AccountsController(WapDbContext context,
             UserManager<WapUser> userManager,
             SignInManager<WapUser> signInManager,
-            IConfiguration configuration, 
+            IConfiguration configuration,
             ILogger<AccountsController> logger,
             IMapper mapper)
         {
@@ -68,7 +68,7 @@ namespace WebAgentPro.Controllers
                 if (!createResult.Succeeded)
                 {
                     var appEx = new WapException("Unable to register user.");
-                    createResult.Errors.ToList().ForEach(error=>appEx.Details.Add(error.Description));
+                    createResult.Errors.ToList().ForEach(error => appEx.Details.Add(error.Description));
                     throw appEx;
                 }
 
@@ -107,7 +107,7 @@ namespace WebAgentPro.Controllers
                 }
 
                 var userViewModel = _mapper.Map<User>(user);
-                userViewModel.Roles = await _userManager.GetRolesAsync(user); 
+                userViewModel.Roles = await _userManager.GetRolesAsync(user);
                 userViewModel.Token = CreateToken(user, userViewModel.Roles); ;
 
                 return Ok(userViewModel);

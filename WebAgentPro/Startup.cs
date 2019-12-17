@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
@@ -23,7 +23,8 @@ namespace WebAgentPro
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public Startup(IHostingEnvironment env)
+
+        public Startup(IWebHostEnvironment env)
         {
             #region CONFIGURATION     Load configuration from appsettings.json files
             var builder = new ConfigurationBuilder()
@@ -33,6 +34,7 @@ namespace WebAgentPro
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+
             #endregion
         }
 
@@ -53,7 +55,7 @@ namespace WebAgentPro
 
             #region Controllers     Configure to ignore loops in object models and to validate new API rules
             services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-//            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             #endregion
 
             #region JWT AUTHENTICATION      Turn on and configure JWT Beara Token Authentication
@@ -91,7 +93,7 @@ namespace WebAgentPro
             #endregion
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -106,18 +108,18 @@ namespace WebAgentPro
                             .AllowCredentials());
             #endregion
 
-            app.UseAuthentication();       
-            
+            app.UseAuthentication();
+
             app.UseRouting();
 
-           app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-           app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 this.CreateRoutes(endpoints);
-                endpoints.MapControllers(); 
+                endpoints.MapControllers();
             });
 
             #region SWAGGER
@@ -148,14 +150,14 @@ namespace WebAgentPro
 
         }
 
-        void CreateRoutes(IEndpointRouteBuilder enpoints) // <--
+        void CreateRoutes(IEndpointRouteBuilder endpoints)
         {
-            enpoints.MapControllerRoute( // <--
+            endpoints.MapControllerRoute(
               "Events",
               string.Concat("{moniker}/{controller=Root}/{action=Index}/{id?}")
               );
 
-            enpoints.MapControllerRoute( // <--
+            endpoints.MapControllerRoute(
                "Default",
               "{controller=Root}/{action=Index}/{id?}"
             );

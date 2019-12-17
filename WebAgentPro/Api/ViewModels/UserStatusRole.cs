@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebAgentProTemplate.Api.ViewModels
+﻿namespace WebAgentProTemplate.Api.ViewModels
 {
     public class UserStatusRole
     {

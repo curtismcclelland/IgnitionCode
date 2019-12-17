@@ -36,7 +36,7 @@ namespace WebAgentPro.Data
                 {
                     Name = "Seeded Widget",
                     Description = "This is a really cool widget. It does things no other widget can do.",
-                    LastDesignReview = DateTime.Parse("1/1/2012")             
+                    LastDesignReview = DateTime.Parse("1/1/2012")
                 });
             }
 
@@ -73,7 +73,7 @@ namespace WebAgentPro.Data
                 _userManager.CreateAsync(agent, "Asdfjkl!1").Wait();
                 _userManager.AddToRoleAsync(agent, "Agent").Wait();
 
-                var manager2= new WapUser()
+                var manager2 = new WapUser()
                 {
                     UserName = "manager2@aia.com",
                     Email = "manager2@aia.com",
