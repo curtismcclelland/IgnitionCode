@@ -22,7 +22,6 @@ namespace WebAgentPro
 {
     public class Startup
     {
-        readonly string MyCorsPolicy = "_myCorsPolicy";
         public IConfiguration Configuration { get; }
         public Startup(IHostingEnvironment env)
         {
@@ -45,10 +44,7 @@ namespace WebAgentPro
             #endregion
 
             #region AUTOMAPPER              Map between DTOs and Entities
-            Mapper.Initialize(configuration =>
-            {
-                configuration.AddProfile<WapMapperProfile>();
-            });
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
 
             #region CORS                    Allow access from other domains

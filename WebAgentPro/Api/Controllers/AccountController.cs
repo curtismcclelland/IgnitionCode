@@ -31,18 +31,21 @@ namespace WebAgentPro.Controllers
         private SignInManager<WapUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
+        private readonly Mapper _mapper;
 
         public AccountsController(WapDbContext context,
             UserManager<WapUser> userManager,
             SignInManager<WapUser> signInManager,
             IConfiguration configuration, 
-            ILogger<AccountsController> logger)
+            ILogger<AccountsController> logger,
+            Mapper mapper)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _logger = logger;
+            _mapper = mapper;
         }
 
 
@@ -57,7 +60,7 @@ namespace WebAgentPro.Controllers
         [ProducesResponseType(typeof(WapExceptionViewModel), 400)]
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
-            WapUser newUser = Mapper.Map<WapUser>(userRegistration);
+            WapUser newUser = _mapper.Map<WapUser>(userRegistration);
 
             try
             {
@@ -104,7 +107,7 @@ namespace WebAgentPro.Controllers
                     throw new WapException("Unable to authenticate user credentials.");
                 }
 
-                var userViewModel = Mapper.Map<User>(user);
+                var userViewModel = _mapper.Map<User>(user);
                 userViewModel.Roles = await _userManager.GetRolesAsync(user); 
                 userViewModel.Token = CreateToken(user, userViewModel.Roles); ;
 

@@ -27,12 +27,14 @@ namespace WebAgentPro.Controllers
         private readonly UserManager<WapUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
+        private readonly Mapper _mapper;
 
-        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger)
+        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger, Mapper mapper)
         {
             _userManager = userManager;
             _configuration = configuration;
             _logger = logger;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace WebAgentPro.Controllers
             var userViews = new List<User>();
             await _userManager.Users.ForEachAsync(wapUser =>
            {
-               var user = Mapper.Map<User>(wapUser);
+               var user = _mapper.Map<User>(wapUser);
                user.Roles = _userManager.GetRolesAsync(wapUser).Result;
                userViews.Add(user);
            });
@@ -69,7 +71,7 @@ namespace WebAgentPro.Controllers
                     .Users
                     .ForEachAsync(wapUser =>
                     {
-                        var user = Mapper.Map<User>(wapUser);
+                        var user = _mapper.Map<User>(wapUser);
                         if (user.IsActive)
                         {
                             var userRole = _userManager.GetRolesAsync(wapUser).Result.FirstOrDefault();
@@ -91,7 +93,7 @@ namespace WebAgentPro.Controllers
                     .Where(u => !u.IsActive)
                     .ForEachAsync(wapUser =>
                     {
-                        var user = Mapper.Map<User>(wapUser);
+                        var user = _mapper.Map<User>(wapUser);
                         userViews.Add(user);
                     });
             }
@@ -103,7 +105,7 @@ namespace WebAgentPro.Controllers
                    .ToList()
                    .ForEach(wapUser =>
                    {
-                       var user = Mapper.Map<User>(wapUser);
+                       var user = _mapper.Map<User>(wapUser);
                        user.Roles.Add(userStatusRole);
                        userViews.Add(user);
                    });
