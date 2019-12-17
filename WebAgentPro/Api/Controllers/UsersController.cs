@@ -38,25 +38,7 @@ namespace WebAgentPro.Controllers
         }
 
         /// <summary>
-        /// Retrieves a list of all registered WAP users.
-        /// </summary>
-        /// <returns>List of User objects.</returns>
-        [HttpGet(Name = "Get All Users")]
-        [ProducesResponseType(typeof(IList<User>), 200)]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var userViews = new List<User>();
-            await _userManager.Users.ForEachAsync(wapUser =>
-           {
-               var user = _mapper.Map<User>(wapUser);
-               user.Roles = _userManager.GetRolesAsync(wapUser).Result;
-               userViews.Add(user);
-           });
-            return Ok(userViews);
-        }
-
-        /// <summary>
-        /// Retrieves a list of all registered WAP users.
+        /// Retrieves a list of all WAP users for the spedcified status/role.
         /// </summary>
         /// <returns>List of User objects.</returns>
         [HttpGet("getFilteredUsers", Name = "Get Filtered Users")]
@@ -67,9 +49,10 @@ namespace WebAgentPro.Controllers
             var userViews = new List<User>();
             if (userStatusRole == "All Users")
             {
-                await _userManager
-                    .Users
-                    .ForEachAsync(wapUser =>
+                IList<WapUser> allUsers = await _userManager
+                    .Users.AsNoTracking().ToListAsync();
+
+                    foreach(WapUser wapUser in allUsers)
                     {
                         var user = _mapper.Map<User>(wapUser);
                         if (user.IsActive)
@@ -84,7 +67,7 @@ namespace WebAgentPro.Controllers
                             user.Roles.Add(userRole);
                         }
                         userViews.Add(user);
-                    });
+                    };
             }
             else if (userStatusRole == "Inactive")
             {
