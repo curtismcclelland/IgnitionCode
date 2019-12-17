@@ -27,9 +27,9 @@ namespace WebAgentPro.Controllers
         private readonly UserManager<WapUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger, Mapper mapper)
+        public UsersController(UserManager<WapUser> userManager, IConfiguration configuration, ILogger<AccountsController> logger, IMapper mapper)
         {
             _userManager = userManager;
             _configuration = configuration;

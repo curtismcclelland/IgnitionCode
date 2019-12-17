@@ -31,14 +31,14 @@ namespace WebAgentPro.Controllers
         private SignInManager<WapUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AccountsController> _logger;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
         public AccountsController(WapDbContext context,
             UserManager<WapUser> userManager,
             SignInManager<WapUser> signInManager,
             IConfiguration configuration, 
             ILogger<AccountsController> logger,
-            Mapper mapper)
+            IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
@@ -94,7 +94,6 @@ namespace WebAgentPro.Controllers
         {
             try
             {
-                //var authenticatedUser = await _repository.Authenticate(credentials.UserName, credentials.Password);
                 var user = await _userManager.FindByNameAsync(credentials.UserName);
                 if (user == null)
                 {
