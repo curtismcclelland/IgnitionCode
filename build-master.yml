@@ -23,7 +23,7 @@ steps:
 
 - task: Npm@1
   inputs:
-    command: 'install'
+    command: 'install $(Build.SourcesDirectory)\WebAgentPro'
 
 - task: VSBuild@1
   inputs:
