@@ -9,44 +9,31 @@
     <option>Agent</option>
     <option>Manager</option>
   </select>
-  <div class="userList">
-    <div class="row gridHeader">
-      <div class="col-sm-12 col-lg-3 firstName">First</div>
-      <div class="col-sm-12 col-lg-3 lastName">Last</div>
-      <div class="col-sm-12 col-lg-3 userName">UserName</div>
-      <div class="col-sm-12 col-lg-3 role">Status/Role</div>
-      <div class="clearfix"></div>
-    </div>
-    <div class="row" *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p }">
-      <div class="col-sm-12 col-lg-3 firstName">
-        <div class="formHeader">First:</div>
-        <div class="valueField">{{user.firstName}}</div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-sm-12 col-lg-3  lastName">
-        <div class="formHeader">Last:</div>
-        <div class="valueField">{{user.lastName}}</div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-sm-12 col-lg-3  userName">
-        <div class="formHeader">UserName:</div>
-        <div class="valueField">{{user.userName}}</div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="col-sm-12 col-lg-3  role">
-        <div class="formHeader">Status/Role:</div>
-        <div class="valueField">
-          <select value='{{getRoleStatus(user)}}' (change)="roleStatusChanged(user, $event.target.value)">
-            <option>Inactive</option>
-            <option>Registered</option>
-            <option>Agent</option>
-            <option>Manager</option>
-          </select>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
+  <br/>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+      <th>First</th>
+      <th>Last</th>
+      <th>UserName</th>
+      <th>Status/Role</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p }">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.userName}}</td>
+            <td>
+                <select value='{{getRoleStatus(user)}}' (change)="roleStatusChanged(user, $event.target.value)">
+                    <option>Inactive</option>
+                    <option>Registered</option>
+                    <option>Agent</option>
+                    <option>Manager</option>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+  </table>
 </div>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>

@@ -16,7 +16,7 @@ namespace WebAgentPro.Controllers
 {
     [ApiController]
     [Route("api/users")]
-    [Authorize(Roles = "Manager")]
+   // [Authorize(Roles = "Manager")]
     [Produces("application/json")]
     [Consumes("application/json")]
     [ProducesResponseType(401)]
