@@ -21,7 +21,7 @@ let AuthGuard = class AuthGuard {
             // check if route is restricted by role
             if (route.data.roles) {
                 //check if user roles include any route restriction roles
-                var matchingRoles = route.data.roles.filter(item => currentUser.roles.includes(item));
+                var matchingRoles = route.data.roles.filter((item) => currentUser.roles.includes(item));
                 if (matchingRoles.length === 0) {
                     // role not authorised so redirect to home page
                     this.router.navigate(['/']);

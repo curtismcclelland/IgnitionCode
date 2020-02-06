@@ -9,7 +9,5 @@ namespace WebAgentPro.Models
         public bool IsActive { get; set; }
         public int? BirthMonth { get; set; }
         public int? BirthDayOfMonth { get; set; }
-
-
     }
 }

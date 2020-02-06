@@ -13,6 +13,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
+            "optimization": true,
             "outputPath": "dist/web-agent-pro-client",
             "index": "ClientApp/index.html",
             "main": "ClientApp/main.ts",
@@ -25,7 +27,7 @@
             ],
             "styles": [
               "ClientApp/bootstrap.min.css",
-              "ClientApp/styles.css" 
+              "ClientApp/styles.css"
             ],
             "scripts": [
             ]
