@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebAgentPro.Models;
-using WebAgentProTemplate.Api.Models;
+using WebAgentPro.Api.Models;
 
 namespace WebAgentPro.Data
 {

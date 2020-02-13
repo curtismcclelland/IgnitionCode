@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebAgentProTemplate.Api.Models
+namespace WebAgentPro.Api.Models
 {
     public class Widget
     {

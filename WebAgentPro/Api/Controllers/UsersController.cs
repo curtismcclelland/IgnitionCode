@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Models;
 using WebAgentPro.ViewModels;
-using WebAgentProTemplate.Api.ViewModels;
+using WebAgentPro.Api.ViewModels;
 
 namespace WebAgentPro.Controllers
 {

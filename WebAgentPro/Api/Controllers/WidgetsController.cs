@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Data;
-using WebAgentProTemplate.Api.Models;
+using WebAgentPro.Api.Models;
 
-namespace WebAgentProTemplate.Api.Controllers
+namespace WebAgentPro.Api.Controllers
 {
     [ApiController]                     // specifies this controller should be bound to the API conventions identitified in startup.cs (current version 2.2)
     [AllowAnonymous]                    // AllowAnonymous during core functionality development.
@@ -116,6 +116,12 @@ namespace WebAgentProTemplate.Api.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(widget);
+        }
+
+        [HttpGet("search")]
+        public IActionResult SearchWidgets([FromQuery] WidgetSearch criteria)
+        {
+            return Ok(_context.Widgets.Where(w => w.Name.Equals(criteria.Name)).GetPaged(criteria.RequestedPage,criteria.PageSize));
         }
 
         private bool WidgetExists(long id)

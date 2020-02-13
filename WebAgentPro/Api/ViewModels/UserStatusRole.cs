@@ -1,4 +1,4 @@
-﻿namespace WebAgentProTemplate.Api.ViewModels
+﻿namespace WebAgentPro.Api.ViewModels
 {
     public class UserStatusRole
     {

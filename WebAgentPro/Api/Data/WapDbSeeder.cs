@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using WebAgentPro.Models;
-using WebAgentProTemplate.Api.Models;
+using WebAgentPro.Api.Models;
 
 namespace WebAgentPro.Data
 {

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Data;
-using WebAgentProTemplate.Api.Models;
+using WebAgentPro.Api.Models;
 
-namespace WebAgentProTemplate.Api.Controllers
+namespace WebAgentPro.Api.Controllers
 {
     [AllowAnonymous]
     [Route("api/[controller]")]

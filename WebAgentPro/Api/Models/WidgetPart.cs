@@ -1,4 +1,4 @@
-﻿namespace WebAgentProTemplate.Api.Models
+﻿namespace WebAgentPro.Api.Models
 {
     public class WidgetPart
     {
