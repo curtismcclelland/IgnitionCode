@@ -11,4 +11,6 @@ namespace WebAgentPro.Api.Models
         public DateTime LastDesignReview { get; set; }
         public virtual ICollection<WidgetPart> Parts { get; set; }
     }
-}
+} 
+ 
+
