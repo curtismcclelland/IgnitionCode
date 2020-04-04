@@ -121,7 +121,27 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet("search")]
         public IActionResult SearchWidgets([FromQuery] WidgetSearch criteria)
         {
-            return Ok(_context.Widgets.Where(w => w.Name.Equals(criteria.Name)).GetPaged(criteria.RequestedPage,criteria.PageSize));
+            //get a queryable reference to the collection
+            var query = _context.Widgets.AsQueryable();
+
+            if (criteria.ID > 0) //IDs are unique so no need to check other criteria
+               query = query.Where(w => w.ID.Equals(criteria.ID));
+            else  // build up the query based on each criteria supplied
+            {
+                if (!string.IsNullOrEmpty(criteria.Name))
+                    query = query.Where(w => w.Name.Contains(criteria.Name));
+
+                if (!string.IsNullOrEmpty(criteria.DesignStartDate.ToString()))
+                    query = query.Where(w => w.LastDesignReview >= criteria.DesignStartDate);
+
+                if (!string.IsNullOrEmpty(criteria.DesignEndDate.ToString()))
+                    query = query.Where(w => w.LastDesignReview <= criteria.DesignEndDate);
+            }
+
+            // send the query to the paging helper
+            var pagedResult = query.GetPaged(criteria.RequestedPage, criteria.PageSize);
+
+            return Ok(pagedResult);
         }
 
         private bool WidgetExists(long id)

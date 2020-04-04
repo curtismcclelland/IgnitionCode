@@ -10,6 +10,9 @@ namespace WebAgentPro.Api.Models
     {
         public int RequestedPage { get; set; }
         public int PageSize { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
+        public DateTime DesignStartDate { get; set; }
+        public DateTime DesignEndDate { get; set; }
     }
 }
