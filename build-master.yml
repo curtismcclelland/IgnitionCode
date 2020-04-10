@@ -39,7 +39,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '-c Release -r win-x86 --self-contained true'
+    arguments: '-c Release -r win-x86 --self-contained true -o $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
     modifyOutputPath: false
 
@@ -48,3 +48,4 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
