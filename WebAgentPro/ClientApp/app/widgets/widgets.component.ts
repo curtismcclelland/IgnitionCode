@@ -30,19 +30,22 @@ export class WidgetsComponent implements OnInit {
 
     // get all the widgets from the API
     getWidgets() {
-        this.service.getWidgets().subscribe(returnedWidgets => { this.widgets = returnedWidgets });
+        this.service.getWidgets().subscribe(returnedWidgets => { 
+        this.widgets = returnedWidgets
+         });
     }
 
     // create an empty widget to populate the create form
     createWidget() {
         this.widgetEdit = new Widget();
-    }
+    } 
 
     // get the selected widget from the API to populate the edit form
     editWidget(id: number) {
         this.service.getWidget(id).subscribe(
             returnedWidget => {
                 this.widgetEdit = returnedWidget;
+                this.widgetEdit.lastDesignReview = this.widgetEdit.lastDesignReview.substring(0, 10);
             });
     }
 

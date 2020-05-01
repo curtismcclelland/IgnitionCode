@@ -39,7 +39,7 @@
                     <!-- Text box for Last Design Review property with validation. -->
                     <div class="form-group">
                         <label for="lastDesignReview">Last Design Review</label>
-                        <input id="lastDesignReview" name="lastDesignReview" #lastDesignReview="ngModel" [(ngModel)]="widgetEdit.lastDesignReview" type="text" class="form-control" required />
+                        <input id="lastDesignReview" name="lastDesignReview" #lastDesignReview="ngModel" [(ngModel)]="widgetEdit.lastDesignReview" type="date" class="form-control" required />
                         <div [hidden]="lastDesignReview.valid || lastDesignReview.pristine" class="alert alert-danger">Last Design Review is required.</div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="card-text">{{ w.description }}</div>
                 <br />
                 <h6 class="card-text">Last Design Review</h6>
-                <div class="card-text">{{ w.lastDesignReview }}</div>
+                <div class="card-text">{{ w.lastDesignReview | date: 'M/d/yyyy'}}</div>
                 <br />
                 <!-- creates a link that passes in the WidgetID to another component -->
                 <a class="card-text" [routerLink]="['/widget-parts', w.id]">View Parts</a>
