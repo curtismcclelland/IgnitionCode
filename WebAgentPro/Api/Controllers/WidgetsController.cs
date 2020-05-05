@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Data;
 using WebAgentPro.Api.Models;
+using System;
 
 namespace WebAgentPro.Api.Controllers
 {
@@ -118,30 +119,46 @@ namespace WebAgentPro.Api.Controllers
             return Ok(widget);
         }
 
-        [HttpGet("search")]
-        public IActionResult SearchWidgets([FromQuery] WidgetSearch criteria)
+        [HttpPost("search")]
+        public IActionResult Search(WidgetSearchCriteria criteria)
         {
-            //get a queryable reference to the collection
             var query = _context.Widgets.AsQueryable();
 
-            if (criteria.ID > 0) //IDs are unique so no need to check other criteria
-               query = query.Where(w => w.ID.Equals(criteria.ID));
-            else  // build up the query based on each criteria supplied
+            // Build up the query
+            if (criteria.ID > 0)
             {
-                if (!string.IsNullOrEmpty(criteria.Name))
-                    query = query.Where(w => w.Name.Contains(criteria.Name));
-
-                if (!string.IsNullOrEmpty(criteria.DesignStartDate.ToString()))
-                    query = query.Where(w => w.LastDesignReview >= criteria.DesignStartDate);
-
-                if (!string.IsNullOrEmpty(criteria.DesignEndDate.ToString()))
-                    query = query.Where(w => w.LastDesignReview <= criteria.DesignEndDate);
+                query = query.Where(q => q.ID == criteria.ID);
+            }
+            else
+            {
+                if (!String.IsNullOrWhiteSpace(criteria.Name))
+                    query = query.Where(q => q.Name == criteria.Name);
             }
 
-            // send the query to the paging helper
-            var pagedResult = query.GetPaged(criteria.RequestedPage, criteria.PageSize);
+            // Handle paging
+            WidgetSearchResults results = new WidgetSearchResults
+            {
+                RequestedPage = criteria.RequestedPage,
+                PageSize = criteria.PageSize,
+                RowCount = query.Count()
+            };
 
-            return Ok(pagedResult);
+            if (results.PageSize > 0) // retrieve just one page worth of quotes
+            {
+                var pageCount = (double)results.RowCount / results.PageSize;
+                results.PageCount = (int)Math.Ceiling(pageCount);
+
+                var skip = (results.RequestedPage - 1) * results.PageSize;
+
+                results.Widgets = query.Skip(skip).Take(results.PageSize).ToList();
+            }
+            else // retrieve all the quotes
+            {
+                results.PageCount = 1;
+                results.Widgets = query.ToList();
+            }
+
+            return Ok(results);
         }
 
         private bool WidgetExists(long id)

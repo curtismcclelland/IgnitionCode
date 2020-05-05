@@ -28,7 +28,9 @@ let WidgetsComponent = class WidgetsComponent {
     }
     // get all the widgets from the API
     getWidgets() {
-        this.service.getWidgets().subscribe(returnedWidgets => { this.widgets = returnedWidgets; });
+        this.service.getWidgets().subscribe(returnedWidgets => {
+            this.widgets = returnedWidgets;
+        });
     }
     // create an empty widget to populate the create form
     createWidget() {
@@ -38,6 +40,7 @@ let WidgetsComponent = class WidgetsComponent {
     editWidget(id) {
         this.service.getWidget(id).subscribe(returnedWidget => {
             this.widgetEdit = returnedWidget;
+            this.widgetEdit.lastDesignReview = this.widgetEdit.lastDesignReview.substring(0, 10);
         });
     }
     // removes the selected widget from the API
