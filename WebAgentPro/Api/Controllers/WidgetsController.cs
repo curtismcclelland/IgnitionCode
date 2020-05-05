@@ -143,7 +143,7 @@ namespace WebAgentPro.Api.Controllers
                 RowCount = query.Count()
             };
 
-            if (results.PageSize > 0) // retrieve just one page worth of quotes
+            if (results.PageSize > 0) // retrieve just one page worth of records
             {
                 var pageCount = (double)results.RowCount / results.PageSize;
                 results.PageCount = (int)Math.Ceiling(pageCount);
