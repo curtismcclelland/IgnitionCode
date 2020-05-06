@@ -51,19 +51,12 @@ namespace WebAgentPro.Controllers
             {
                 IList<WapUser> allUsers = await _userManager
                     .Users.AsNoTracking().ToListAsync();
-
                 foreach (WapUser wapUser in allUsers)
                 {
                     var user = _mapper.Map<User>(wapUser);
                     if (user.IsActive)
                     {
                         var userRole = _userManager.GetRolesAsync(wapUser).Result.FirstOrDefault();
-                        if (userRole == null)
-                        {
-                            const string defaultRole = "Registered";
-                            var roleResult = _userManager.AddToRoleAsync(wapUser, defaultRole).Result;
-                            userRole = defaultRole;
-                        }
                         user.Roles.Add(userRole);
                     }
                     userViews.Add(user);
@@ -93,7 +86,6 @@ namespace WebAgentPro.Controllers
                        userViews.Add(user);
                    });
             }
-
             return Ok(userViews);
         }
 

@@ -61,7 +61,7 @@ namespace WebAgentPro.Controllers
         public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
             WapUser newUser = _mapper.Map<WapUser>(userRegistration);
-
+            newUser.IsActive = true;
             try
             {
                 var createResult = await _userManager.CreateAsync(newUser, userRegistration.Password);
@@ -71,8 +71,11 @@ namespace WebAgentPro.Controllers
                     createResult.Errors.ToList().ForEach(error => appEx.Details.Add(error.Description));
                     throw appEx;
                 }
-
-
+                else
+                {
+                    var defaultRole = "Registered";
+                    var roleResult = _userManager.AddToRoleAsync(newUser, defaultRole).Result;
+                }
                 return Ok();
             }
             catch (WapException e)
