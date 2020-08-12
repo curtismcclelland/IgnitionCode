@@ -19,7 +19,6 @@
             "index": "ClientApp/index.html",
             "main": "ClientApp/main.ts",
             "polyfills": "ClientApp/polyfills.ts",
-            "es5BrowserSupport": true,
             "tsConfig": "ClientApp/tsconfig.app.json",
             "assets": [
               "ClientApp/favicon.ico",
@@ -29,8 +28,7 @@
               "ClientApp/bootstrap.min.css",
               "ClientApp/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -45,7 +43,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -54,6 +51,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }

@@ -19,8 +19,8 @@
 */
 
 
-import 'core-js/es7/object';
-import 'core-js/es7/array';
+//import 'core-js/es7/object';
+//import 'core-js/es7/array';
 
 if (!Array.prototype.includes) {
     Object.defineProperty(Array.prototype, 'includes', {
@@ -82,7 +82,7 @@ if (!Array.prototype.includes) {
 
 /** Evergreen browsers require these. **/
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.
-import 'core-js/es7/reflect'; 
+//import 'core-js/es7/reflect'; 
 
 
 /**
