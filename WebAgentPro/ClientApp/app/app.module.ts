@@ -16,6 +16,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
+import { DiscountsComponent } from './discounts/discounts.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
         UsersComponent,
         RegisterComponent,
         WidgetsComponent,
-        WidgetPartsComponent
+        WidgetPartsComponent,
+        DiscountsComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

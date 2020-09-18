@@ -23,9 +23,65 @@ namespace WebAgentPro.Data
         {
             InitializeRoles();
             InitializeUsers();
-
+            InitializeDiscounts();
             //Initialize your data
             InitializeWidgets();
+        }
+
+        private void InitializeDiscounts()
+        {
+            if(_context.Discounts.Count<Discount>().Equals(0))
+            {
+                Discount newDiscount = new Discount
+                {
+                    State = "VT",
+                    DaytimeRunningLights = -.01M,
+                    AntilockBrakes = -.02M,
+                    LowAnnualMileage = -.02M,
+                    PassiveRestraints = -.03M,
+                    AntitheftInstalled = -.03M,
+                    HighDaysDrivenPerWeek = .02M,
+                    LowMilesDrivenToWork = -.02M,
+                    ReduceUse = -.06M,
+                    GarageAddressDifferent = .03M,
+                    LowDrivingExperience = .15M,
+                    PreviousCarrierLizard = .05M,
+                    PreviousCarrierPervasive = -.03M,
+                    RecentMovingViolations = .2M,
+                    RecentClaims = .2M,
+                    MultiCar = -.05M,
+                    YoungDriver = .1M,
+                    SafeDrivingSchool = -.05M
+                };
+
+                _context.Discounts.Add(newDiscount);
+
+                newDiscount = new Discount
+                {
+                    State = "CA",
+                    DaytimeRunningLights = -.01M,
+                    AntilockBrakes = -.02M,
+                    LowAnnualMileage = -.02M,
+                    PassiveRestraints = -.03M,
+                    AntitheftInstalled = -.03M,
+                    HighDaysDrivenPerWeek = .02M,
+                    LowMilesDrivenToWork = -.02M,
+                    ReduceUse = -.06M,
+                    GarageAddressDifferent = .03M,
+                    LowDrivingExperience = .15M,
+                    PreviousCarrierLizard = .05M,
+                    PreviousCarrierPervasive = -.03M,
+                    RecentMovingViolations = .2M,
+                    RecentClaims = .2M,
+                    MultiCar = -.05M,
+                    YoungDriver = .1M,
+                    SafeDrivingSchool = -.05M
+                };
+
+                _context.Discounts.Add(newDiscount);
+
+                _context.SaveChanges();
+            }
         }
 
         private void InitializeWidgets()

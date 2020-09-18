@@ -3,6 +3,7 @@
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
         <a class="nav-item nav-link" routerLink="/widgets">Widgets</a>
+        <a class="nav-item nav-link" routerLink="/discounts" *ngIf="isManager">Discounts</a>
         <a class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>

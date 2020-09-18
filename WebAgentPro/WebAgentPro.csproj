@@ -23,6 +23,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\_models\discount.ts" />
     <None Remove="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
 
@@ -53,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\_models\discount.ts" />
     <TypeScriptCompile Include="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
 
