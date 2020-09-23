@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Discount } from '@app/_models/discount';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-discounts',
@@ -11,9 +12,8 @@ import { Discount } from '@app/_models/discount';
 export class DiscountsComponent implements OnInit {
 
     apiUrl: string = environment.apiUrl
-    inactiveStates: string[]
     discounts: Discount[]
-    newStateDiscounts: Discount = new Discount()
+    inactiveStates: string[]
 
     allStates: string[] = [
         'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
@@ -23,16 +23,15 @@ export class DiscountsComponent implements OnInit {
         'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
     ];
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     ngOnInit(): void {
-        this.resetView()
-    }
-
-    resetView() {
-        this.newStateDiscounts = new Discount()
         this.getInactiveStates()
         this.getDiscounts()
+    }
+
+    stateChanged(state: string) {
+        this.router.navigate(['discount','add',state])
     }
 
     // #region API Calls
@@ -41,24 +40,6 @@ export class DiscountsComponent implements OnInit {
         var httpRequest = this.http.get<Discount[]>(`${this.apiUrl}/discounts`)
 
         httpRequest.subscribe(returnedDiscounts => { this.discounts = returnedDiscounts })
-    }
-
-    putDiscount(updatedDiscount: Discount) {
-        var httpRequest = this.http.put(`${this.apiUrl}/discounts/${updatedDiscount.state}`, updatedDiscount)
-
-        httpRequest.subscribe(
-            success => {
-                this.resetView();
-            })
-    }
-
-    postDiscount(newDiscount: Discount) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newDiscount)
-
-        httpRequest.subscribe(
-            success => {
-                this.resetView();
-            })
     }
 
     getInactiveStates() {

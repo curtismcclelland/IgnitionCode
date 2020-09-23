@@ -1,0 +1,90 @@
+<form #discountForm="ngForm" (ngSubmit)="submitForm()" *ngIf="discount">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Quotes</strong>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" readonly name="state" [(ngModel)]="discount.state" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Low Driving Experience</label>
+                    <input type="number" step=".01" name="lowDrivingExperience" [(ngModel)]="discount.lowDrivingExperience" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Previous Carrier Lizard</label>
+                    <input type="number" step=".01" name="statepreviousCarrierLizard" #previousCarrierLizard="ngModel" [(ngModel)]="discount.previousCarrierLizard" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Previous Carrier Pervasive</label>
+                    <input type="number" step=".01" name="statepreviousCarrierPervasive" #previousCarrierPervasive="ngModel" [(ngModel)]="discount.previousCarrierPervasive" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Recent Moving Violations</label>
+                    <input type="number" step=".01" name="recentMovingViolations" #recentMovingViolations="ngModel" [(ngModel)]="discount.recentMovingViolations" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Recent Claims</label>
+                    <input type="number" step=".01" name="recentClaims" #recentClaims="ngModel" [(ngModel)]="discount.recentClaims" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Multi-car</label>
+                    <input type="number" step=".01" name="multiCar" #multiCar="ngModel" [(ngModel)]="discount.multiCar" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <strong>Vehicles</strong>
+                <div class="form-group">
+                    <label>Daytime Running Lights</label>
+                    <input type="number" step=".01" name="daytimeRunningLights" #daytimeRunningLights="ngModel" [(ngModel)]="discount.daytimeRunningLights" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Anti-lock Brakes</label>
+                    <input type="number" step=".01" name="antilockBrakes" #antilockBrakes="ngModel" [(ngModel)]="discount.antilockBrakes" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Low Mileage</label>
+                    <input type="number" step=".01" name="lowAnnualMileage" #lowAnnualMileage="ngModel" [(ngModel)]="discount.lowAnnualMileage" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Passive Restraints</label>
+                    <input type="number" step=".01" name="passiveRestraints" #passiveRestraints="ngModel" [(ngModel)]="discount.passiveRestraints" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Anti-theft Installed</label>
+                    <input type="number" step=".01" name="antitheftInstalled" #antitheftInstalled="ngModel" [(ngModel)]="discount.antitheftInstalled" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>High Days Driven Per Week</label>
+                    <input type="number" step=".01" name="highDaysDrivenPerWeek" #highDaysDrivenPerWeek="ngModel" [(ngModel)]="discount.highDaysDrivenPerWeek" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Low Miles Driven To Work</label>
+                    <input type="number" step=".01" name="lowMilesDrivenToWork" #lowMilesDrivenToWork="ngModel" [(ngModel)]="discount.lowMilesDrivenToWork" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Reduced Use</label>
+                    <input type="number" step=".01" name="reduceUse" #reduceUse="ngModel" [(ngModel)]="discount.reduceUse" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Garage Address Different</label>
+                    <input type="number" step=".01" name="garageAddressDifferent" #garageAddressDifferent="ngModel" [(ngModel)]="discount.garageAddressDifferent" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <strong>Drivers</strong>
+                <div class="form-group">
+                    <label>Young Driver</label>
+                    <input type="number" step=".01" name="youngDriver" #youngDriver="ngModel" [(ngModel)]="discount.youngDriver" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Safe Driving School</label>
+                    <input type="number" step=".01" name="safeDrivingSchool" #safeDrivingSchool="ngModel" [(ngModel)]="discount.safeDrivingSchool" class="form-control" required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-dark">
+        <button type="submit" [disabled]="!discountForm.form.valid" class="btn btn-success">Save</button>
+    </div>
+</form>

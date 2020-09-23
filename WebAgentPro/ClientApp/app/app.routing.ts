@@ -9,12 +9,14 @@ import { Role } from './_models';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { WidgetPartsComponent } from './widget-parts/widget-parts.component';
 import { DiscountsComponent } from './discounts/discounts.component';
+import { DiscountEditComponent } from './discount-edit/discount-edit.component';
 
 const appRoutes: Routes = [
     { path: '',         component: HomeComponent,   canActivate: [AuthGuard] },
     { path: 'widgets', component: WidgetsComponent, canActivate: [AuthGuard] },
     { path: 'widget-parts/:id', component: WidgetPartsComponent, canActivate: [AuthGuard] },
     { path: 'discounts', component: DiscountsComponent, canActivate: [AuthGuard], data: { roles: [Role.Manager] } },
+    { path: 'discount/:action/:state', component: DiscountEditComponent, canActivate: [AuthGuard] },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Role.Manager] } },
     { path: 'login',    component: LoginComponent },
     { path: 'register', component: RegisterComponent },
