@@ -24,8 +24,6 @@ namespace WebAgentPro.Data
             InitializeRoles();
             InitializeUsers();
             InitializeDiscounts();
-            //Initialize your data
-            InitializeWidgets();
         }
 
         private void InitializeDiscounts()
@@ -80,26 +78,6 @@ namespace WebAgentPro.Data
 
                 _context.Discounts.Add(newDiscount);
 
-                _context.SaveChanges();
-            }
-        }
-
-        private void InitializeWidgets()
-        {
-            if (_context.Widgets.Count<Widget>().Equals(0))
-            {
-                Widget newWidget = new Widget
-                {
-                    Name = "Seeded Widget",
-                    Description = "This is a really cool widget. It does things no other widget can do.",
-                    LastDesignReview = DateTime.Parse("1/1/2012")
-                };
-
-                _context.Widgets.Add(newWidget);
-                _context.SaveChanges();
-
-                _context.WidgetParts.Add(new WidgetPart { WidgetID = newWidget.ID, Name = "Reliable Part", Description = "Ultra-reliable part for your widget." });
-                _context.WidgetParts.Add(new WidgetPart { WidgetID = newWidget.ID, Name = "Fragile Part", Description = "This thing does the job but breaks easily." });
                 _context.SaveChanges();
             }
         }

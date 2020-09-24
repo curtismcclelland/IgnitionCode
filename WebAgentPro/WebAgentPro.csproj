@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\app\RouteNotFound\" />
     <Folder Include="Connected Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
