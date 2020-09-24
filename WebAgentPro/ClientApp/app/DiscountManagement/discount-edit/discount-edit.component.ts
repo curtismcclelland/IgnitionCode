@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Discount } from '../_models/discount';
-import { environment } from '../../environments/environment';
+import { Discount } from '@app/_models/discount';
+import { environment } from '@environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-discount-edit',
-    templateUrl: './discount-edit.component.html',
-    styleUrls: ['./discount-edit.component.css']
+    templateUrl: './discount-edit.component.html'
 })
 export class DiscountEditComponent implements OnInit {
 

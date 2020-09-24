@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '@environments/environment';
 import { Discount } from '@app/_models/discount';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-discounts',
-  templateUrl: './discounts.component.html',
-  styleUrls: ['./discounts.component.css']
+  templateUrl: './discounts.component.html'
 })
 export class DiscountsComponent implements OnInit {
 

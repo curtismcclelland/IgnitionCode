@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { AccountService } from '@app/_services';
-import { Role } from '@app/_models';
+import { AccountService } from '@app/_security/account.service';
+import { Roles } from '@app/_security/user.roles';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
             if (route.data.roles) {
 
                 //check if user roles include any route restriction roles
-                var matchingRoles: Array<Role> = route.data.roles.filter((item: Role) => currentUser.roles.includes(item));
+                var matchingRoles: Array<Roles> = route.data.roles.filter((item: Roles) => currentUser.roles.includes(item));
 
                 if (matchingRoles.length === 0) {
                     // role not authorised so redirect to home page

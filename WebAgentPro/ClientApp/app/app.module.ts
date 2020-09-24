@@ -8,13 +8,13 @@ import { routing }        from './app.routing';
 
 import { NgxPaginationModule } from 'ngx-pagination'; 
 
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
-import { HomeComponent } from './home';
-import { UsersComponent } from './users';
-import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
-import { DiscountsComponent } from './discounts/discounts.component';
-import { DiscountEditComponent } from './discount-edit/discount-edit.component';
+import { JwtInterceptor, ErrorInterceptor } from './_security';
+import { UsersComponent } from './usermanagement/users/users.component';
+import { LoginComponent } from './registerlogin/login/login.component';
+import { RegisterComponent } from './registerlogin/register/register.component';
+import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
+import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
+import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 
 @NgModule({
     imports: [
@@ -27,12 +27,12 @@ import { DiscountEditComponent } from './discount-edit/discount-edit.component';
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
         LoginComponent,
         UsersComponent,
         RegisterComponent,
         DiscountsComponent,
-        DiscountEditComponent
+        DiscountEditComponent,
+        RoutenotfoundComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

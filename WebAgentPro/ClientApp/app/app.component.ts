@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountService } from './_services';
-import { User, Roles } from './_models';
+import { AccountService, User, Roles } from './_security';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
@@ -23,3 +22,4 @@ export class AppComponent {
         this.router.navigate(['/login']);
     }
 }
+  

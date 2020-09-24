@@ -1,10 +1,10 @@
-import { Role } from "./user.roles";
+import { Roles } from "./user.roles";
 
 export class User {
     userName: string;
     firstName: string;
     lastName: string;
-    roles: Role[];
+    roles: Roles[];
     isActive: boolean;
     token: string;
 }

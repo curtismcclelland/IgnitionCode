@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-
-import { User } from '@app/_models';
-import { UserService } from '@app/_services';
-import {Role} from '@app/_models/user.roles';
+import { environment } from '@environments/environment';
+import {User, Roles} from '@app/_security';
+import { HttpClient } from '@angular/common/http';
 
 @Component({ templateUrl: 'users.component.html' })
 export class UsersComponent implements OnInit {
@@ -12,7 +11,7 @@ export class UsersComponent implements OnInit {
     userFilter : string = '';
 
     constructor(
-      private userService: UserService
+        private http: HttpClient
     ) {
 
     }
@@ -28,12 +27,12 @@ export class UsersComponent implements OnInit {
 
     populateUserList = (): void => {
       if (this.userFilter) {
-        this.userService.getFiltered(this.userFilter).pipe(first()).subscribe(users => {
+        this.getFiltered(this.userFilter).pipe(first()).subscribe(users => {
           this.users = users;
         });
       } 
       else {
-        this.userService.getAll().pipe(first()).subscribe(users => {
+        this.getAll().pipe(first()).subscribe(users => {
           this.users = users;
         });
       }
@@ -52,11 +51,11 @@ export class UsersComponent implements OnInit {
       return;
     }
     selectedUser.isActive = true;
-    selectedUser.roles.push(roleStatusSelection as Role);
+    selectedUser.roles.push(roleStatusSelection as Roles);
   };
 
   updateStatusRoleToServer = (selectedUserName: string, roleStatusSelection: string): void => {
-    this.userService.setUserStatusRole(selectedUserName, roleStatusSelection)
+    this.setUserStatusRole(selectedUserName, roleStatusSelection)
       .pipe(first())
       .subscribe(
         data => {
@@ -75,5 +74,26 @@ export class UsersComponent implements OnInit {
   };
 
 
+    // #region API Calls
+
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
+
+    getFiltered(userStatusRole: string) {
+        return this.http.get<User[]>(`${environment.apiUrl}/users/getFilteredUsers?userStatusRole=${userStatusRole}`);
+    }
+
+
+    setUserStatusRole(selectedUserName: string, roleStatusSelection: string) {
+        const body = {
+            userName: selectedUserName,
+            statusRole: roleStatusSelection
+        };
+        return this.http.post(`${environment.apiUrl}/users/setUserStatusRole`, body);
+    }
+
+
+    // #endregion
 
 }

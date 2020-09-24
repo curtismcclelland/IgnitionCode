@@ -1,11 +1,12 @@
 <!-- nav --> 
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
+    <span class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
         <a class="nav-item nav-link" routerLink="/discounts" *ngIf="isManager">Discounts</a>
         <a class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
+    </span>
+    <span class="w-100 text-right text-white-50">{{this.currentUser.userName}}</span>
 </nav>
 
 <!-- main app container -->
