@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 
                 if (matchingRoles.length === 0) {
                     // role not authorised so redirect to home page
-                    this.router.navigate(['/']);
+                    this.router.navigate(['']);
                     return false;
                 }
             }

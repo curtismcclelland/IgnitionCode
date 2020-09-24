@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     { path: 'discount/:action/:state', component: DiscountEditComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
 
     // default route when nothing specified
-    { path: '', component: DiscountsComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
+    { path: '', component: DiscountsComponent, canActivate: [AuthGuard] },
 
     // any other route will redirect here
     { path: '**', component: RoutenotfoundComponent, canActivate: [AuthGuard] }

@@ -15,7 +15,7 @@ import { RegisterComponent } from './registerlogin/register/register.component';
 import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
 import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
-
+  
 @NgModule({
     imports: [
         BrowserModule,
