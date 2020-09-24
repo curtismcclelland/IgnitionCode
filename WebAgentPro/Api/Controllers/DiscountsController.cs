@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.ObjectPool;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Data;
 
@@ -116,15 +117,24 @@ namespace WebAgentPro.Api.Controllers
             return discount;
         }
 
-        [HttpGet("ActiveStates")]
-        public async Task<ActionResult<string[]>> ActiveStates()
+        [HttpGet("InactiveStates")]
+        public async Task<ActionResult<IEnumerable<string>>> InactiveStates()
         {
-            var states = await _context.Discounts
+            var allStates = new string[] {
+                "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+                "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA",
+                "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", 
+                "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", 
+                "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
+
+            var existingStates = await _context.Discounts
                 .OrderBy(s => s.State)
                 .Select(d => d.State)
                 .ToArrayAsync();
-                
-            return states;
+
+            var inactiveStates = allStates.Except(existingStates);
+
+            return inactiveStates.ToList();
         }
 
         private bool DiscountExists(string id)

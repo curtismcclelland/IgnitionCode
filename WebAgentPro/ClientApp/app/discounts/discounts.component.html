@@ -1,13 +1,13 @@
 <h1>Discount Management</h1>
 
 <h3>Add State</h3>
-<div class="form-group">
+<div>
     <select name="state" class="custom-select" (change)="stateChanged($event.target.value)">
         <option></option>
-        <option *ngFor="let s of inactiveStates">{{s}}</option>
+        <option *ngFor="let s of inactiveStates" value="{{s}}">{{s}}</option>
     </select>
 </div>
-
+<div></div>
 <h3>Existing States</h3>
 <div id="accordion" *ngIf="discounts">
     <div *ngFor="let d of discounts" class="card">
@@ -15,92 +15,87 @@
             <button type="button" class="btn btn-danger" [routerLink]="['/discount','edit',d.state]">{{d.state}}</button>
         </div>
         <div id="body{{d.state}}" class="collapse" data-parent="#accordion">
-            <form #discountForm="ngForm" (ngSubmit)="putDiscount(d)">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
                             <strong>Quotes</strong>
-                            <div class="form-group">
+                            <div>
                                 <label for="lowDrivingExperience">Low Driving Experience</label>
-                                <input type="number" step=".01" id="lowDrivingExperience" name="lowDrivingExperience" #lowDrivingExperience="ngModel" [(ngModel)]="d.lowDrivingExperience" class="form-control" required />
+                                <span class="float-right">{{d.lowDrivingExperience}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="previousCarrierLizard">Previous Carrier Lizard</label>
-                                <input type="number" step=".01" id="previousCarrierLizard" name="previousCarrierLizard" #previousCarrierLizard="ngModel" [(ngModel)]="d.previousCarrierLizard" class="form-control" required />
+                                <span class="float-right">{{d.previousCarrierLizard}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="previousCarrierPervasive">Previous Carrier Pervasive</label>
-                                <input type="number" step=".01" id="previousCarrierPervasive" name="previousCarrierPervasive" #previousCarrierPervasive="ngModel" [(ngModel)]="d.previousCarrierPervasive" class="form-control" required />
+                                <span class="float-right">{{d.previousCarrierPervasive}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="recentMovingViolations">Recent Moving Violations</label>
-                                <input type="number" step=".01" id="recentMovingViolations" name="recentMovingViolations" #recentMovingViolations="ngModel" [(ngModel)]="d.recentMovingViolations" class="form-control" required />
+                                <span class="float-right">{{d.recentMovingViolations}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="recentClaims">Recent Claims</label>
-                                <input type="number" step=".01" id="recentClaims" name="recentClaims" #recentClaims="ngModel" [(ngModel)]="d.recentClaims" class="form-control" required />
+                                <span class="float-right">{{d.recentClaims}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="multiCar">Multi-car</label>
-                                <input type="number" step=".01" id="multiCar" name="multiCar" #multiCar="ngModel" [(ngModel)]="d.multiCar" class="form-control" required />
+                                <span class="float-right">{{d.multiCar}}</span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <strong>Vehicles</strong>
-                            <div class="form-group">
+                            <div>
                                 <label for="daytimeRunningLights">Daytime Running Lights</label>
-                                <input type="number" step=".01" id="daytimeRunningLights" name="daytimeRunningLights" #daytimeRunningLights="ngModel" [(ngModel)]="d.daytimeRunningLights" class="form-control" required />
+                                <span class="float-right">{{d.daytimeRunningLights}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="antilockBrakes">Anti-lock Brakes</label>
-                                <input type="number" step=".01" id="antilockBrakes" name="antilockBrakes" #antilockBrakes="ngModel" [(ngModel)]="d.antilockBrakes" class="form-control" required />
+                                <span class="float-right">{{d.antilockBrakes}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="lowAnnualMileage">Low Mileage</label>
-                                <input type="number" step=".01" id="lowAnnualMileage" name="lowAnnualMileage" #lowAnnualMileage="ngModel" [(ngModel)]="d.lowAnnualMileage" class="form-control" required />
+                                <span class="float-right">{{d.lowAnnualMileage}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="passiveRestraints">Passive Restraints</label>
-                                <input type="number" step=".01" id="passiveRestraints" name="passiveRestraints" #passiveRestraints="ngModel" [(ngModel)]="d.passiveRestraints" class="form-control" required />
+                                <span class="float-right">{{d.passiveRestraints}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="antitheftInstalled">Anti-theft Installed</label>
-                                <input type="number" step=".01" id="antitheftInstalled" name="antitheftInstalled" #antitheftInstalled="ngModel" [(ngModel)]="d.antitheftInstalled" class="form-control" required />
+                                <span class="float-right">{{d.antitheftInstalled}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="highDaysDrivenPerWeek">High Days Driven Per Week</label>
-                                <input type="number" step=".01" id="highDaysDrivenPerWeek" name="highDaysDrivenPerWeek" #highDaysDrivenPerWeek="ngModel" [(ngModel)]="d.highDaysDrivenPerWeek" class="form-control" required />
+                                <span class="float-right">{{d.highDaysDrivenPerWeek}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="lowMilesDrivenToWork">Low Miles Driven To Work</label>
-                                <input type="number" step=".01" id="lowMilesDrivenToWork" name="lowMilesDrivenToWork" #lowMilesDrivenToWork="ngModel" [(ngModel)]="d.lowMilesDrivenToWork" class="form-control" required />
+                                <span class="float-right">{{d.lowMilesDrivenToWork}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="reduceUse">Reduced Use</label>
-                                <input type="number" step=".01" id="reduceUse" name="reduceUse" #reduceUse="ngModel" [(ngModel)]="d.reduceUse" class="form-control" required />
+                                <span class="float-right">{{d.reduceUse}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="garageAddressDifferent">Garage Address Different</label>
-                                <input type="number" step=".01" id="garageAddressDifferent" name="garageAddressDifferent" #garageAddressDifferent="ngModel" [(ngModel)]="d.garageAddressDifferent" class="form-control" required />
+                                <span class="float-right">{{d.garageAddressDifferent}}</span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <strong>Drivers</strong>
-                            <div class="form-group">
+                            <div>
                                 <label for="youngDriver">Young Driver</label>
-                                <input type="number" step=".01" id="youngDriver" name="youngDriver" #youngDriver="ngModel" [(ngModel)]="d.youngDriver" class="form-control" required />
+                                <span class="float-right">{{d.youngDriver}}</span>
                             </div>
-                            <div class="form-group">
+                            <div>
                                 <label for="safeDrivingSchool">Safe Driving School</label>
-                                <input type="number" step=".01" id="safeDrivingSchool" name="safeDrivingSchool" #safeDrivingSchool="ngModel" [(ngModel)]="d.safeDrivingSchool" class="form-control" required />
+                                <span class="float-right">{{d.safeDrivingSchool}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-dark">
-                    <button type="submit" [disabled]="!discountForm.form.valid" class="btn btn-success">Save</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>

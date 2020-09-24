@@ -24,12 +24,14 @@ export class DiscountEditComponent implements OnInit {
         this.stateParamSubscription = this.route.params.subscribe(
             params => {
                 this.action = params['action']
-                if (this.action == "edit") {
-                    this.getDiscount(params['state'])
-                }
-                else {
-                    this.discount = new Discount
-                    this.discount.state = params['state']
+
+                switch (this.action) {
+                    case "add":
+                        this.initializeDiscount(params['state'])
+                        break
+                    case "edit":
+                        this.getDiscount(params['state'])
+                        break
                 }
             }
         )
@@ -40,21 +42,30 @@ export class DiscountEditComponent implements OnInit {
     }
 
     submitForm() {
-        if (this.action == "edit") {
-            this.putDiscount(this.discount)
-        }
-        else {
-            this.postDiscount(this.discount)
+        switch (this.action) {
+            case "add":
+                this.postDiscount(this.discount)
+                break
+            case "edit":
+                this.putDiscount(this.discount)
+                break
         }
     }
 
+    initializeDiscount(state: string) {
+        this.discount = new Discount
+        this.discount.state = state
+    }
 
     // #region API Calls
 
     getDiscount(state: string) {
         var httpRequest = this.http.get<Discount>(`${this.apiUrl}/discounts/${state}`)
 
-        httpRequest.subscribe(returnedDiscount => { this.discount = returnedDiscount })
+        httpRequest.subscribe(
+            returnedDiscount => {
+                this.discount = returnedDiscount
+            })
     }
 
     putDiscount(updatedDiscount: Discount) {

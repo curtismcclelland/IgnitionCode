@@ -15,14 +15,6 @@ export class DiscountsComponent implements OnInit {
     discounts: Discount[]
     inactiveStates: string[]
 
-    allStates: string[] = [
-        'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-        'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA',
-        'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
-        'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-        'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-    ];
-
     constructor(private http: HttpClient, private router: Router) { }
 
     ngOnInit(): void {
@@ -43,10 +35,10 @@ export class DiscountsComponent implements OnInit {
     }
 
     getInactiveStates() {
-        var httpRequest = this.http.get<string[]>(`${this.apiUrl}/discounts/activestates`)
+        var httpRequest = this.http.get<string[]>(`${this.apiUrl}/discounts/inactivestates`)
 
         httpRequest.subscribe(returnedStates => {
-            this.inactiveStates = this.allStates.filter(s => !returnedStates.includes(s))
+            this.inactiveStates = returnedStates
         })
     }
 
