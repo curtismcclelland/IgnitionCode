@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 
 import { User } from '@app/_models';
 import { UserService } from '@app/_services';
-import {Role} from '@app/_models/role';
+import {Role} from '@app/_models/user.roles';
 
 @Component({ templateUrl: 'users.component.html' })
 export class UsersComponent implements OnInit {

@@ -55,7 +55,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\_models\discount.ts" />
-    <TypeScriptCompile Include="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
 
   <ItemGroup>

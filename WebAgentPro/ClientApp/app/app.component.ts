@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AccountService } from './_services';
-import { User, Role } from './_models';
+import { User, Roles } from './_models';
 
 @Component({ selector: 'app', templateUrl: 'app.component.html' })
 export class AppComponent {
@@ -16,7 +15,7 @@ export class AppComponent {
     }
 
     get isManager() {
-        return this.currentUser && this.currentUser.roles.includes(Role.Manager);
+        return this.currentUser && this.currentUser.roles.includes(Roles.Manager);
     }
 
     logout() {

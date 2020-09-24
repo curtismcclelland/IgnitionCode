@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService, AccountService } from '@app/_services';
+import { AccountService } from '@app/_services';
 import { UserCredentials } from '@app/_models';
 
 @Component({ templateUrl: 'login.component.html' })
@@ -17,8 +17,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService,
-        private alertService: AlertService
+        private accountService: AccountService
     ) {
         // redirect to home if already logged in
         if (this.accountService.currentUserValue) {
@@ -67,9 +66,6 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
             error => {
-                    // show the error message in the UI
-                    this.alertService.error(error);
-
                     // allows the UI to update based on the end of the data operation
                     this.loading = false;
                 });
