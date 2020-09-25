@@ -83,6 +83,15 @@ namespace WebAgentPro
             #region IDENTITY                Configure ASP.NET Identity to use your DbContext and ApplicationUser
             services.AddIdentity<WapUser, IdentityRole>()
                       .AddEntityFrameworkStores<WapDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+            });
             #endregion
 
             #region SPA STATIC FILES        Configure location of Angular runtime files

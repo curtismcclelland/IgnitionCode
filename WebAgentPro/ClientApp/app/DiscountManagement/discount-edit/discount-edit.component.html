@@ -1,7 +1,7 @@
-<h1>Discount Management</h1>
+<h3>Discount Management</h3>
 
-<h3 *ngIf="action == 'edit'" class="card-title">Edit State Discounts</h3>
-<h3 *ngIf="action == 'add'"  class="card-title">Add State Discounts</h3>
+<h5 *ngIf="action == 'edit'" class="card-title">Edit State Discounts</h5>
+<h5 *ngIf="action == 'add'"  class="card-title">Add State Discounts</h5>
 
 <form *ngIf="discount" #discountForm="ngForm" (ngSubmit)="submitForm()">
     <div class="row">

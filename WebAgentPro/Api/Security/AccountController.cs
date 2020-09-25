@@ -69,7 +69,7 @@ namespace WebAgentPro.Controllers
                 {
                     var appEx = new WapException("Unable to register user.");
                     createResult.Errors.ToList().ForEach(error => appEx.Details.Add(error.Description));
-                    throw appEx;
+                    return BadRequest(appEx.AsViewModel());
                 }
                 else
                 {

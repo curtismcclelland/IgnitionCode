@@ -1,6 +1,6 @@
-<h1>Discount Management</h1>
+<h3>Discount Management</h3>
 
-<h3>Add State</h3>
+<h5>Add State</h5>
 <div>
     <select name="state" class="custom-select" (change)="stateChanged($event.target.value)">
         <option></option>
@@ -8,7 +8,7 @@
     </select>
 </div>
 <div></div>
-<h3>Existing States</h3>
+<h5>Existing States</h5>
 <div id="accordion" *ngIf="discounts">
     <div *ngFor="let d of discounts" class="card">
         <div class="card-header" data-toggle="collapse" [attr.data-target]="'#body' + d.state" style="cursor: pointer">
