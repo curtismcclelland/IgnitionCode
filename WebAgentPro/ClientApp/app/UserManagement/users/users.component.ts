@@ -57,14 +57,7 @@ export class UsersComponent implements OnInit {
   updateStatusRoleToServer = (selectedUserName: string, roleStatusSelection: string): void => {
     this.setUserStatusRole(selectedUserName, roleStatusSelection)
       .pipe(first())
-      .subscribe(
-        data => {
-         // this.alertService.success('Registration successful', true);
-         // this.router.navigate(['/login']);
-        },
-        error => {
-          // this.alertService.error(error);
-        });
+      .subscribe();
   }
 
 
