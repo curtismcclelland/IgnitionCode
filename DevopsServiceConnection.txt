@@ -1,0 +1,6 @@
+Subscription Id:        fe818304-2dd9-49dd-bc34-7fa4441245db
+Subscroption Name:      Pay-As-You-Go
+Service Principal Id    58acfda6-bd5f-4c26-aa4f-2028abdf0dc0
+Service Principal Key   bHr51C2cg6.fFz.42wCQ6X.-KuzmXk7xRT
+Tenant ID               7316c73e-d72f-4005-b2c4-76b2323e6d63
+Service Connection Name Instructor Azure Account
