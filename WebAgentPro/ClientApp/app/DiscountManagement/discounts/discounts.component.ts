@@ -29,7 +29,10 @@ export class DiscountsComponent implements OnInit {
     getDiscounts() {
         var httpRequest = this.http.get<Discount[]>(`${this.apiUrl}/discounts`)
 
-        httpRequest.subscribe(returnedDiscounts => { this.discounts = returnedDiscounts })
+        httpRequest.subscribe(returnedDiscounts => {
+            console.log('Received discounts:', returnedDiscounts)
+            this.discounts = returnedDiscounts
+        })
     }
 
     getInactiveStates() {
