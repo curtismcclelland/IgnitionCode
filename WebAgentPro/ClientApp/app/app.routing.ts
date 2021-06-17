@@ -25,4 +25,4 @@ const appRoutes: Routes = [
     { path: '**', component: RoutenotfoundComponent, canActivate: [AuthGuard] }
 ];
 
-export const routing = RouterModule.forRoot(appRoutes);
+export const routing = RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' });
