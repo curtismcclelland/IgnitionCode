@@ -16,22 +16,29 @@ namespace WebAgentPro.Api.Models
         [Required]
         public int QuoteId { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime QuoteDateTime { get; set; }
         [Required]
+        [StringLength(60)]
         [Display(Name = "Creator Email")]
         public string CreatorEmail { get; set; }
         [Required]
         [Display(Name = "RoleID")]
+        [StringLength(60)]
         public string RoleID { get; set; }
         [Required]
         [Display(Name = "First Name")]
+        [StringLength(60)]
         public string FirstName { get; set; }
         [Required]
         [Display(Name = "Last Name")]
+        [StringLength(60)]
         public string LastName { get; set; }
         [Required]
+        [StringLength(60)]
         public string Address { get; set; }
         [Required]
+        [StringLength(60)]
         public string City { get; set; }
         [Required]
         [MinLength(2)]
@@ -46,12 +53,14 @@ namespace WebAgentPro.Api.Models
         [MaxLength(10)]
         public string Ssn { get; set; }
         [Required]
-        [Display(Name = "Date of Birth MM/DD/YYYY")]
+        [Display(Name = "Date of Birth")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode=true)]
         public DateTime DateOfBirth { get; set; }
         [Required]
         [Display(Name = "Less Than 3 Years Driving")]
         public bool LessThan3YearsDriving { get; set; }
         [Required]
+        [StringLength(60)]
         [Display(Name = "Previous Carrier")]
         public string PreviousCarrier { get; set; }
         [Required]
