@@ -12,11 +12,14 @@ export class QuoteCreationComponent implements OnInit {
   constructor() { }
 
   submit(){
-    this.step = this.step + 1;
   }
 
   previous(){
     this.step = this.step - 1;
+  }
+
+  continue(){
+    this.step = this.step + 1;
   }
 
   ngOnInit(): void {
