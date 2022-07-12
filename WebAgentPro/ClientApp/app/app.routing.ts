@@ -8,8 +8,12 @@ import { UsersComponent } from './usermanagement/users/users.component';
 import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
 import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
+import { QuoteCreationComponent } from './QuoteCreation/quote-creation.component';
+import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
 
 const appRoutes: Routes = [
+    { path: 'quoteSearch', component: QuoteSearchComponent },
+    { path: 'quoteCreation', component: QuoteCreationComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
