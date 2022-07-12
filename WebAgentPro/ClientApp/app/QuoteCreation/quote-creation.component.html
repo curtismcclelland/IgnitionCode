@@ -1,2 +1,19 @@
 <h1>Quote Creation</h1>
 <a class="nav-item nav-link" routerLink="/quoteSearch">Quote Search</a>
+<form (ngSubmit)="submit()">
+    <div *ngIf="step == 1">
+        First Section
+        <inputs></inputs>
+    </div>
+    
+    <div *ngIf="step == 2"> 
+        Second Section
+    </div>
+    
+    <div *ngIf="step == 3">
+        Third Section
+    </div>
+    <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+    <button type="submit" class="btn btn-primary" *ngIf="step != 3">Continue</button>
+    <button type="submit" class="btn btn-primary" *gIf="step == 3">Submit</button>
+</form>
