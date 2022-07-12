@@ -7,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuoteCreationComponent implements OnInit {
 
+  step: any = 1;
+
   constructor() { }
+
+  submit(){
+    this.step = this.step + 1;
+  }
+
+  previous(){
+    this.step = this.step - 1;
+  }
 
   ngOnInit(): void {
   }
