@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\_models\discount.ts" />
+    <None Remove="ClientApp\app\_models\driver.ts" />
+    <None Remove="ClientApp\app\_models\quote.ts" />
+    <None Remove="ClientApp\app\_models\vehicle.ts" />
     <None Remove="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
 
@@ -55,6 +58,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\_models\discount.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_models\vehicle.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_models\driver.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_models\quote.ts" />
   </ItemGroup>
 
   <ItemGroup>
