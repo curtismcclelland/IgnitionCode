@@ -18,9 +18,19 @@
     justify-content: center;
 }
 
+h1 {
+    text-align:center;
+    background: #0025CB;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17.0131px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+}
+
 h2 {
-    width: 205px;
-    height: 31px;
+    text-align: center;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -29,6 +39,7 @@ h2 {
 }
 
 label {
+    text-align:center;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -37,33 +48,77 @@ label {
 }
 
 .dropdown {
-    position: relative;
+    position: absolute;
     display: inline-block;
 }
 
 select {
     box-sizing: border-box;
-    /* Auto layout */
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    gap: 6.69px;
-    width: 325px;
-    height: 41px;
-    /* White */
-
+    gap: 6.33px;
+    width: 307.18px;
+    height: 42px;
     background: #FFFFFF;
-    /* Dark Gray */
-
-    border: 2px solid #2F2F2F;
-    border-radius: 8px;
-    /* Inside auto layout */
-
+    border: 1.89034px solid #2F2F2F;
+    border-radius: 7.56136px;
     flex: none;
     order: 1;
     align-self: stretch;
     flex-grow: 0;
+}
+
+
+input[type="checkbox"] {
+    cursor: pointer;
+    background: #FFFFFF;
+    height: 24px;
+    width: 24px;
+    top: 11px;
+    left: 267px;
+    border: 1px solid #000000;
+    color: white;
+}
+
+    input[type="checkbox"]:checked {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    input[type="checkbox"]:after {
+        content: ' ';
+        position: absolute;
+        height: 18px;
+        width: 20px;
+        left: 2px;
+        top: 3px;
+        border-radius: 0px;
+        border: #FFFFFF;
+        border-width: 0 2px 2px 0;
+        transform: rotate(50deg);
+        display: none;
+    }
+
+    input[type="checkbox"]:checked:after {
+        display: block;
+    }
+
+.questions {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.0131px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.form-control {
+    padding: 9.4517px 14.1775px;
+    gap: 6.33px;
+    background: #FFFFFF;
+    border: 1.89034px solid #2F2F2F;
+    border-radius: 7.56136px;
+    height: 42px;
 }
