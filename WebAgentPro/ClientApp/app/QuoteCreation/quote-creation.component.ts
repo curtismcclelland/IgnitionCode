@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@environments/environment';
+import { Quote } from '@app/_models/quote';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quote-creation',
@@ -8,51 +13,125 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/f
 })
 export class QuoteCreationComponent implements OnInit {
 
-  step: any = 1;
+    apiUrl: string = environment.apiUrl
+    quoteParamSubscription: Subscription
 
-  public userForm: FormGroup;
-  first_name: string = "";
-  last_name: string = "";
-  address: string = "";
-  city: string = "";
-  state: string = "";
-  zip: number = 0;
-  ssn: number = 0;
-  dob: string = "";
+    quote: Quote
+    action: string
+    step: any = 1;
 
-  constructor(private fb: FormBuilder) {
-    this.userForm = this.fb.group({
-      first_name: "",
-      last_name: "",
-      address:"",
-      city:"",
-      state:"",
-      zip:0,
-      ssn:0,
-      dob:""
-    })
-  }
+    constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
-  submit(){
-    this.first_name = this.userForm.get("first_name")?.value;
-    this.last_name = this.userForm.get("last_name")?.value;
-    this.address = this.userForm.get("address")?.value;
-    this.city = this.userForm.get("city")?.value;
-    this.zip = this.userForm.get("zip")?.value;
-    this.ssn = this.userForm.get("ssn")?.value;
-    this.dob = this.userForm.get("dob")?.value;
-    console.log(this.first_name)
-  }
+    ngOnInit(): void {
+        this.quoteParamSubscription = this.route.params.subscribe(
+            params => {
+                this.action = params['action']
 
-  previous(){
-    this.step = this.step - 1;
-  }
+                switch (this.action) {
+                    case "add":
+                        this.initializeQuote(params['quoteId'])
+                        break
+                    case "edit":
+                        this.getQuote(params['quoteId'])
+                        break
+                }
+            }
+        )
+    }
+    //This method would be called if you were to exit out early during
+    //creation or editing. This will change when we have partial quotes
+    //being saved and marked as uncompleted. 
+    ngOnDestroy() {
+        this.quoteParamSubscription.unsubscribe();
+    }
 
-  continue(){
-    this.step = this.step + 1;
-  }
+    submitForm() {
+        switch (this.action) {
+            case "add":
+                this.postQuote(this.quote)
+                break
+            case "edit":
+                this.putQuote(this.quote)
+                break
+        }
+    }
 
-  ngOnInit(): void {
-  }
+    initializeQuote(quoteId: number) {
+        this.quote = new Quote
+        this.quote.quoteId = quoteId
+    }
+
+    getQuote(quoteId: number) {
+        var httpRequest = this.http.get<Quote>(`${this.apiUrl}/quotes/${quoteId}`)
+
+        httpRequest.subscribe(
+            returnedQuote => {
+                this.quote = returnedQuote
+            }
+        )
+    }
+
+    putQuote(updatedQuote: Quote) {
+        var httpRequest = this.http.put(`${this.apiUrl}/quotes/${updatedQuote.quoteId}`, updatedQuote)
+
+        httpRequest.subscribe(
+            success => {
+                this.router.navigateByUrl("/quotes")
+            })
+    }
+
+    postQuote(newQuote: Quote) {
+        var httpRequest = this.http.post<number>(`${this.apiUrl}/quotes`, newQuote)
+
+        httpRequest.subscribe(
+            success => {
+                this.router.navigateByUrl("/quotes")
+            })
+    }
+
+
+    //These methods are used by the corresponding html to keep track
+    //of the page on which quote creation resides
+    previous() {
+        this.step = this.step - 1;
+    }
+
+    continue() {
+        this.step = this.step + 1;
+    }
+
+  //public userForm: FormGroup;
+  //first_name: string = "";
+  //last_name: string = "";
+  //address: string = "";
+  //city: string = "";
+  //state: string = "";
+  //zip: number = 0;
+  //ssn: number = 0;
+  //dob: string = "";
+
+  //constructor(private fb: FormBuilder) {
+  //  this.userForm = this.fb.group({
+  //    first_name: "",
+  //    last_name: "",
+  //    address:"",
+  //    city:"",
+  //    state:"",
+  //    zip:0,
+  //    ssn:0,
+  //    dob:""
+  //  })
+  //}
+
+  //submit(){
+  //  this.first_name = this.userForm.get("first_name")?.value;
+  //  this.last_name = this.userForm.get("last_name")?.value;
+  //  this.address = this.userForm.get("address")?.value;
+  //  this.city = this.userForm.get("city")?.value;
+  //  this.zip = this.userForm.get("zip")?.value;
+  //  this.ssn = this.userForm.get("ssn")?.value;
+  //  this.dob = this.userForm.get("dob")?.value;
+  //  console.log(this.first_name)
+  //}
 
 }
