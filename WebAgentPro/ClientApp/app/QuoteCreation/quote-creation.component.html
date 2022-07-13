@@ -1,13 +1,37 @@
-<h1>Quote Creation</h1>
+<h1>Create New Quote</h1>
 <a class="nav-item nav-link" routerLink="/quoteSearch">Quote Search</a>
 <form (ngSubmit)="submit()">
+    <!--Customer Information-->
     <div *ngIf="step == 1">
         First Section
         <inputs></inputs>
     </div>
     
-    <div *ngIf="step == 2"> 
-        Second Section
+    <!--Customer History-->
+    <div *ngIf="step == 2">
+        <h2>Customer History</h2>
+        <!--Previous Carrier input box-->
+        <label for="PrevCarrier">Previous Carrier</label><br />
+        <select>
+            <option value="Lizard">Lizard Insurance</option>
+            <option value="Pervasive">Pervasive Insurance</option>
+            <option value="Other">Other</option>
+        </select><br />
+        <!--claims in last 5 years-->
+        <input type="checkbox" id="5Years" />
+        <label for="5Years">Claims in the last 5 years?</label><br />
+        <!--moving violations-->
+        <input type="checkbox" id="MovingViolations" />
+        <label for="MovingViolations">Any moving violations in the last 5 years?</label><br />
+        <!--less than 3 years-->
+        <input type="checkbox" id="LessThan3Yrs" />
+        <label for="LessThan3Yrs">Less than 3 years driving?</label><br />
+        <!--force multi car discount-->
+        <input type="checkbox" id="MultiCarDiscount" />
+        <label for="MultiCarDiscount">Force multi-car discount</label><br />
+        <!--customer is a diver?-->
+        <input type="checkbox" id="CustomerEqualDriver" />
+        <label for="CustomerEqualDriver">Is this customer a driver?</label><br />
     </div>
     
     <div *ngIf="step == 3">
