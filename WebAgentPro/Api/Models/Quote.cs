@@ -11,8 +11,6 @@ namespace WebAgentPro.Api.Models
     public class Quote
     {
         [Key]
-        [MinLength(6)]
-        [MaxLength(6)]
         [Required]
         public int QuoteId { get; set; }
         [Required]
