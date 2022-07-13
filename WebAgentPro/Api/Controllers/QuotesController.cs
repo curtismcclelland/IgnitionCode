@@ -94,6 +94,11 @@ namespace WebAgentPro.Api.Controllers
                 return NotFound();
             }
 
+        
+
+
+
+
             _context.Quotes.Remove(quote);
             await _context.SaveChangesAsync();
 

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using WebAgentPro.Models;
 using WebAgentPro.Api.Models;
+using System.Collections.Generic;
 
 namespace WebAgentPro.Data
 {
@@ -160,70 +161,130 @@ namespace WebAgentPro.Data
             {
                 Driver newDriver = new Driver
                 {
-
-                    DriverId = 1,
-                    FirstName = "abc",
-                    LastName = "qwe",
-                    SSN = "1231231231",
-                    DriverLicenseNumber = "a",
-                    DriverLicenseState = "b",
+                    FirstName = "Data",
+                    LastName = "Initializer",
+                    SSN = "0000000001",
+                    DriverLicenseNumber = "Random",
+                    DriverLicenseState = "Test",
                     DateOfBirth = DateTime.Now,
                     SafeDrivingSchool = true,
                     QuoteMultiplier = 0
                 };
+                _context.Drivers.Add(newDriver);
+
+                /*var newDriver2 = new Driver
+                {
+                    FirstName = "Second",
+                    LastName = "Initializer",
+                    SSN = "0000000002",
+                    DriverLicenseNumber = "Random",
+                    DriverLicenseState = "Test",
+                    DateOfBirth = DateTime.Now,
+                    SafeDrivingSchool = true,
+                    QuoteMultiplier = 0
+                };
+                _context.Drivers.Add(newDriver2);
+                */
 
                 Vehicle newVehicle = new Vehicle
                 {
 
-                    VehiceId = 1,
-                    Vin = "abc",
-                    Make = "qwe",
-                    Model = "1231231231",
+                    Vin = "TestVin",
+                    Make = "TestMake",
+                    Model = "001",
                     Year = 2022,
                     CurrentValue = -.05M,
                     PrimaryDriver = newDriver,
-                    AnnualMileage = 00,
+                    AnnualMileage = 000,
                     DaytimeRunningLights = true,
                     AntilockBrakes = true,
                     PassiveRestraints = true,
                     AntiTheft = true,
-                    DaysDrivenPerWeek = 1,
-                    MilesDrivenToWork= 1,
+                    DaysDrivenPerWeek = 001,
+                    MilesDrivenToWork= 001,
                     ReducedUsedDiscount = true,
                     GarageAddressDifferentFromResidence = true,
                     QuoteMultiplier = -.02M
                 };
 
-                Quote newQuote = new Quote
-                {
-                    QuoteId = 1,
-                    QuoteDateTime = DateTime.Now,
-                    CreatorEmail = "abc@avanade.ca",
-                    RoleID = "qwe",
-                    FirstName = "abc",
-                    LastName = "qaz",
-                    Address = "1231231231",
-                    City = "a",
-                    State = "ON",
-                    Zip = "70000",
-                    Ssn = "1231231231",
-                    DateOfBirth = DateTime.Now,
-                    LessThan3YearsDriving = true,
-                    PreviousCarrier = "no",
-                    MovingVioliationInLast5Years = true,
-                    ClaimInLast5Years = true,
-                    ForceMultiCarDiscount = true,
-                    Drivers = new System.Collections.Generic.List<Driver>
-                            {
-                               newDriver
-                            },
-                    Vehicles = new System.Collections.Generic.List<Vehicle>
-                            {
-                               newVehicle
-                            }
+                _context.Vehicles.Add(newVehicle);
+                //var newVehicle2 = new Vehicle
+                //{
 
+                //    Vin = "TestSecondVin",
+                //    Make = "TestMake",
+                //    Model = "002",
+                //    Year = 2022,
+                //    CurrentValue = -.05M,
+                //    PrimaryDriver = newDriver,
+                //    AnnualMileage = 000,
+                //    DaytimeRunningLights = true,
+                //    AntilockBrakes = true,
+                //    PassiveRestraints = true,
+                //    AntiTheft = true,
+                //    DaysDrivenPerWeek = 001,
+                //    MilesDrivenToWork = 001,
+                //    ReducedUsedDiscount = true,
+                //    GarageAddressDifferentFromResidence = true,
+                //    QuoteMultiplier = -.02M
+                //};
+
+                // _context.Vehicles.Add(newVehicle2);
+
+                var quotes = new Quote[]
+                    {
+                    new Quote
+                    {
+                        QuoteDateTime = DateTime.Now,
+                        CreatorEmail = "abc@avanade.ca",
+                        RoleID = "AgentTest",
+                        FirstName = "Creator",
+                        LastName = "Test",
+                        Address = "123 Avanade",
+                        City = "Toronto",
+                        State = "ON",
+                        Zip = "70000",
+                        Ssn = "0000000001",
+                        DateOfBirth = DateTime.Now,
+                        LessThan3YearsDriving = true,
+                        PreviousCarrier = "No",
+                        MovingVioliationInLast5Years = true,
+                        ClaimInLast5Years = true,
+                        ForceMultiCarDiscount = true,
+                        Drivers = new List<Driver>
+                                {
+                                   newDriver,
+                                   //newDriver2
+                                },
+                        Vehicles = new List<Vehicle>
+                                {
+                                   newVehicle,
+                                   //newVehicle2 
+
+                                },
+                        DaytimeRunningLights = -.01M,
+                        AntilockBrakes = -.02M,
+                        LowAnnualMileage = -.02M,
+                        PassiveRestraints = -.03M,
+                        AntitheftInstalled = -.03M,
+                        HighDaysDrivenPerWeek = .02M,
+                        LowMilesDrivenToWork = -.02M,
+                        ReduceUse = -.06M,
+                        GarageAddressDifferent = .03M,
+                        LowDrivingExperience = .15M,
+                        PreviousCarrierLizard = .05M,
+                        PreviousCarrierPervasive = -.03M,
+                        RecentMovingViolations = .2M,
+                        RecentClaims = .2M,
+                        MultiCar = -.05M,
+                        YoungDriver = .1M,
+                        SafeDrivingSchool = -.05M,
+                        TotalQuoteMultiplier = -.05M,
+                        QuotePrice = -.05M,
+                        Status="IN"
+                }
                 };
-                _context.Quotes.Add(newQuote);
+                _context.Quotes.AddRange(quotes);
                 _context.SaveChanges();
             }
         }

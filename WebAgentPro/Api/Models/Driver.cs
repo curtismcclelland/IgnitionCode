@@ -11,7 +11,6 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DriverId { get; set; }
         [Required]
         [Display(Name = "First Name")]
