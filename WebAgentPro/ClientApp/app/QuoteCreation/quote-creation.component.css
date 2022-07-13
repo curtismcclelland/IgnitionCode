@@ -1,19 +1,53 @@
 .btn-primary{
-    width: 325px;
-    background: #0025CB;
-    border-radius: 20px;
+    border-radius: 35%;
 }
 
-.formNavButtons{
+h2 {
+    width: 205px;
+    height: 31px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    color: #000000;
+}
+
+label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #2F2F2F;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+select {
+    box-sizing: border-box;
+    /* Auto layout */
+
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 6.69px;
+    width: 325px;
+    height: 41px;
+    /* White */
 
-.stepTitle{
-    text-align: center;
-}
+    background: #FFFFFF;
+    /* Dark Gray */
 
-.quoteForm{
-    justify-content: center;
+    border: 2px solid #2F2F2F;
+    border-radius: 8px;
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
 }
