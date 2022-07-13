@@ -1,5 +1,21 @@
-.btn-primary{
-    border-radius: 35%;
+.btn-primary {
+    width: 325px;
+    background: #0025CB;
+    border-radius: 20px;
+}
+
+.formNavButtons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.stepTitle {
+    text-align: center;
+}
+
+.quoteForm {
+    justify-content: center;
 }
 
 h2 {
