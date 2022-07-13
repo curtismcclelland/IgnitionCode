@@ -23,10 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Api\Controllers\QuotesController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="ClientApp\app\_models\discount.ts" />
     <None Remove="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
