@@ -24,6 +24,7 @@ namespace WebAgentPro.Data
             InitializeRoles();
             InitializeUsers();
             InitializeDiscounts();
+   
         }
 
         private void InitializeDiscounts()
@@ -150,5 +151,9 @@ namespace WebAgentPro.Data
                 _roleManager.CreateAsync(new IdentityRole() { Name = "Manager" }).Wait();
             }
         }
+
     }
 }
+
+
+

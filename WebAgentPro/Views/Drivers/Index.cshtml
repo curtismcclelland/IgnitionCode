@@ -1,0 +1,77 @@
+﻿@model IEnumerable<WebAgentPro.Api.Models.Driver>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SSN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverLicenseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverLicenseState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SafeDrivingSchool)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuoteMultiplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SSN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverLicenseNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DriverLicenseState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SafeDrivingSchool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteMultiplier)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DriverId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DriverId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DriverId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

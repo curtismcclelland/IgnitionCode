@@ -1,0 +1,119 @@
+﻿@model IEnumerable<WebAgentPro.Api.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Make)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnnualMileage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaytimeRunningLights)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntilockBrakes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PassiveRestraints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AntiTheft)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaysDrivenPerWeek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MilesDrivenToWork)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReducedUsedDiscount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GarageAddressDifferentFromResidence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuoteMultiplier)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualMileage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaytimeRunningLights)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntilockBrakes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PassiveRestraints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AntiTheft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaysDrivenPerWeek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MilesDrivenToWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReducedUsedDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GarageAddressDifferentFromResidence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteMultiplier)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VehiceId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VehiceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VehiceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
