@@ -24,7 +24,8 @@ namespace WebAgentPro.Data
             InitializeRoles();
             InitializeUsers();
             InitializeDiscounts();
-   
+            InitializeQuotes();
+
         }
 
         private void InitializeDiscounts()
@@ -149,6 +150,81 @@ namespace WebAgentPro.Data
                 _roleManager.CreateAsync(new IdentityRole() { Name = "Registered" }).Wait();
                 _roleManager.CreateAsync(new IdentityRole() { Name = "Agent" }).Wait();
                 _roleManager.CreateAsync(new IdentityRole() { Name = "Manager" }).Wait();
+            }
+        }
+
+
+        private void InitializeQuotes()
+        {
+            if (_context.Quotes.Count<Quote>().Equals(0))
+            {
+                Driver newDriver = new Driver
+                {
+
+                    DriverId = 1,
+                    FirstName = "abc",
+                    LastName = "qwe",
+                    SSN = "1231231231",
+                    DriverLicenseNumber = "a",
+                    DriverLicenseState = "b",
+                    DateOfBirth = DateTime.Now,
+                    SafeDrivingSchool = true,
+                    QuoteMultiplier = 0
+                };
+
+                Vehicle newVehicle = new Vehicle
+                {
+
+                    VehiceId = 1,
+                    Vin = "abc",
+                    Make = "qwe",
+                    Model = "1231231231",
+                    Year = 2022,
+                    CurrentValue = -.05M,
+                    PrimaryDriver = newDriver,
+                    AnnualMileage = 00,
+                    DaytimeRunningLights = true,
+                    AntilockBrakes = true,
+                    PassiveRestraints = true,
+                    AntiTheft = true,
+                    DaysDrivenPerWeek = 1,
+                    MilesDrivenToWork= 1,
+                    ReducedUsedDiscount = true,
+                    GarageAddressDifferentFromResidence = true,
+                    QuoteMultiplier = -.02M
+                };
+
+                Quote newQuote = new Quote
+                {
+                    QuoteId = 1,
+                    QuoteDateTime = DateTime.Now,
+                    CreatorEmail = "abc@avanade.ca",
+                    RoleID = "qwe",
+                    FirstName = "abc",
+                    LastName = "qaz",
+                    Address = "1231231231",
+                    City = "a",
+                    State = "ON",
+                    Zip = "70000",
+                    Ssn = "1231231231",
+                    DateOfBirth = DateTime.Now,
+                    LessThan3YearsDriving = true,
+                    PreviousCarrier = "no",
+                    MovingVioliationInLast5Years = true,
+                    ClaimInLast5Years = true,
+                    ForceMultiCarDiscount = true,
+                    Drivers = new System.Collections.Generic.List<Driver>
+                            {
+                               newDriver
+                            },
+                    Vehicles = new System.Collections.Generic.List<Vehicle>
+                            {
+                               newVehicle
+                            }
+
+                };
+                _context.Quotes.Add(newQuote);
+                _context.SaveChanges();
             }
         }
 
