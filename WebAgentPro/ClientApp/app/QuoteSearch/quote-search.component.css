@@ -1,0 +1,125 @@
+ h1 {
+    text-align: center;
+    background-color: #0025CB;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    background-color: #0025CB;
+}
+button {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    background-color: #0025CB;
+    color: #ffffff;
+    border: none;
+}
+
+.searchbtn {
+    left: 50px;
+}
+
+p.typeOfQuote {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: capitalize;
+    color: #757575;
+}
+
+p.completedStatus {
+    background-color: #6CBFFF;
+    border-radius: 4px;
+}
+
+p.incompleteStatus {
+    padding: 1px 2px;
+    width: 83px;
+    height: 24px;
+    background-color: #757575;
+    border-radius: 4px;
+
+    width: 67px;
+    height: 16px;
+    top: 4px;
+    left: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+div.quoteSection {
+    box-sizing: border-box;
+
+    padding: 16px;
+    gap: 12px;
+    background: #FFFFFF;
+    border: 1px solid #2F2F2F;
+    border-radius: 14px;
+}
+
+p.customerName {
+    width: 205px;
+    height: 23px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #0025CB;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+p.timeAndid {
+    font-family: 'Barlow';
+    font-style: normal;
+    color: #757575;
+}
+
+p.time {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+p.quoteID {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+p.driverVehicleFull {
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #2F2F2F;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+p.price {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: right;
+    color: #2F2F2F;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
