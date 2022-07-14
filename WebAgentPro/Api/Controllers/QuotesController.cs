@@ -25,14 +25,16 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
-            return await _context.Quotes.ToListAsync();
+            //return await _context.Quotes.ToListAsync();
+            return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.PrimaryDriver).AsNoTracking().ToListAsync();
         }
 
         // GET: api/Quotes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Quote>> GetQuote(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            //var quote = await _context.Quotes.FindAsync(id);]
+            var quote = await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p=>p.PrimaryDriver).AsNoTracking().SingleOrDefaultAsync(p => p.QuoteId == id);
 
             if (quote == null)
             {

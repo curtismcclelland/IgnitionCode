@@ -25,14 +25,15 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
         {
-            return await _context.Vehicles.ToListAsync();
+            return await _context.Vehicles.Include(p => p.PrimaryDriver).AsNoTracking().ToListAsync();
         }
 
         // GET: api/Vehicles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
+            //var vehicle = await _context.Vehicles.FindAsync(id);
+            var vehicle = await _context.Vehicles.Include(p => p.PrimaryDriver).AsNoTracking().SingleOrDefaultAsync(p => p.VehiceId == id);
 
             if (vehicle == null)
             {

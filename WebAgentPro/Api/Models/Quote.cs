@@ -10,6 +10,7 @@ namespace WebAgentPro.Api.Models
 {
     public class Quote
     {
+
         [Key]
         [Required]
         public int QuoteId { get; set; }
@@ -71,12 +72,9 @@ namespace WebAgentPro.Api.Models
         [Display(Name = "Force Multi Car Discount")]
         public bool ForceMultiCarDiscount { get; set; }
         [Required]
-        public List<Driver> Drivers { get; set; }
+        public List<Driver> Drivers { get; set; } 
         [Required]
         public List<Vehicle> Vehicles { get; set; }
-
-
-
         [Required]
         public decimal DaytimeRunningLights { get; set; }
         [Required]
@@ -127,7 +125,7 @@ namespace WebAgentPro.Api.Models
         public string Status { get; set; }
 
 
-
+        
 
     }
 }

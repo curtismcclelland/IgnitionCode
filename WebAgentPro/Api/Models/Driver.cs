@@ -9,6 +9,7 @@ namespace WebAgentPro.Api.Models
 {
     public class Driver
     {
+  
         [Key]
         [Required]
         public int DriverId { get; set; }
