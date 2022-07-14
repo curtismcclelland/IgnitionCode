@@ -64,27 +64,49 @@
             <h2>Customer History</h2>
         </div>
         <!--Previous Carrier input box-->
+        <div class="form-group">
         <label for="PrevCarrier">Previous Carrier</label><br />
         <select>
             <option value="Lizard">Lizard Insurance</option>
             <option value="Pervasive">Pervasive Insurance</option>
             <option value="Other">Other</option>
-        </select><br />
+        </select>
+            </div>
         <!--claims in last 5 years-->
-        <input type="checkbox" id="5Years" />
-        <label for="5Years">Claims in the last 5 years?</label><br />
+        <div class="form-check group">
+            <label class="questions">Claims in the last 5 years?
+            <input type="checkbox" name="5Years">
+            <span class="blueCheck"></span>
+            </label>
+        </div>
         <!--moving violations-->
-        <input type="checkbox" id="MovingViolations" />
-        <label for="MovingViolations">Any moving violations in the last 5 years?</label><br />
+        <div>
+            <label class="questions">Any moving violations in the last 5 years?
+            <input type="checkbox" name="MovingViolations">
+            <span class="blueCheck"></span>
+            </label>
+        </div>
         <!--less than 3 years-->
-        <input type="checkbox" id="LessThan3Yrs" />
-        <label for="LessThan3Yrs">Less than 3 years driving?</label><br />
+        <div>
+            <label class="questions">Less than 3 years driving?
+            <input type="checkbox" name="LessThan3Yrs">
+            <span class="blueCheck"></span>
+            </label>
+        </div>
         <!--force multi car discount-->
-        <input type="checkbox" id="MultiCarDiscount" />
-        <label for="MultiCarDiscount">Force multi-car discount</label><br />
+        <div>
+            <label class="questions">Force multi-car discount?
+                <input type="checkbox" name="MultiCarDiscount">
+            <span class="blueCheck"></span>
+            </label>
+        </div>
         <!--customer is a diver?-->
-        <input type="checkbox" id="CustomerEqualDriver" />
-        <label for="CustomerEqualDriver">Is this customer a driver?</label><br />
+        <div>
+            <label class="questions">Is this customer a driver?
+                <input type="checkbox" name="CustomerEqualDriver">
+            <span class="blueCheck"></span>
+                </label>
+        </div>
     </div>
     
     <!-- Driver Information Pt1 -->
@@ -100,7 +122,7 @@
                     <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
                 </div>
                 <div class="form-group col-md-4 col-2-in-one">
-                    <label for="inputState" class="form-label">Driver’s License State</label>
+                    <label for="inputState" class="form-label">Driver�s License State</label>
                     <select formControlName="state" id="inputState" name="state" class="form-control" required>
                         <option selected>Choose...</option>
                         <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
@@ -147,7 +169,7 @@
                     <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
                 </div>
                 <div class="form-group col-md-4 col-2-in-one">
-                    <label for="inputState" class="form-label">Driver’s License State</label>
+                    <label for="inputState" class="form-label">Driver�s License State</label>
                     <select formControlName="state" id="inputState" name="state" class="form-control" required>
                         <option selected>Choose...</option>
                         <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
@@ -229,9 +251,76 @@
         </div>
     </div>
 
-    <div class="formNavButtons">
-        <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
-        <a class="btn btn-primary" role="button" *ngIf="step != 6" (click)="continue()">Continue</a>
-        <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid" *ngIf="step == 6">Submit</button>
+    <div *ngIf="step == 4">
+        <div class="stepTitle">
+            <h2>Vehicle Information</h2>
+            <p>All fields are required</p>
+        </div>
+        <div class="stepForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="make" class="form-label">Make</label>
+                    <input formControlName="make" name="make" type="text" class="form-control" id="make" placeholder="{{make}}" required maxlength="60">
+                </div>
+            </div>
+        </div>
+        <div class="stepForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="model" class="form-label">Model</label>
+                    <input formControlName="model" name="model" type="text" class="form-control" id="model" placeholder="{{model}}" required maxlength="60">
+                </div>
+            </div>
+        </div>
+        <div class="stepForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="year" class="form-label">Year</label>
+                            <input formControlName="year" name="year" type="text" class="form-control" id="year" placeholder="2019" required maxlength="60">
+                </div>
+            </div>
+        </div>
+        <div class="stepForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="currentvalue" class="form-label">Current Value</label>
+                    <input formControlName="current_value" name="current_value" type="text" class="form-control" id="currentvalue" placeholder="$12,345" required maxlength="60">
+                </div>
+            </div>
+        </div>
+        <div class="stepForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="annualmileage" class="form-label">Annual Mileage</label>
+                    <input formControlName="annual_mileage" name="annual_mileage" type="text" class="form-control" id="annualmileage" placeholder="12345" required maxlength="60">
+                </div>
+            </div>
+        </div>
+        <div class="stepForm">
+        <div class="form-group col-md-4">
+            <label for="daysDriven" class="form-label">Days Driven per Week</label>
+            <select formControlName="daysDriven" id="daysDriven" name="DaysDriven" class="form-control" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+        </div>
+            </div>
+        <div class="stepForm">
+        <div class="form-group col-md-6">
+            <label for="DriventoWork">Miles Driven to Work</label>
+            <input formControlName="work" type="number" name="work" class="form-control" id="DriventoWork" placeholder="40" required>
+        </div>
+            </div>
     </div>
+
+        <div class="formNavButtons">
+            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+            <a class="btn btn-primary" role="button" *ngIf="step != 5" (click)="continue()">Continue</a>
+            <button type="submit" class="btn btn-primary" *ngIf="step == 6">Submit</button>
+        </div>
 </form>
