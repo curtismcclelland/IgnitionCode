@@ -9,10 +9,12 @@ namespace WebAgentPro.Api.Models
 {
     public class Driver
     {
-  
         [Key]
         [Required]
         public int DriverId { get; set; }
+        [Required]
+        public int QuoteId { get; set; }
+        public int? VehicleId { get; set; }
         [Required]
         [Display(Name = "First Name")]
         [StringLength(60)]

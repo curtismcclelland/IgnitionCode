@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Drivers
         [HttpGet]
+        [Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
         {
             return await _context.Drivers.ToListAsync();
@@ -30,6 +32,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Drivers/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Driver>> GetDriver(int id)
         {
             var driver = await _context.Drivers.FindAsync(id);
@@ -45,7 +48,8 @@ namespace WebAgentPro.Api.Controllers
         // PUT: api/Drivers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDriver(int id, Driver driver)
+        [Authorize(Roles = "Manager, Agent")]
+        public async Task<IActionResult> EditDriver(int id, Driver driver)
         {
             if (id != driver.DriverId)
             {
@@ -76,7 +80,8 @@ namespace WebAgentPro.Api.Controllers
         // POST: api/Drivers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Driver>> PostDriver(Driver driver)
+        [Authorize(Roles = "Manager, Agent")]
+        public async Task<ActionResult<Driver>> CreateDriver(Driver driver)
         {
             _context.Drivers.Add(driver);
 
@@ -98,6 +103,7 @@ namespace WebAgentPro.Api.Controllers
 
         // DELETE: api/Drivers/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager, Agent")]
         public async Task<IActionResult> DeleteDriver(int id)
         {
             var driver = await _context.Drivers.FindAsync(id);

@@ -27,6 +27,8 @@ namespace WebAgentPro.Api.Models
         public decimal CurrentValue { get; set; }    
         public Driver PrimaryDriver { get; set; }
         [Required]
+        public int QuoteId { get; set; }
+        [Required]
         [Display(Name = "Annual Mileage")]
         public int AnnualMileage { get; set; }
         [Required]

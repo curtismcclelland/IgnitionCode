@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +32,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Quotes/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Quote>> GetQuote(int id)
         {
             //var quote = await _context.Quotes.FindAsync(id);]
@@ -47,7 +49,7 @@ namespace WebAgentPro.Api.Controllers
         // PUT: api/Quotes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuote(int id, Quote quote)
+        public async Task<IActionResult> EditQuote(int id, Quote quote)
         {
             if (id != quote.QuoteId)
             {
@@ -78,7 +80,7 @@ namespace WebAgentPro.Api.Controllers
         // POST: api/Quotes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Quote>> PostQuote(Quote quote)
+        public async Task<ActionResult<Quote>> CreateQuote(Quote quote)
         {
             _context.Quotes.Add(quote);
             await _context.SaveChangesAsync();
