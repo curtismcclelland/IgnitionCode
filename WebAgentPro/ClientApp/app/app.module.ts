@@ -17,6 +17,8 @@ import { DiscountEditComponent } from './discountmanagement/discount-edit/discou
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 import { QuoteCreationComponent } from './QuoteCreation/quote-creation.component';
 import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   
 @NgModule({
     imports: [
@@ -25,6 +27,7 @@ import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
+        BrowserAnimationsModule,
         routing
     ],
     declarations: [

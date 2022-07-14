@@ -1,108 +1,74 @@
-<h1>Quote Creation</h1>
 <a class="nav-item nav-link" routerLink="/quoteSearch">Quote Search</a>
-<h3>{{first_name}}</h3>
-<form (ngSubmit)="submit()" class="quoteForm" [formGroup]="userForm">
+<form (ngSubmit)="submitForm()" class="quoteForm" #userForm="ngForm"><!--[formGroup]="userForm"> -->
+    <!-- {{ userForm.value | json}} -->
+
+    <!-- Customer Information -->
     <div *ngIf="step == 1">
         <div class="stepTitle">
             <h2>Customer Information</h2>
             <p>All fields are required</p>
         </div>
+        <!-- pop up error css came from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup -->
+        <!-- need to revisit - Shubha -->
         <div class="stepForm">
             <div class="form-row">
+<<<<<<< HEAD
                 <div class="form-group col-md-6">
                     <label for="firstname" class="form-label">First Name</label>
                     <input formControlName="first_name" name="first_name" type="text" class="form-control" id="firstname" placeholder="John" required maxlength="60">
+=======
+                <div class="form-group col-md-6 popup">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input formControlName="firstName" [(ngModel)]="quote.firstName" type="text" class="form-control" placeholder="First Name" >
+                    <span *ngIf="firstName.invalid && firstName.touched" class="popuptext" id="myPopup">First name is required.</span>
+>>>>>>> origin/5006-Implement-UX-sj
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 popup">
                     <label for="lastname" class="form-label">Last Name</label>
-                    <input formControlName="last_name" type="text" name="last_name" class="form-control" id="lastname" placeholder="Doe" required maxlength="60">
+                    <input formControlName="lastName" [(ngModel)]="quote.lastName" type="text" name="lastName" class="form-control" id="lastname" placeholder="Last Name" required maxlength="60">
+                    <span *ngIf="lastName.invalid && lastName.touched" class="popuptext" id="myPopup">Last name is required.</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputAddress" class="form-label">Address</label>
-                <input formControlName="address" type="text" name="address" class="form-control" id="inputAddress" placeholder="1234 Main St" required maxlength="60">
+                <input formControlName="address" [(ngModel)]="quote.address" type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required maxlength="60">
+                <span *ngIf="address.invalid && address.touched" class="popuptext" id="myPopup">Address is required.</span>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputCity">City</label>
-                <input formControlName="city" type="text" name="city" class="form-control" id="inputCity" required maxlength="60">
-              </div>
+                <input formControlName="city" [(ngModel)]="quote.city" type="text" name="city" class="form-control" id="inputCity" placeholder="City" required maxlength="60">
+                <span *ngIf="city.invalid && city.touched" class="popuptext" id="myPopup">City is required.</span>
+            </div>
               <div class="form-group col-md-4">
                   <label for="inputState" class="form-label">State</label>
-                  <select formControlName="state" id="inputState" name="state" class="form-control" required>
+                  <select formControlName="state" [(ngModel)]="quote.state" id="inputState" name="state" class="form-control" required>
                       <option selected>Choose...</option>
-                      <option value="AL">Alabama</option>
-                      <option value="AK">Alaska</option>
-                      <option value="AZ">Arizona</option>
-                      <option value="AR">Arkansas</option>
-                      <option value="CA">California</option>
-                      <option value="CO">Colorado</option>
-                      <option value="CT">Connecticut</option>
-                      <option value="DE">Delaware</option>
-                      <option value="DC">District Of Columbia</option>
-                      <option value="FL">Florida</option>
-                      <option value="GA">Georgia</option>
-                      <option value="HI">Hawaii</option>
-                      <option value="ID">Idaho</option>
-                      <option value="IL">Illinois</option>
-                      <option value="IN">Indiana</option>
-                      <option value="IA">Iowa</option>
-                      <option value="KS">Kansas</option>
-                      <option value="KY">Kentucky</option>
-                      <option value="LA">Louisiana</option>
-                      <option value="ME">Maine</option>
-                      <option value="MD">Maryland</option>
-                      <option value="MA">Massachusetts</option>
-                      <option value="MI">Michigan</option>
-                      <option value="MN">Minnesota</option>
-                      <option value="MS">Mississippi</option>
-                      <option value="MO">Missouri</option>
-                      <option value="MT">Montana</option>
-                      <option value="NE">Nebraska</option>
-                      <option value="NV">Nevada</option>
-                      <option value="NH">New Hampshire</option>
-                      <option value="NJ">New Jersey</option>
-                      <option value="NM">New Mexico</option>
-                      <option value="NY">New York</option>
-                      <option value="NC">North Carolina</option>
-                      <option value="ND">North Dakota</option>
-                      <option value="OH">Ohio</option>
-                      <option value="OK">Oklahoma</option>
-                      <option value="OR">Oregon</option>
-                      <option value="PA">Pennsylvania</option>
-                      <option value="RI">Rhode Island</option>
-                      <option value="SC">South Carolina</option>
-                      <option value="SD">South Dakota</option>
-                      <option value="TN">Tennessee</option>
-                      <option value="TX">Texas</option>
-                      <option value="UT">Utah</option>
-                      <option value="VT">Vermont</option>
-                      <option value="VA">Virginia</option>
-                      <option value="WA">Washington</option>
-                      <option value="WV">West Virginia</option>
-                      <option value="WI">Wisconsin</option>
-                      <option value="WY">Wyoming</option>
+                      <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
               </select>
-              </div>
+                <span *ngIf="state.invalid && state.touched" class="popuptext" id="myPopup">Sate is required.</span>
+            </div>
               <div class="form-group col-md-2">
                 <label for="inputZip">Zip</label>
-                <input formControlName="zip" type="number" name="zip" class="form-control" id="inputZip" placeholder="XXXXX" required maxlength="9" minlength="5">
+                <input formControlName="zip" [(ngModel)]="quote.zip" type="number" class="form-control" placeholder="ZIP" required maxlength="9" minlength="5">
               </div>
             </div>
             <div class="form-group">
                 <label for="ssn" class="form-label">Social Security Nunber</label>
-                <input formControlName="ssn" type="text" name="ssn" class="form-control" id="ssn" placeholder="XXX-XX-XXXX" required maxlength="10" minlength="10">
+                <input formControlName="ssn" [(ngModel)]="quote.ssn" type="text" class="form-control" placeholder="###-##-###" required maxlength="10" minlength="10">
             </div>
             <div class="form-group">
-                <label for="ssn" class="form-label">Date of Birth (MM/DD/YYYY)</label>
-                <input formControlName="dob" type="date" name="dob" class="form-control" id="ssn" placeholder="MM/DD/YYY" required>
+                <label for="dateOfBirth" class="form-label">Date of Birth (MM/DD/YYYY)</label>
+                <input formControlName="dateOfBirth" [(ngModel)]="quote.dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY" required>
             </div>
         </div>
     </div>
     
     <!--Customer History-->
     <div *ngIf="step == 2">
-        <h2>Customer History</h2>
+        <div class="stepTitle">
+            <h2>Customer History</h2>
+        </div>
         <!--Previous Carrier input box-->
         <div class="form-group">
         <label for="PrevCarrier">Previous Carrier</label><br />
@@ -149,10 +115,34 @@
         </div>
     </div>
     
+    <!-- Driver Information Pt1 -->
     <div *ngIf="step == 3">
-        Third Section
+        <div class="stepForm">
+            <div class="stepTitle">
+                <h2>Driver Information</h2>
+                <p>All fields are required</p>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputAddress" class="form-label">Driver's License #</label>
+                    <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
+                </div>
+                <div class="form-group col-md-4 col-2-in-one">
+                    <label for="inputState" class="form-label">Driver’s License State</label>
+                    <select formControlName="state" id="inputState" name="state" class="form-control" required>
+                        <option selected>Choose...</option>
+                        <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                    </select>
+                </div>
+                <div class="form-check">
+                    <label class="" for="">Attended Safe Driving School?</label>
+                    <input class="" formControlName="safeDrivingSchool" name="safeDrivingSchool" type="checkbox" id="">
+                </div>
+            </div>
+        </div>
     </div>
 
+<<<<<<< HEAD
     <div *ngIf="step == 4">
         <div class="stepTitle">
             <h2>Vehicle Information</h2>
@@ -218,6 +208,127 @@
             <input formControlName="work" type="number" name="work" class="form-control" id="DriventoWork" placeholder="40" required>
         </div>
             </div>
+=======
+    <!-- Driver Information Pt2 -->
+    <div *ngIf="step == 3">
+        <div class="stepForm">
+            <div class="stepTitle">
+                <h2>Driver Information</h2>
+                <p>All fields are required</p>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6 popup">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input formControlName="firstName" [(ngModel)]="quote.firstName" type="text" class="form-control" placeholder="First Name" >
+                    <span *ngIf="firstName.invalid && firstName.touched" class="popuptext" id="myPopup">First name is required.</span>
+                </div>
+                <div class="form-group col-md-6 popup">
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input formControlName="lastName" [(ngModel)]="quote.lastName" type="text" name="lastName" class="form-control" id="lastname" placeholder="Last Name" required maxlength="60">
+                    <span *ngIf="lastName.invalid && lastName.touched" class="popuptext" id="myPopup">Last name is required.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ssn" class="form-label">Social Security Nunber</label>
+                <input formControlName="ssn" [(ngModel)]="quote.ssn" type="text" class="form-control" placeholder="###-##-###" required maxlength="10" minlength="10">
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth" class="form-label">Date of Birth (MM/DD/YYYY)</label>
+                <input formControlName="dateOfBirth" [(ngModel)]="quote.dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputAddress" class="form-label">Driver's License #</label>
+                    <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
+                </div>
+                <div class="form-group col-md-4 col-2-in-one">
+                    <label for="inputState" class="form-label">Driver’s License State</label>
+                    <select formControlName="state" id="inputState" name="state" class="form-control" required>
+                        <option selected>Choose...</option>
+                        <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="" for="">Attended Safe Driving School?</label>
+                <input class="" type="checkbox"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicle Information -->
+    <div *ngIf="step == 4">
+        <div class="stepForm">
+            <div class="stepTitle">
+                <h2>Vehicle Information</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicle Checklist -->
+    <div *ngIf="step == 5">
+        <div class="stepForm vehicleChecklist">
+            <div class="stepTitle">
+                <h2>Vehicle Checklist</h2>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="AntiTheft">Anti-theft Alarms</label>
+                    <input type="checkbox" id="AntiTheft" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="AntiLock">Anti-lock Brakes</label>
+                    <input type="checkbox" id="AntiLock" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="RunningLights">Daytime Running Lights</label>
+                    <input type="checkbox" id="RunningLights" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="GarageAddressDiff">Garage Address Different</label>
+                    <input type="checkbox" id="GarageAddressDiff" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="PassiveRestraints">Passive Restraints </label>
+                    <input type="checkbox" id="PassiveRestraints" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="ReducedUseDiscount">Reduced Use Discount</label>
+                    <input type="checkbox" id="ReducedUseDiscount" />
+                </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Review Information Page -->
+    <div *ngIf="step == 6">
+        <div class="stepForm">
+            <div class="stepTitle">
+                <h2>Review Information</h2>
+            </div>
+            <div class="row reviewPageSectionHeader">
+                <p clsas="col sectionTitle">Customer Information</p>
+                <p class="col editBtn"><i class="bi bi-pencil"></i>Edit</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="formNavButtons">
+        <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+        <a class="btn btn-primary" role="button" *ngIf="step != 6" (click)="continue()">Continue</a>
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid" *ngIf="step == 6">Submit</button>
+>>>>>>> origin/5006-Implement-UX-sj
     </div>
 
         <div class="formNavButtons">

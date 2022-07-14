@@ -26,7 +26,7 @@ namespace WebAgentPro.Api.Models
         [Display(Name = "Current Value")]
         public decimal CurrentValue { get; set; }
        
-        public List<Driver> PrimaryDriver { get; set; }
+        public Driver PrimaryDriver { get; set; }
         [Required]
         [Display(Name = "Annual Mileage")]
         public int AnnualMileage { get; set; }
