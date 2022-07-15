@@ -1,3 +1,36 @@
+.progressBar{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.progress-step{
+    box-sizing: border-box;
+
+    width: 16px;
+    height: 16px;
+
+    /* Dark Blue */
+
+    background: #adadad;
+    /* Dark Blue */
+
+    border: 2px solid #0025CB;
+    border-radius: 50%;
+}
+
+.current-step{
+    width: 14px;
+    height: 14px;
+
+    background: #0025CB;
+    border-radius: 50%;
+}
+
 .btn-primary {
     width: 325px;
     background: #0025CB;
@@ -40,6 +73,7 @@ h2 {
 
 
 label {
+    font-family: 'Barlow';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -91,30 +125,30 @@ input[type="checkbox"] {
     color: white;
 }
 
-    input[type="checkbox"]:checked {
-        background-color: #000000;
-        color: #FFFFFF;
-    }
+input[type="checkbox"]:checked {
+    background-color: #000000;
+    color: #FFFFFF;
+}
 
-    input[type="checkbox"]:after {
-        content: ' ';
-        position: absolute;
-        height: 18px;
-        width: 20px;
-        left: 2px;
-        top: 3px;
-        border-radius: 0px;
-        border: #FFFFFF;
-        border-width: 0 2px 2px 0;
-        transform: rotate(50deg);
-        display: none;
-    }
+input[type="checkbox"]:after {
+    content: ' ';
+    position: absolute;
+    height: 18px;
+    width: 20px;
+    left: 2px;
+    top: 3px;
+    border-radius: 0px;
+    border: #FFFFFF;
+    border-width: 0 2px 2px 0;
+    transform: rotate(50deg);
+    display: none;
+}
 
-    input[type="checkbox"]:checked:after {
-        display: block;
-    }
+input[type="checkbox"]:checked:after {
+    display: block;
+}
 
-.questions {
+label .questions {
     font-style: normal;
     font-weight: 400;
     font-size: 17.0131px;
@@ -133,30 +167,30 @@ input[type="checkbox"] {
     user-select: none;
 }
 
-    /* The actual popup */
-    .popup .popuptext {
-        font-family: 'Barlow';
-        font-style: normal;
-        width: 160px;
-        background-color: #D63E3E;
-        color: #fff;
-        text-align: center;
-        padding: 8px 0;
-        position: absolute;
-        z-index: 1;
-        left: 10%;
-        border-radius: 7px;
-    }
+/* The actual popup */
+.popup .popuptext {
+    font-family: 'Barlow';
+    font-style: normal;
+    width: 160px;
+    background-color: #D63E3E;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    left: 10%;
+    border-radius: 7px;
+}
 
-        /* Popup arrow */
-        .popup .popuptext::after {
-            content: "";
-            position: absolute;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
 
 input[type="checkbox"] {
     float: right;
@@ -168,20 +202,29 @@ input[type="checkbox"] {
 }
 
 .reviewPageSectionHeader {
+    font-family: 'DM Sans';
+    font-style: normal;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    border-bottom: #2F2F2F;
-    border-width: 2px;
+    border-bottom: 0.5px solid #757575;
+    height: 30px;
+    padding-bottom: 10px;
 }
 
-    .reviewPageSectionHeader > .editBtn {
-        text-align: right;
-    }
+.reviewPageSectionHeader > .editBtn {
+    text-align: right;
+    color: #757575;
+}
 
-    .reviewPageSectionHeader > .sectionTitle {
-        text-align: left;
-    }
+.reviewPageSectionHeader > .sectionTitle {
+    text-align: left;
+    /* Dark Gray */
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #2F2F2F;
+}
 
 .form-control {
     padding: 9.4517px 14.1775px;
@@ -190,4 +233,18 @@ input[type="checkbox"] {
     border: 1.89034px solid #2F2F2F;
     border-radius: 7.56136px;
     height: 42px;
+}
+
+.fieldSection{
+    color: #757575;
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.reviewInfoPage > p{
+    font-family: 'DM Sans';
+    font-style: normal;
+    color: #2F2F2F;
 }
