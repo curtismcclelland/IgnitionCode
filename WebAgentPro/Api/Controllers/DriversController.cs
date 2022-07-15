@@ -24,7 +24,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Drivers
         [HttpGet]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
         {
             return await _context.Drivers.ToListAsync();
@@ -32,7 +32,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Drivers/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Driver>> GetDriver(int id)
         {
             var driver = await _context.Drivers.FindAsync(id);
@@ -48,7 +48,7 @@ namespace WebAgentPro.Api.Controllers
         // PUT: api/Drivers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<IActionResult> EditDriver(int id, Driver driver)
         {
             if (id != driver.DriverId)
@@ -80,7 +80,7 @@ namespace WebAgentPro.Api.Controllers
         // POST: api/Drivers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Driver>> CreateDriver(Driver driver)
         {
             _context.Drivers.Add(driver);
@@ -100,10 +100,40 @@ namespace WebAgentPro.Api.Controllers
             return CreatedAtAction("GetDriver", new { id = driver.DriverId }, driver);
         }
 
+        ////Create Vehicle that is belong to Driver
+        //[HttpPost]
+        //[Route("{id}/addvehicle")]
+        ////[Authorize(Roles = "Manager, Agent")]
+        //public async Task<ActionResult<Driver>> CreateVehicle(Vehicle newVehicle,int? id)
+        //{
+        //    var driverToUpdate = _context.Drivers.Find(id);
+        //    var vehicleToAdd = _context.Vehicles.Find(newVehicle.VehiceId);
 
+        //    if (driverToUpdate is null)
+        //    {
+        //        throw new InvalidOperationException("Driver does not exist");
+        //    }
+        //    driverToUpdate.VehicleId = vehicleToAdd.VehiceId;
+            
+        //    _context.Vehicles.Add(newVehicle);
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+
+        //    catch (DbUpdateException)
+        //    {
+
+        //        throw;
+
+        //    }
+
+        //    return CreatedAtAction("GetVehicle", new { id = newVehicle.VehiceId }, newVehicle);
+        //}
         // DELETE: api/Drivers/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<IActionResult> DeleteDriver(int id)
         {
             var driver = await _context.Drivers.FindAsync(id);

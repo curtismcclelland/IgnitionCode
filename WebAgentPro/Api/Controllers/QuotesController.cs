@@ -27,16 +27,16 @@ namespace WebAgentPro.Api.Controllers
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
             //return await _context.Quotes.ToListAsync();
-            return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.PrimaryDriver).AsNoTracking().ToListAsync();
+            return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.Driver).AsNoTracking().ToListAsync();
         }
 
         // GET: api/Quotes/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Manager, Agent")]
+        //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Quote>> GetQuote(int id)
         {
             //var quote = await _context.Quotes.FindAsync(id);]
-            var quote = await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p=>p.PrimaryDriver).AsNoTracking().SingleOrDefaultAsync(p => p.QuoteId == id);
+            var quote = await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p=>p.Driver).AsNoTracking().SingleOrDefaultAsync(p => p.QuoteId == id);
 
             if (quote == null)
             {
@@ -55,7 +55,6 @@ namespace WebAgentPro.Api.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(quote).State = EntityState.Modified;
 
             try
@@ -77,16 +76,54 @@ namespace WebAgentPro.Api.Controllers
             return NoContent();
         }
 
+
+
         // POST: api/Quotes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Quote>> CreateQuote(Quote quote)
+        public async Task<ActionResult<Quote>> CreateQuote(Quote newQuote)
         {
-            _context.Quotes.Add(quote);
+            //var drivers = new List<Driver>();
+            //foreach (var eachDrivers in newQuote.DriverId)
+            //{
+            //    var driver = _context.Drivers.Find(eachDrivers);
+            //    if (driver == null)
+            //    {
+            //        return null;
+            //    }
+            //    else
+            //    {
+            //        drivers.Add(driver);
+            //    }
+            //}
+
+
+            //var vehicles = new List<Vehicle>();
+            //foreach (var eachVehicles in newQuote.VehicleId)
+            //{
+            //    var vehicle = _context.Vehicles.Find(eachVehicles);
+            //    if (vehicle == null)
+            //    {
+            //        return null;
+            //    }
+            //    else
+            //    {
+            //        vehicles.Add(vehicle);
+            //    }
+            //}
+
+            //var addedQuote = _context.Quotes.Add(newQuote);
+
+
+            _context.Quotes.Add(newQuote);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
+            return CreatedAtAction("GetQuote", new { id = newQuote.QuoteId }, newQuote);
         }
+
+
+
+
 
         // DELETE: api/Quotes/5
         [HttpDelete("{id}")]
@@ -97,11 +134,6 @@ namespace WebAgentPro.Api.Controllers
             {
                 return NotFound();
             }
-
-        
-
-
-
 
             _context.Quotes.Remove(quote);
             await _context.SaveChangesAsync();

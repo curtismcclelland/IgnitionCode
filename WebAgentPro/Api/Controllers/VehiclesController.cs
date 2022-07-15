@@ -25,7 +25,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
         {
-            return await _context.Vehicles.Include(p => p.PrimaryDriver).AsNoTracking().ToListAsync();
+            return await _context.Vehicles.ToListAsync();
         }
 
         // GET: api/Vehicles/5
@@ -33,7 +33,7 @@ namespace WebAgentPro.Api.Controllers
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
             //var vehicle = await _context.Vehicles.FindAsync(id);
-            var vehicle = await _context.Vehicles.Include(p => p.PrimaryDriver).AsNoTracking().SingleOrDefaultAsync(p => p.VehiceId == id);
+            var vehicle = await _context.Vehicles.Include(p => p.PrimaryDriverId).AsNoTracking().SingleOrDefaultAsync(p => p.VehicleId == id);
 
             if (vehicle == null)
             {
@@ -42,13 +42,12 @@ namespace WebAgentPro.Api.Controllers
 
             return vehicle;
         }
-
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVehicle(int id, Vehicle vehicle)
         {
-            if (id != vehicle.VehiceId)
+            if (id != vehicle.VehicleId)
             {
                 return BadRequest();
             }
@@ -82,7 +81,7 @@ namespace WebAgentPro.Api.Controllers
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = vehicle.VehiceId }, vehicle);
+            return CreatedAtAction("GetVehicle", new { id = vehicle.VehicleId }, vehicle);
         }
 
         // DELETE: api/Vehicles/5
@@ -103,7 +102,7 @@ namespace WebAgentPro.Api.Controllers
 
         private bool VehicleExists(int id)
         {
-            return _context.Vehicles.Any(e => e.VehiceId == id);
+            return _context.Vehicles.Any(e => e.VehicleId == id);
         }
     }
 }

@@ -71,10 +71,8 @@ namespace WebAgentPro.Api.Models
         [Required]
         [Display(Name = "Force Multi Car Discount")]
         public bool ForceMultiCarDiscount { get; set; }
-        [Required]
-        public List<Driver> Drivers { get; set; } 
-        [Required]
-        public List<Vehicle> Vehicles { get; set; }
+        public List<Driver> Drivers { get; set; } = new List<Driver>();
+        public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
         [Required]
         public decimal DaytimeRunningLights { get; set; }
         [Required]

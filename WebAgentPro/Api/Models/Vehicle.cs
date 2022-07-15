@@ -10,7 +10,7 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int VehiceId { get; set; }
+        public int VehicleId { get; set; }
         [Required]
         [StringLength(60)]
         public string Vin { get; set; }
@@ -25,9 +25,11 @@ namespace WebAgentPro.Api.Models
         [Required]
         [Display(Name = "Current Value")]
         public decimal CurrentValue { get; set; }    
-        public Driver PrimaryDriver { get; set; }
+        public int PrimaryDriverId { get; set; }
+        public Driver Driver { get; set; }
         [Required]
         public int QuoteId { get; set; }
+        public Quote Quote { get; set; }
         [Required]
         [Display(Name = "Annual Mileage")]
         public int AnnualMileage { get; set; }
