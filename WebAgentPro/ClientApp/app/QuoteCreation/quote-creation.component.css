@@ -1,3 +1,36 @@
+.progressBar{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.progress-step{
+    box-sizing: border-box;
+
+    width: 16px;
+    height: 16px;
+
+    /* Dark Blue */
+
+    background: #adadad;
+    /* Dark Blue */
+
+    border: 2px solid #0025CB;
+    border-radius: 50%;
+}
+
+.current-step{
+    width: 14px;
+    height: 14px;
+
+    background: #0025CB;
+    border-radius: 50%;
+}
+
 .btn-primary {
     width: 325px;
     background: #0025CB;
@@ -40,6 +73,7 @@ h2 {
 
 
 label {
+    font-family: 'Barlow';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -114,7 +148,7 @@ input[type="checkbox"]:checked:after {
     display: block;
 }
 
-.questions {
+label .questions {
     font-style: normal;
     font-weight: 400;
     font-size: 17.0131px;
