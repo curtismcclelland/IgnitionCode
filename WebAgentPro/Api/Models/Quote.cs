@@ -10,7 +10,6 @@ namespace WebAgentPro.Api.Models
 {
     public class Quote
     {
-
         [Key]
         [Required]
         public int QuoteId { get; set; }

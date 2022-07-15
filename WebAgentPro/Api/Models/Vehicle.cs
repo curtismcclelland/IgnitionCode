@@ -28,7 +28,7 @@ namespace WebAgentPro.Api.Models
         public int PrimaryDriverId { get; set; }
         public Driver Driver { get; set; }
         [Required]
-        public int QuoteId { get; set; }
+        public int QuoteId { get; set; } 
         public Quote Quote { get; set; }
         [Required]
         [Display(Name = "Annual Mileage")]

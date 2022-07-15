@@ -26,8 +26,8 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
-            //return await _context.Quotes.ToListAsync();
-            return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.Driver).AsNoTracking().ToListAsync();
+            return await _context.Quotes.ToListAsync();
+            //return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.Driver).AsNoTracking().ToListAsync();
         }
 
         // GET: api/Quotes/5
@@ -83,38 +83,6 @@ namespace WebAgentPro.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Quote>> CreateQuote(Quote newQuote)
         {
-            //var drivers = new List<Driver>();
-            //foreach (var eachDrivers in newQuote.DriverId)
-            //{
-            //    var driver = _context.Drivers.Find(eachDrivers);
-            //    if (driver == null)
-            //    {
-            //        return null;
-            //    }
-            //    else
-            //    {
-            //        drivers.Add(driver);
-            //    }
-            //}
-
-
-            //var vehicles = new List<Vehicle>();
-            //foreach (var eachVehicles in newQuote.VehicleId)
-            //{
-            //    var vehicle = _context.Vehicles.Find(eachVehicles);
-            //    if (vehicle == null)
-            //    {
-            //        return null;
-            //    }
-            //    else
-            //    {
-            //        vehicles.Add(vehicle);
-            //    }
-            //}
-
-            //var addedQuote = _context.Quotes.Add(newQuote);
-
-
             _context.Quotes.Add(newQuote);
             await _context.SaveChangesAsync();
 
