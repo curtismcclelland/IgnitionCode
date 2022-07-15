@@ -1,7 +1,6 @@
 <a class="nav-item nav-link" routerLink="/quoteSearch">Quote Search</a>
-<form (ngSubmit)="submitForm()" class="quoteForm" #userForm="ngForm"><!--[formGroup]="userForm"> -->
-    <!-- {{ userForm.value | json}} -->
-
+<form (ngSubmit)="submitForm()" class="quoteForm" [formGroup]="userForm">
+    {{ userForm.value | json }}
     <!-- Customer Information -->
     <div *ngIf="step == 1">
         <div class="stepTitle">
@@ -10,50 +9,59 @@
         </div>
         <!-- pop up error css came from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_popup -->
         <!-- need to revisit - Shubha -->
-        <div class="stepForm">
+        <div class="stepForm" formGroupName="customerInfo">
             <div class="form-row">
-                <div class="form-group col-md-6 popup">
-                    <label for="first_name" class="form-label">First Name</label>
-                    <input formControlName="firstName" [(ngModel)]="quote.firstName" type="text" class="form-control" placeholder="First Name" >
+                <div class="col-md-6 popup form-group">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input formControlName="firstName" type="text" class="form-control" placeholder="First Name" />
                     <span *ngIf="firstName.invalid && firstName.touched" class="popuptext" id="myPopup">First name is required.</span>
                 </div>
-                <div class="form-group col-md-6 popup">
-                    <label for="lastname" class="form-label">Last Name</label>
-                    <input formControlName="lastName" [(ngModel)]="quote.lastName" type="text" name="lastName" class="form-control" id="lastname" placeholder="Last Name" required maxlength="60">
+                <div class=" col-md-6 popup">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input formControlName="lastName" type="text" class="form-control" placeholder="Last Name"/>
                     <span *ngIf="lastName.invalid && lastName.touched" class="popuptext" id="myPopup">Last name is required.</span>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="popup">
                 <label for="inputAddress" class="form-label">Address</label>
-                <input formControlName="address" [(ngModel)]="quote.address" type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required maxlength="60">
+                <input formControlName="address" type="text" name="address" class="form-control" id="inputAddress" placeholder="Address">
                 <span *ngIf="address.invalid && address.touched" class="popuptext" id="myPopup">Address is required.</span>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="col-md-6 popup">
                 <label for="inputCity">City</label>
-                <input formControlName="city" [(ngModel)]="quote.city" type="text" name="city" class="form-control" id="inputCity" placeholder="City" required maxlength="60">
+                <input formControlName="city" type="text" name="city" class="form-control" placeholder="City">
                 <span *ngIf="city.invalid && city.touched" class="popuptext" id="myPopup">City is required.</span>
             </div>
-              <div class="form-group col-md-4">
+              <div class="col-md-4 popup">
                   <label for="inputState" class="form-label">State</label>
-                  <select formControlName="state" [(ngModel)]="quote.state" id="inputState" name="state" class="form-control" required>
-                      <option selected>Choose...</option>
-                      <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
-              </select>
+                  <select formControlName="state" name="state" class="form-control" required>
+                    <option selected>Choose...</option>
+                    <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                </select>
                 <span *ngIf="state.invalid && state.touched" class="popuptext" id="myPopup">Sate is required.</span>
             </div>
-              <div class="form-group col-md-2">
+              <div class="col-md-2 popup">
                 <label for="inputZip">Zip</label>
-                <input formControlName="zip" [(ngModel)]="quote.zip" type="number" class="form-control" placeholder="ZIP" required maxlength="9" minlength="5">
-              </div>
+                <input formControlName="zip" type="number" class="form-control" placeholder="ZIP">
+                <span *ngIf="zip.invalid && zip.touched" class="popuptext" id="myPopup">ZipCode is required.</span>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="popup">
                 <label for="ssn" class="form-label">Social Security Nunber</label>
-                <input formControlName="ssn" [(ngModel)]="quote.ssn" type="text" class="form-control" placeholder="###-##-###" required maxlength="10" minlength="10">
+                <input formControlName="ssn" type="text" class="form-control" placeholder="###-##-###">
+                <span *ngIf="ssn.invalid && ssn.touched" class="popuptext" id="myPopup">Social Security Nunber is required.</span>
             </div>
-            <div class="form-group">
+            <div class="popup">
                 <label for="dateOfBirth" class="form-label">Date of Birth (MM/DD/YYYY)</label>
-                <input formControlName="dateOfBirth" [(ngModel)]="quote.dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY" required>
+                <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY">
+                <span *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="popuptext" id="myPopup">Date of Birth is required.</span>
+            </div>
+            
+            {{ customerInfo.valid }}
+            <div class="formNavButtons">
+                <!-- <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a> -->
+                <button class="btn btn-primary" [disabled]="!customerInfo.valid" (click)="continue()">Continue</button>
             </div>
         </div>
     </div>
@@ -65,47 +73,50 @@
         </div>
         <!--Previous Carrier input box-->
         <div class="form-group">
-        <label for="PrevCarrier">Previous Carrier</label><br />
-        <select>
-            <option value="Lizard">Lizard Insurance</option>
-            <option value="Pervasive">Pervasive Insurance</option>
-            <option value="Other">Other</option>
-        </select>
-            </div>
+            <select required>
+                <option selected>Choose...</option>
+                <option value="Lizard">Lizard Insurance</option>
+                <option value="Pervasive">Pervasive Insurance</option>
+            </select>
+        </div>
         <!--claims in last 5 years-->
-        <div class="form-check group">
-            <label class="questions">Claims in the last 5 years?
-            <input type="checkbox" name="5Years">
-            <span class="blueCheck"></span>
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="questions">Claims in the last 5 years?</label>
+                <input type="checkbox" name="5Years">
+            </div>
         </div>
         <!--moving violations-->
-        <div>
-            <label class="questions">Any moving violations in the last 5 years?
-            <input type="checkbox" name="MovingViolations">
-            <span class="blueCheck"></span>
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="questions">Any moving violations in the last 5 years?</label>
+                    <input type="checkbox" name="MovingViolations">
+            </div>
         </div>
         <!--less than 3 years-->
-        <div>
-            <label class="questions">Less than 3 years driving?
-            <input type="checkbox" name="LessThan3Yrs">
-            <span class="blueCheck"></span>
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="questions">Less than 3 years driving?</label>
+                <input type="checkbox" name="LessThan3Yrs">
+            </div>
         </div>
         <!--force multi car discount-->
-        <div>
-            <label class="questions">Force multi-car discount?
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="questions">Force multi-car discount?</label>
                 <input type="checkbox" name="MultiCarDiscount">
-            <span class="blueCheck"></span>
-            </label>
+            </div>
         </div>
         <!--customer is a diver?-->
-        <div>
-            <label class="questions">Is this customer a driver?
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="questions">Is this customer a driver?</label>
                 <input type="checkbox" name="CustomerEqualDriver">
-            <span class="blueCheck"></span>
-                </label>
+            </div>
+        </div>
+        <div class="formNavButtons">
+            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+            <button class="btn btn-primary" (click)="continue()">Continue</button>
         </div>
     </div>
     
@@ -122,7 +133,7 @@
                     <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
                 </div>
                 <div class="form-group col-md-4 col-2-in-one">
-                    <label for="inputState" class="form-label">Driver�s License State</label>
+                    <label for="inputState" class="form-label">Driver's License State</label>
                     <select formControlName="state" id="inputState" name="state" class="form-control" required>
                         <option selected>Choose...</option>
                         <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
@@ -169,7 +180,7 @@
                     <input formControlName="dlNum" type="text" name="dlNum" class="form-control" id="inputAddress" placeholder="########" required maxlength="60">
                 </div>
                 <div class="form-group col-md-4 col-2-in-one">
-                    <label for="inputState" class="form-label">Driver�s License State</label>
+                    <label for="inputState" class="form-label">Driver's License State</label>
                     <select formControlName="state" id="inputState" name="state" class="form-control" required>
                         <option selected>Choose...</option>
                         <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
@@ -181,14 +192,69 @@
                 <input class="" type="checkbox"/>
             </div>
         </div>
+        <div class="formNavButtons">
+            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+            <button class="btn btn-primary"  (click)="continue()">Continue</button>
+        </div>
     </div>
 
     <!-- Vehicle Information -->
     <div *ngIf="step == 4">
+        <div class="stepTitle">
+            <h2>Vehicle Information</h2>
+            <p>All fields are required</p>
+        </div>
         <div class="stepForm">
-            <div class="stepTitle">
-                <h2>Vehicle Information</h2>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="make" class="form-label">Make</label>
+                    <input formControlName="make" name="make" type="text" class="form-control" id="make" placeholder="{{make}}" required maxlength="60">
+                </div>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="model" class="form-label">Model</label>
+                    <input formControlName="model" name="model" type="text" class="form-control" id="model" placeholder="{{model}}" required maxlength="60">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="year" class="form-label">Year</label>
+                            <input formControlName="year" name="year" type="text" class="form-control" id="year" placeholder="2019" required maxlength="60">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="currentvalue" class="form-label">Current Value</label>
+                    <input formControlName="current_value" name="current_value" type="text" class="form-control" id="currentvalue" placeholder="$12,345" required maxlength="60">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="annualmileage" class="form-label">Annual Mileage</label>
+                    <input formControlName="annual_mileage" name="annual_mileage" type="text" class="form-control" id="annualmileage" placeholder="12345" required maxlength="60">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="daysDriven" class="form-label">Days Driven per Week</label>
+                <select formControlName="daysDriven" id="daysDriven" name="DaysDriven" class="form-control" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="DriventoWork">Miles Driven to Work</label>
+                <input formControlName="work" type="number" name="work" class="form-control" id="DriventoWork" placeholder="40" required>
+            </div>
+        </div>
+        <div class="formNavButtons">
+            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+            <button class="btn btn-primary"  (click)="continue()">Continue</button>
         </div>
     </div>
 
@@ -198,7 +264,6 @@
             <div class="stepTitle">
                 <h2>Vehicle Checklist</h2>
             </div>
-            
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="AntiTheft">Anti-theft Alarms</label>
@@ -234,7 +299,11 @@
                     <label for="ReducedUseDiscount">Reduced Use Discount</label>
                     <input type="checkbox" id="ReducedUseDiscount" />
                 </div>
+            </div>
         </div>
+        <div class="formNavButtons">
+            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
+            <button class="btn btn-primary" (click)="continue()">Continue</button>
         </div>
     </div>
     
@@ -244,83 +313,198 @@
             <div class="stepTitle">
                 <h2>Review Information</h2>
             </div>
-            <div class="row reviewPageSectionHeader">
-                <p clsas="col sectionTitle">Customer Information</p>
-                <p class="col editBtn"><i class="bi bi-pencil"></i>Edit</p>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="step == 4">
-        <div class="stepTitle">
-            <h2>Vehicle Information</h2>
-            <p>All fields are required</p>
-        </div>
-        <div class="stepForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="make" class="form-label">Make</label>
-                    <input formControlName="make" name="make" type="text" class="form-control" id="make" placeholder="{{make}}" required maxlength="60">
+            <div class="reviewInfoPage">
+                <!-- Customer Information -->
+                <div class="customerInfo">
+                    <div class="row reviewPageSectionHeader">
+                        <p clsas="col sectionTitle">Customer Information</p>
+                        <p class="col editBtn"><i class="bi bi-pencil"></i> Edit</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">Name</span>
+                            <p>Jonathan Doe</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Address</span>
+                            <p>1234 White St
+                                New York, NY 10000</p>
+                        </div>
+                    </div>    
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">SSN</span>
+                            <p>111-11-111</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Date Of Birth</span>
+                            <p>04/17/1983</p>
+                        </div>
+                    </div> 
+                </div>
+                <!-- Customer History -->
+                <div class="customerHistory"> 
+                    <div class="row reviewPageSectionHeader">
+                        <p clsas="col sectionTitle">Customer History</p>
+                        <p class="col editBtn"><i class="bi bi-pencil"></i> Edit</p>
+                    </div>
+                    <div class="">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Claims in the last 5 years?</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Any moving violations in the last 5 years? </label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Less than 3 years driving?</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Force multi-car discount?</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="driverInfo"> 
+                    <div class="row reviewPageSectionHeader">
+                        <p clsas="col sectionTitle">Driver Information</p>
+                        <p class="col editBtn"><i class="bi bi-pencil"></i> Edit</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">Name</span>
+                            <p>Jonathan Doe</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Address</span>
+                            <p>1234 White St
+                                New York, NY 10000</p>
+                        </div>
+                    </div>    
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">SSN</span>
+                            <p>111-11-111</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Date Of Birth</span>
+                            <p>04/17/1983</p>
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">DL #</span>
+                            <p>123456789</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">DL State</span>
+                            <p>NY</p>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label class="" for="">Attended Safe Driving School?</label>
+                        <input class="" type="checkbox"/>
+                    </div>
+                </div>
+                <div class="vehicleInfo"> 
+                    <div class="row reviewPageSectionHeader">
+                        <p clsas="col sectionTitle">Vehicle Information</p>
+                        <p class="col editBtn"><i class="bi bi-pencil"></i> Edit</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">Make</span>
+                            <p>Toyota</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Model</span>
+                            <p>RAV4</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Year</span>
+                            <p>2019</p>
+                        </div>
+                    </div>    
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">Current Value</span>
+                            <p>$12,345</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Annual Mileage</span>
+                            <p>12345</p>
+                        </div>
+                    </div>   
+                    <div class="row">
+                        <div class="col">
+                            <span class="fieldSection">Days Driver per Week</span>
+                            <p>7</p>
+                        </div>
+                        <div class="col">
+                            <span class="fieldSection">Miles Driver to Work</span>
+                            <p>40</p>
+                        </div>
+                    </div> 
+                </div>
+                <div class="vehicleCheckList"> 
+                    <div class="row reviewPageSectionHeader">
+                        <p clsas="col sectionTitle">Vehicle Checklist</p>
+                        <p class="col editBtn"><i class="bi bi-pencil"></i> Edit</p>
+                    </div>
+                    <div class="">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Anti-theft alarms</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Anti-lock Brakes  </label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Daytime Running Lights</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Garage Address Different</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Passive Restraints </label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="">Reduced Use Discount</label>
+                                <input type="checkbox" id="" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
-        <div class="stepForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="model" class="form-label">Model</label>
-                    <input formControlName="model" name="model" type="text" class="form-control" id="model" placeholder="{{model}}" required maxlength="60">
-                </div>
-            </div>
-        </div>
-        <div class="stepForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="year" class="form-label">Year</label>
-                            <input formControlName="year" name="year" type="text" class="form-control" id="year" placeholder="2019" required maxlength="60">
-                </div>
-            </div>
-        </div>
-        <div class="stepForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="currentvalue" class="form-label">Current Value</label>
-                    <input formControlName="current_value" name="current_value" type="text" class="form-control" id="currentvalue" placeholder="$12,345" required maxlength="60">
-                </div>
-            </div>
-        </div>
-        <div class="stepForm">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="annualmileage" class="form-label">Annual Mileage</label>
-                    <input formControlName="annual_mileage" name="annual_mileage" type="text" class="form-control" id="annualmileage" placeholder="12345" required maxlength="60">
-                </div>
-            </div>
-        </div>
-        <div class="stepForm">
-        <div class="form-group col-md-4">
-            <label for="daysDriven" class="form-label">Days Driven per Week</label>
-            <select formControlName="daysDriven" id="daysDriven" name="DaysDriven" class="form-control" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
-        </div>
-            </div>
-        <div class="stepForm">
-        <div class="form-group col-md-6">
-            <label for="DriventoWork">Miles Driven to Work</label>
-            <input formControlName="work" type="number" name="work" class="form-control" id="DriventoWork" placeholder="40" required>
-        </div>
-            </div>
-    </div>
-
         <div class="formNavButtons">
-            <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a>
-            <a class="btn btn-primary" role="button" *ngIf="step != 5" (click)="continue()">Continue</a>
             <button type="submit" class="btn btn-primary" *ngIf="step == 6">Submit</button>
         </div>
+    </div>
 </form>
