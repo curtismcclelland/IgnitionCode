@@ -1,4 +1,5 @@
 ﻿import { Driver } from "./driver";
+import { Quote } from "./quote";
 
 export class Vehicle{
     vehicleId: number;
@@ -7,7 +8,10 @@ export class Vehicle{
     model: string;
     year: number;
     currentValue: number;
-    primaryDriver: Driver;
+    primaryDriverId: number;
+    driver: Driver;
+    quoteId: number;
+    quote: Quote;
     annualMileage: number;
     daytimeRunningLights: boolean;
     antiLockBrakes: boolean;
