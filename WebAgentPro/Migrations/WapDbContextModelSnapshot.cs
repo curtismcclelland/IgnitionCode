@@ -223,22 +223,18 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DriverLicenseNumber")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("DriverLicenseState")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -249,7 +245,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SSN")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -271,7 +266,6 @@ namespace WebAgentPro.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -282,7 +276,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -290,7 +283,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatorEmail")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -301,7 +293,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -315,7 +306,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -341,7 +331,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PreviousCarrier")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -367,7 +356,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("RoleID")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -375,17 +363,14 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Ssn")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
@@ -396,7 +381,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Zip")
-                        .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
@@ -437,7 +421,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Make")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -445,7 +428,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Model")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -465,7 +447,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Vin")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 

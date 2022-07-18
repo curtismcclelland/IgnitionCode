@@ -27,7 +27,7 @@ namespace WebAgentPro.Api.Controllers
         //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
         {
-            return await _context.Drivers.ToListAsync();
+            return await _context.Drivers.ToListAsync(); 
         }
 
         // GET: api/Drivers/5

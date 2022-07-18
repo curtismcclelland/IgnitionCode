@@ -27,7 +27,7 @@ namespace WebAgentPro.Api.Controllers
         public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
         {
             return await _context.Quotes.ToListAsync();
-            //return await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p => p.Driver).AsNoTracking().ToListAsync();
+          
         }
 
         // GET: api/Quotes/5

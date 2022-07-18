@@ -11,38 +11,21 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int DriverId { get; set; }
-        [Required]
+        public int DriverId { get; set; }     
         public int QuoteId { get; set; }
-        public Quote Quote { get; set; } = new Quote();
-        [Required]
-        [Display(Name = "First Name")]
+        public Quote Quote { get; set; }       
         [StringLength(60)]
         public string FirstName { get; set; }
-        [Required]
-        [Display(Name = "Last Name")]
         [StringLength(60)]
         public string LastName { get; set; }
-        [Required]
         [StringLength(10)]
         public string SSN { get; set; }
-        [Required]
-        [Display(Name = "Driver License Number")]
         [StringLength(60)]
-        public string DriverLicenseNumber { get; set; }
-        [Required]
-        [Display(Name = "Driver License State")]
+        public string DriverLicenseNumber { get; set; }      
         [StringLength(60)]
         public string DriverLicenseState { get; set; }
-        [Required]
-        [Display(Name = "Date Of Birth")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
-        [Required]
-        [Display(Name = "Safe Driving School")]
         public bool SafeDrivingSchool { get; set; }
-        [Required]
-        [Display(Name = "Quote Multiplier")]
         public decimal QuoteMultiplier { get; set; }
 
 
