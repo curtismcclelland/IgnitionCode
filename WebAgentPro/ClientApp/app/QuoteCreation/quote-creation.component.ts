@@ -397,4 +397,70 @@ export class QuoteCreationComponent implements OnInit {
     //of the page on which quote creation resides
     previous() { this.step = this.step - 1; }
     continue() { this.step = this.step + 1; }
+
+    //Quote pricing
+
+    calculateQuotePrice() {
+      var driverBaseCost = 200;
+      var vehicleBaseCost = 200;
+      var policyBaseCost = 100;
+      var driverQuoteMultiplier = 1;
+      var vehicleQuoteMultiplier = 1;
+      var currentQuoteQuoteMultiplier = 1;
+
+   
+          if (this.driver.safeDrivingSchool == true) {
+              driverQuoteMultiplier *= .95;
+          }
+          if (Date.now() - new Date(this.driver.dateOfBirth).getTime() < 23) {
+              driverQuoteMultiplier *= .95;
+      }
+      var driverSubtotalCost = driverBaseCost *= driverQuoteMultiplier;
+
+      if (this.vehicle.annualMileage < 6000) {
+          vehicleQuoteMultiplier *= .98;
+      }
+      if (this.vehicle.antiTheft == true) {
+          vehicleQuoteMultiplier *= .97;
+      }
+      if (this.vehicle.daysDrivenPerWeek > 4) {
+          vehicleQuoteMultiplier *= 1.02;
+      }
+      if (this.vehicle.milesDrivenToWork < 25) {
+          vehicleQuoteMultiplier *= .98;
+      }
+      if (this.vehicle.daytimeRunningLights == true) {
+          vehicleQuoteMultiplier *= .99;
+      }
+      if (this.vehicle.garageAddressDifferentFromResidence == true) {
+          vehicleQuoteMultiplier *= 1.03;
+      }
+      if (this.vehicle.passiveRestraints == true) {
+          vehicleQuoteMultiplier *= .97;
+      }
+      if (this.vehicle.reducedUsedDiscount == true) {
+          vehicleQuoteMultiplier *= .94
+      }
+      var vehicleSubtotalCost = vehicleBaseCost *= vehicleQuoteMultiplier;
+
+      if (this.quote.claimInLast5Years == true) {
+          currentQuoteQuoteMultiplier *= 1.2;
+      }
+      if (this.quote.forceMultiCarDiscount == true) {
+          currentQuoteQuoteMultiplier *= .95;
+      }
+      if (this.quote.movingViolationInLast5Years == true) {
+          currentQuoteQuoteMultiplier *= 1.20;
+      }
+      if (this.quote.previousCarrierLizard) {
+          currentQuoteQuoteMultiplier *= 1.05;
+      }
+      if (this.quote.previousCarrierPervasive) {
+          currentQuoteQuoteMultiplier *= .97;
+      }
+      var policySubtotal = policyBaseCost *= currentQuoteQuoteMultiplier;
+      console.log("Your total vehicle cost is: ", vehicleSubtotalCost);
+      console.log("Your total driver cost is: ", driverSubtotalCost);
+      console.log("You total policy cost is: ", policySubtotal);
+  }
 }

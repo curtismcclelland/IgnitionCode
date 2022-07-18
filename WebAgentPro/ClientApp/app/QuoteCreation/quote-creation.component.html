@@ -23,6 +23,10 @@
                     <label for="firstName" class="form-label">First Name</label>
                     <input formControlName="firstName" type="text" class="form-control" placeholder="First Name" />
                     <span *ngIf="firstName.invalid && firstName.touched" class="popuptext" id="myPopup">First name is required.</span>
+<<<<<<< HEAD
+>>>>>>> origin/5006-Implement-UX-sj
+=======
+>>>>>>> origin/5006-Implement-UX-sj
                 </div>
                 <div class=" col-md-6 popup">
                     <label for="lastName" class="form-label">Last Name</label>
@@ -64,10 +68,6 @@
                 <label for="dateOfBirth" class="form-label">Date of Birth (MM/DD/YYYY)</label>
                 <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY">
                 <span *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="popuptext" id="myPopup">Date of Birth is required.</span>
-            </div>
-            <div class="formNavButtons">
-                <!-- <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a> -->
-                <button class="btn btn-primary" *ngIf="step != 6" [disabled]="!customerInfo.valid" (click)="continue()">Continue</button>
             </div>
         </div>
     </div>
@@ -154,10 +154,6 @@
                     <label class="" for="">Attended Safe Driving School?</label>
                     <input class="" type="checkbox"/>
                 </div>
-            </div>
-            <div class="formNavButtons">
-                <button class="btn btn-primary" (click)="previous()">Previous</button>
-                <button class="btn btn-primary" (click)="continue()">Continue</button>
             </div>
         </div>
     </div>
