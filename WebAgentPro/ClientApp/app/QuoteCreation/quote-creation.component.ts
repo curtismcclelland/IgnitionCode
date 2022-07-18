@@ -404,6 +404,8 @@ export class QuoteCreationComponent implements OnInit {
           success => {
               this.quote = success
               //console.log(this.quote)
+              //console.log(typeof (this.quote.quoteId))
+              //console.log(this.quote)
           });
     }
 

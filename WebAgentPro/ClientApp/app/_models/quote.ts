@@ -15,7 +15,7 @@ export class Quote {
     state: string;
     zip: string;
     ssn: string;
-    dateOfBirth: string;
+    dateOfBirth: Date;
     lessThan3YearsDriving: boolean;
     previousCarrier: string;
     movingViolationInLast5Years: boolean;
