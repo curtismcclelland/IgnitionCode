@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAgentPro.Migrations
 {
-    public partial class CorrectNewModel : Migration
+    public partial class CorrectNewModelWithoutRequireConstrant : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,18 +14,18 @@ namespace WebAgentPro.Migrations
                     QuoteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuoteDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatorEmail = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    RoleID = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    Zip = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    Ssn = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CreatorEmail = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    RoleID = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    City = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true),
+                    Zip = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
+                    Ssn = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LessThan3YearsDriving = table.Column<bool>(type: "bit", nullable: false),
-                    PreviousCarrier = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    PreviousCarrier = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     MovingVioliationInLast5Years = table.Column<bool>(type: "bit", nullable: false),
                     ClaimInLast5Years = table.Column<bool>(type: "bit", nullable: false),
                     ForceMultiCarDiscount = table.Column<bool>(type: "bit", nullable: false),
@@ -48,7 +48,7 @@ namespace WebAgentPro.Migrations
                     SafeDrivingSchool = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     TotalQuoteMultiplier = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     QuotePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,11 +62,11 @@ namespace WebAgentPro.Migrations
                     DriverId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuoteId = table.Column<int>(type: "int", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    SSN = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    DriverLicenseNumber = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    DriverLicenseState = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    SSN = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    DriverLicenseNumber = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    DriverLicenseState = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SafeDrivingSchool = table.Column<bool>(type: "bit", nullable: false),
                     QuoteMultiplier = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -88,9 +88,9 @@ namespace WebAgentPro.Migrations
                 {
                     VehicleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Vin = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Make = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Vin = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Make = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: true),
                     Year = table.Column<int>(type: "int", nullable: false),
                     CurrentValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrimaryDriverId = table.Column<int>(type: "int", nullable: false),

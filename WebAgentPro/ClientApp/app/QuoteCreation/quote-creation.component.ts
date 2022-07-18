@@ -24,10 +24,6 @@ export class QuoteCreationComponent implements OnInit {
   vehicle: Vehicle
   action: string
   step: any = 1;
-
-  currentQuoteId: number = 1;
-  currentDriverId: number = 1;
-  currentVehicleId: number = 1;
  
   public userForm: FormGroup;
 
@@ -293,16 +289,12 @@ export class QuoteCreationComponent implements OnInit {
 
     this.userForm.valueChanges.subscribe(console.log); // printing form data on every value change
     }
-
-    //This method would be called if you were to exit out early during
-    //creation or editing. This will change when we have partial quotes
-    //being saved and marked as uncompleted. 
+ 
     ngOnDestroy() {
         this.quoteParamSubscription.unsubscribe();
     }
 
     updateDriverInfo(){
-      // this.driver.driverId = this.currentDriverId;
       this.driver.firstName = this.driverFirstName.value;
       this.driver.lastName = this.driverLastName.value;
       this.driver.ssn = this.driverSSN.value;
@@ -313,8 +305,7 @@ export class QuoteCreationComponent implements OnInit {
       this.driver.quoteMultiplier = this.driverQuoteMultiplier.value;
       // this.driver.quoteId = this.quote.quoteId; REPEAT THIS FOR VEHICLE
     }
-    updateVehicleInfo(){
-      // this.vehicle.vehicleId = this.currentVehicleId;
+    updateVehicleInfo() {
       this.vehicle.vin = this.vin.value;
       this.vehicle.make = this.make.value;
       this.vehicle.model = this.model.value;
@@ -330,8 +321,7 @@ export class QuoteCreationComponent implements OnInit {
       this.vehicle.reducedUsedDiscount = this.reduceUse.value;
       this.vehicle.garageAddressDifferentFromResidence = this.garageAddressDifferent.value;
     }
-    updateQuoteInfo(){
-      // this.driver.driverId = this.currentDriverId;
+    updateQuoteInfoFirstPage(){
       this.quote.firstName = this.firstName.value;
       this.quote.lastName = this.lastName.value;
       this.quote.address = this.address.value;
@@ -339,20 +329,27 @@ export class QuoteCreationComponent implements OnInit {
       this.quote.state = this.state.value;
       this.quote.zip = this.zip.value;
       this.quote.ssn = this.ssn.value;
-      this.quote.dateOfBirth = this.dateOfBirth.value;
-      this.quote.lessThan3YearsDriving = this.lessThan3YearsDriving.value;
-      this.quote.previousCarrier = this.previousCarrier.value;
-      this.quote.movingViolationInLast5Years = this.movingViolationInLast5Years.value;
-      this.quote.claimInLast5Years = this.claimInLast5Years.value;
-      this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
-      // this.driver.quoteId = this.quote.quoteId; REPEAT THIS FOR VEHICLE
+        this.quote.dateOfBirth = this.dateOfBirth.value;
+        this.putQuote(this.quote);
+        
+    }
+
+    updateQuoteInfoSecondPage() {
+        this.quote.lessThan3YearsDriving = this.lessThan3YearsDriving.value;
+        this.quote.previousCarrier = this.previousCarrier.value;
+        this.quote.movingViolationInLast5Years = this.movingViolationInLast5Years.value;
+        this.quote.claimInLast5Years = this.claimInLast5Years.value;
+        this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
+        this.putQuote(this.quote);
+        
     }
 
     // Adjust for multiple Drivers and Vehicles later
     submitForm() {
       this.updateDriverInfo();
       this.updateVehicleInfo();
-      this.updateQuoteInfo();
+        this.updateQuoteInfoFirstPage();
+        this.updateQuoteInfoSecondPage();
 
       console.log(this.quote)
       console.log(this.driver)
@@ -360,16 +357,24 @@ export class QuoteCreationComponent implements OnInit {
 
       this.calculateQuotePrice();
       this.continue();
-
-      // this.postQuote(this.quote);
     }
 
-    // CHANGE THIS FUNTION!!!!!!!!!!!
+    
     initializeQuote() {
-      this.quote = new Quote;
+        this.quote = new Quote;
+        this.postQuote(this.quote);
       this.driver = new Driver;
       this.vehicle = new Vehicle;
-      // this.quote.quoteId = quoteId;
+    }
+
+    driverPageSubmission() {
+        this.updateDriverInfo();
+        this.postDriver(this.driver);
+    }
+
+    vehiclePageSubmission() {
+        this.updateVehicleInfo();
+        this.postVehicle(this.vehicle);
     }
 
     getQuote(quoteId: number) {
@@ -387,17 +392,37 @@ export class QuoteCreationComponent implements OnInit {
 
       httpRequest.subscribe(
           success => {
+              console.log(success)
               this.router.navigateByUrl("/quotes")
           });
     }
 
     postQuote(newQuote: Quote) {
-      var httpRequest = this.http.post<number>(`${this.apiUrl}/quotes`, newQuote);
+      var httpRequest = this.http.post<Quote>(`${this.apiUrl}/quotes`, newQuote);
 
       httpRequest.subscribe(
           success => {
-              this.router.navigateByUrl("/quotes")
+              this.quote = success
+              //console.log(this.quote)
           });
+    }
+
+    postDriver(newDriver: Driver) {
+        var httpRequest = this.http.post<number>(`${this.apiUrl}/drivers`, newDriver);
+
+        httpRequest.subscribe(
+            success => {
+                this.router.navigateByUrl("/quotes")
+            });
+    }
+
+    postVehicle(newVehicle: Vehicle) {
+        var httpRequest = this.http.post<number>(`${this.apiUrl}/vehicles`, newVehicle);
+
+        httpRequest.subscribe(
+            success => {
+                this.router.navigateByUrl("/quotes")
+            });
     }
 
 
