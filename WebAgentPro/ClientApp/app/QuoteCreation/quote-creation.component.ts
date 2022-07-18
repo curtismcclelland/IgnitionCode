@@ -23,7 +23,7 @@ export class QuoteCreationComponent implements OnInit {
   driver: Driver
   vehicle: Vehicle
   action: string
-  step: any = 7;
+  step: any = 1;
 
   currentQuoteId: number = 1;
   currentDriverId: number = 1;
@@ -108,6 +108,11 @@ export class QuoteCreationComponent implements OnInit {
   garageAddressDifferent: FormControl;
   passiveRestraints: FormControl;
   reduceUse: FormControl;
+
+  vehicleSubtotalCost: number = 0;
+  driverSubtotalCost: number = 0;
+  policySubtotal: number = 0;
+
 
   // Maybe this can be stored in the DB
   listOfStates: string[] = [
@@ -353,6 +358,9 @@ export class QuoteCreationComponent implements OnInit {
       console.log(this.driver)
       console.log(this.vehicle)
 
+      this.calculateQuotePrice();
+      this.continue();
+
       // this.postQuote(this.quote);
     }
 
@@ -408,14 +416,13 @@ export class QuoteCreationComponent implements OnInit {
       var vehicleQuoteMultiplier = 1;
       var currentQuoteQuoteMultiplier = 1;
 
-   
-          if (this.driver.safeDrivingSchool == true) {
-              driverQuoteMultiplier *= .95;
-          }
-          if (Date.now() - new Date(this.driver.dateOfBirth).getTime() < 23) {
-              driverQuoteMultiplier *= .95;
+      if (this.driver.safeDrivingSchool == true) {
+          driverQuoteMultiplier *= .95;
       }
-      var driverSubtotalCost = driverBaseCost *= driverQuoteMultiplier;
+      if (Date.now() - new Date(this.driver.dateOfBirth).getTime() < 23) {
+          driverQuoteMultiplier *= .95;
+      }
+      this.driverSubtotalCost = driverBaseCost *= driverQuoteMultiplier;
 
       if (this.vehicle.annualMileage < 6000) {
           vehicleQuoteMultiplier *= .98;
@@ -441,7 +448,7 @@ export class QuoteCreationComponent implements OnInit {
       if (this.vehicle.reducedUsedDiscount == true) {
           vehicleQuoteMultiplier *= .94
       }
-      var vehicleSubtotalCost = vehicleBaseCost *= vehicleQuoteMultiplier;
+      this.vehicleSubtotalCost = vehicleBaseCost *= vehicleQuoteMultiplier;
 
       if (this.quote.claimInLast5Years == true) {
           currentQuoteQuoteMultiplier *= 1.2;
@@ -458,9 +465,9 @@ export class QuoteCreationComponent implements OnInit {
       if (this.quote.previousCarrierPervasive) {
           currentQuoteQuoteMultiplier *= .97;
       }
-      var policySubtotal = policyBaseCost *= currentQuoteQuoteMultiplier;
-      console.log("Your total vehicle cost is: ", vehicleSubtotalCost);
-      console.log("Your total driver cost is: ", driverSubtotalCost);
-      console.log("You total policy cost is: ", policySubtotal);
+      this.policySubtotal = policyBaseCost *= currentQuoteQuoteMultiplier;
+      console.log("Your total vehicle cost is: ", this.vehicleSubtotalCost);
+      console.log("Your total driver cost is: ", this.driverSubtotalCost);
+      console.log("You total policy cost is: ", this.policySubtotal);
   }
 }
