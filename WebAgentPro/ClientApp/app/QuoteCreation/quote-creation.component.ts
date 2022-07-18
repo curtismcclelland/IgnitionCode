@@ -418,10 +418,17 @@ export class QuoteCreationComponent implements OnInit {
 
       if (this.driver.safeDrivingSchool == true) {
           driverQuoteMultiplier *= .95;
-      }
-      if (Date.now() - new Date(this.driver.dateOfBirth).getTime() < 23) {
+        }
+
+      var date = new Date();
+      date.setDate(date.getDate());
+      date.setMonth(date.getMonth());
+      date.setFullYear(date.getFullYear() - 23);
+
+      if ((new Date(this.driver.dateOfBirth).getTime()) > date.getTime()) {
           driverQuoteMultiplier *= .95;
-      }
+        }
+
       this.driverSubtotalCost = driverBaseCost *= driverQuoteMultiplier;
 
       if (this.vehicle.annualMileage < 6000) {
