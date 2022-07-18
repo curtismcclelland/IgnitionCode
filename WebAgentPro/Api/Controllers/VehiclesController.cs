@@ -25,6 +25,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
         {
+            //return await _context.Vehicles.Include(vehicle => vehicle.Driver).ThenInclude(driver => driver.Quote).AsNoTracking().ToListAsync();
             return await _context.Vehicles.ToListAsync();
         }
 

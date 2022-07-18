@@ -26,10 +26,10 @@ namespace WebAgentPro.Api.Models
         [Display(Name = "Current Value")]
         public decimal CurrentValue { get; set; }    
         public int PrimaryDriverId { get; set; }
-        public Driver Driver { get; set; }
+        public Driver Driver { get; set; } = new Driver();
         [Required]
-        public int QuoteId { get; set; } 
-        public Quote Quote { get; set; }
+        public int QuoteId { get; set; }
+        public Quote Quote { get; set; } = new Quote();
         [Required]
         [Display(Name = "Annual Mileage")]
         public int AnnualMileage { get; set; }

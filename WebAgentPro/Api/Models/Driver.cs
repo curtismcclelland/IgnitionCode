@@ -14,7 +14,7 @@ namespace WebAgentPro.Api.Models
         public int DriverId { get; set; }
         [Required]
         public int QuoteId { get; set; }
-        public Quote Quote {get; set; }
+        public Quote Quote { get; set; } = new Quote();
         [Required]
         [Display(Name = "First Name")]
         [StringLength(60)]

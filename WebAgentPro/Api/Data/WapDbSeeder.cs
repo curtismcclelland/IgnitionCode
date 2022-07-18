@@ -24,9 +24,7 @@ namespace WebAgentPro.Data
         {
             InitializeRoles();
             InitializeUsers();
-            InitializeDiscounts();
-            //InitializeDrivers();
-            //InitializeVehicles();
+            InitializeDiscounts();           
             InitializeQuotes();
 
         }
@@ -247,61 +245,6 @@ namespace WebAgentPro.Data
                 _context.SaveChanges();
             }
         }
-
-        //private void InitializeDrivers()
-        //{
-        //    if ( _context.Drivers.Count<Driver>().Equals(0) )
-        //    {
-
-        //        Driver newDriver = new Driver
-        //        {
-        //            FirstName = "Data",
-        //            LastName = "Initializer",
-        //            SSN = "0000000001",
-        //            DriverLicenseNumber = "Random",
-        //            DriverLicenseState = "Test",
-        //            DateOfBirth = DateTime.Now,
-        //            SafeDrivingSchool = true,
-        //            QuoteMultiplier = 0,
-                                   
-        //            //VehicleId = 0
-        //        };
-        //        _context.Drivers.Add(newDriver);
-        //        _context.SaveChanges();
-        //    }
-        //}
-
-        //private void InitializeVehicles()
-        //{
-        //    if (_context.Vehicles.Count<Vehicle>().Equals(0))
-        //    {
-
-        //        Vehicle newVehicle = new Vehicle
-        //        {
-        //            Vin = "TestVin",
-        //            Make = "TestMake",
-        //            Model = "001",
-        //            Year = 2022,
-        //            CurrentValue = -.05M,
-        //            PrimaryDriverId = 0,
-        //            QuoteId=0,
-        //            AnnualMileage = 000,
-        //            DaytimeRunningLights = true,
-        //            AntilockBrakes = true,
-        //            PassiveRestraints = true,
-        //            AntiTheft = true,
-        //            DaysDrivenPerWeek = 001,
-        //            MilesDrivenToWork = 001,
-        //            ReducedUsedDiscount = true,
-        //            GarageAddressDifferentFromResidence = true,
-        //            QuoteMultiplier = -.02M,
-        //            //QuoteId = 0
-        //        };
-
-        //        _context.Vehicles.Add(newVehicle);
-        //        _context.SaveChanges();
-        //    }
-        //}
 
     }
 }
