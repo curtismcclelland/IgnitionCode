@@ -2,12 +2,13 @@
 <form (ngSubmit)="submitForm()" class="quoteForm" [formGroup]="userForm">
     <!-- {{ userForm.value | json }} -->
     <!-- Customer Information -->
-    <div class="progressBar">
-        <div class="progress-step"><div *ngIf="step == 1" class="current-step"></div></div>
-        <div class="progress-step"></div>
-        <div class="progress-step"></div>
-        <div class="progress-step"></div>
-        <div class="progress-step"></div>
+    <div class="progressBar" *ngIf="step != 7">
+        <div class="progress-step"><div *ngIf="step <= 1" class="current-step"></div></div>
+        <div class="progress-step"><div *ngIf="step <= 2" class="current-step"></div></div>
+        <div class="progress-step"><div *ngIf="step <= 3" class="current-step"></div></div>
+        <div class="progress-step"><div *ngIf="step <= 4" class="current-step"></div></div>
+        <div class="progress-step"><div *ngIf="step <= 5" class="current-step"></div></div>
+        <div class="progress-step"><div *ngIf="step <= 6" class="current-step"></div></div>
     </div>
     <div *ngIf="step == 1">
         <div class="stepTitle">
@@ -64,8 +65,6 @@
                 <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY">
                 <span *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="popuptext" id="myPopup">Date of Birth is required.</span>
             </div>
-            
-            {{ customerInfo.valid }}
             <div class="formNavButtons">
                 <!-- <a class="btn btn-primary" role="button" *ngIf="step != 1" (click)="previous()">Previous</a> -->
                 <button class="btn btn-primary" *ngIf="step != 6" [disabled]="!customerInfo.valid" (click)="continue()">Continue</button>
@@ -530,8 +529,31 @@
             </div>
             
         </div>
-        <div class="formNavButtons">
+        <div *ngIf="step == 6" class="formNavButtons">
             <button type="submit" class="btn btn-primary" *ngIf="step == 6">Submit</button>
         </div>
+    </div>
+    <div *ngIf="step == 7">
+        <div class="row reviewPageSectionHeader">
+            <p clsas="col sectionTitle">Quote Summary</p>
+        </div>
+        <table>
+            <tr>
+              <th>Description</th>
+              <th>Price</th>
+            </tr>
+            <tr>
+              <td>Driver: {{driverLastName.value}}, {{driverFirstName.value}}</td>
+              <td>${{driverPrice}}</td>
+            </tr>
+            <tr>
+              <td>Vehicle: {{make}}, {{model}}</td>
+              <td>${{vehiclePrice}}</td>
+            </tr>
+            <tr>
+              <td>Policy</td>
+              <td>${{totalCost}}</td>
+            </tr>
+          </table>
     </div>
 </form>

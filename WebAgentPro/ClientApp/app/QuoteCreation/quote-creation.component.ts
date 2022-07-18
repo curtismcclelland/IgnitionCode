@@ -23,7 +23,7 @@ export class QuoteCreationComponent implements OnInit {
   driver: Driver
   vehicle: Vehicle
   action: string
-  step: any = 4;
+  step: any = 7;
 
   currentQuoteId: number = 1;
   currentDriverId: number = 1;
@@ -264,6 +264,10 @@ export class QuoteCreationComponent implements OnInit {
       reduceUse: this.reduceUse,
     })
   }
+
+  driverPrice: number = 0;
+  vehiclePrice: number = 0;
+  totalCost: number = 0;
 
   // Creates the Form
   createForm(){
