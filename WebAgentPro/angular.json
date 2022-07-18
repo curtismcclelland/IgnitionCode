@@ -21,7 +21,7 @@
             "polyfills": "ClientApp/polyfills.ts",
             "tsConfig": "ClientApp/tsconfig.app.json",
             "assets": [
-              "ClientApp/favicon.ico",
+              "ClientApp/aiaLogo.png",
               "ClientApp/assets"
             ],
             "styles": [
@@ -89,7 +89,7 @@
             ],
             "scripts": [],
             "assets": [
-              "ClientApp/favicon.ico",
+              "ClientApp/aiaLogo.png",
               "ClientApp/assets"
             ]
           }

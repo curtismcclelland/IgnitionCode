@@ -1,0 +1,184 @@
+.navbar {
+    position: absolute;
+    width: 375px;
+    height: 54px;
+    left: 0px;
+    top: 29px;
+    background: #0025CB;
+}
+
+.h1 {
+    position: absolute;
+    width: 76px;
+    height: 26px;
+    left: 149px;
+    top: 14px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height */
+
+    letter-spacing: 0.05em;
+    /* White */
+
+    color: #FFFFFF;
+}
+
+button {
+    width: 39px;
+    height: 21px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+p.typeOfQuote {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: capitalize;
+    color: #757575;
+}
+
+p.submittedStatus {
+    padding: 1px 4px;
+    width: 83px;
+    height: 24px;
+    background-color: #0025CB;
+    border-radius: 4px;
+    width: 67px;
+    height: 16px;
+    top: 4px;
+    left: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+button.completedStatus {
+    padding: 1px 2px;
+    width: 83px;
+    height: 24px;
+    background-color: #6CBFFF;
+    border-radius: 4px;
+    width: 67px;
+    height: 16px;
+    top: 4px;
+    left: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+p.incompleteStatus {
+    padding: 1px 2px;
+    width: 83px;
+    height: 24px;
+    background-color: #757575;
+    border-radius: 4px;
+
+    width: 67px;
+    height: 16px;
+    top: 4px;
+    left: 8px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ffffff;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+div.quoteSection {
+    box-sizing: border-box;
+
+    padding: 16px;
+    gap: 12px;
+    background: #FFFFFF;
+    border: 1px solid #2F2F2F;
+    border-radius: 14px;
+}
+
+div.customerInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    width: 205px;
+    height: 140px;
+}
+
+p.customerName {
+    width: 205px;
+    height: 23px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #0025CB;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+p.timeAndid {
+    font-family: 'Barlow';
+    font-style: normal;
+    color: #757575;
+}
+
+p.time {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+p.quoteID {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+p.driverVehicleFull {
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #2F2F2F;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+}
+
+p.price {
+    left: 251px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: right;
+    color: #2F2F2F;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}

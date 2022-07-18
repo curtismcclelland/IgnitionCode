@@ -15,6 +15,10 @@ import { RegisterComponent } from './registerlogin/register/register.component';
 import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
 import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
+import { QuoteCreationComponent } from './QuoteCreation/quote-creation.component';
+import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   
 @NgModule({
     imports: [
@@ -23,6 +27,7 @@ import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.
         FormsModule,
         HttpClientModule,
         NgxPaginationModule,
+        BrowserAnimationsModule,
         routing
     ],
     declarations: [
@@ -32,7 +37,9 @@ import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.
         RegisterComponent,
         DiscountsComponent,
         DiscountEditComponent,
-        RoutenotfoundComponent
+        RoutenotfoundComponent,
+        QuoteCreationComponent,
+        QuoteSearchComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
