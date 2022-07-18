@@ -23,7 +23,7 @@ export class QuoteCreationComponent implements OnInit {
   driver: Driver
   vehicle: Vehicle
   action: string
-  step: any = 7;
+  step: any = 1;
 
   currentQuoteId: number = 1;
   currentDriverId: number = 1;
