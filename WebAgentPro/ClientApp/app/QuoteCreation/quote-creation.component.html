@@ -23,10 +23,6 @@
                     <label for="firstName" class="form-label">First Name</label>
                     <input formControlName="firstName" type="text" class="form-control" placeholder="First Name" />
                     <span *ngIf="firstName.invalid && firstName.touched" class="popuptext" id="myPopup">First name is required.</span>
-<<<<<<< HEAD
->>>>>>> origin/5006-Implement-UX-sj
-=======
->>>>>>> origin/5006-Implement-UX-sj
                 </div>
                 <div class=" col-md-6 popup">
                     <label for="lastName" class="form-label">Last Name</label>
@@ -69,6 +65,9 @@
                 <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY">
                 <span *ngIf="dateOfBirth.invalid && dateOfBirth.touched" class="popuptext" id="myPopup">Date of Birth is required.</span>
             </div>
+        </div>
+        <div class="formNavButtons">
+            <button class="btn btn-primary" (click)="continue()">Continue</button>
         </div>
     </div>
     
@@ -155,6 +154,10 @@
                     <input class="" type="checkbox"/>
                 </div>
             </div>
+        </div>
+        <div class="formNavButtons">
+            <button class="btn btn-primary" (click)="previous()">Previous</button>
+            <button class="btn btn-primary" (click)="continue()">Continue</button>
         </div>
     </div>
 
@@ -540,15 +543,15 @@
             </tr>
             <tr>
               <td>Driver: {{driverLastName.value}}, {{driverFirstName.value}}</td>
-              <td>${{driverPrice}}</td>
+              <td>${{driverSubtotalCost}}</td>
             </tr>
             <tr>
-              <td>Vehicle: {{make}}, {{model}}</td>
-              <td>${{vehiclePrice}}</td>
+              <td>Vehicle: {{make.value}}, {{model.value}}</td>
+              <td>${{vehicleSubtotalCost}}</td>
             </tr>
             <tr>
               <td>Policy</td>
-              <td>${{totalCost}}</td>
+              <td>${{policySubtotal}}</td>
             </tr>
           </table>
     </div>
