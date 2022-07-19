@@ -43,6 +43,32 @@ namespace WebAgentPro.Api.Controllers
 
             return vehicle;
         }
+
+
+        /* ------------------------------------------------
+         * 
+         * 
+         * Get Vehicle by QuoteID
+         * 
+         * 
+         * ------------------------------------------------*/
+
+        [HttpGet("getbyquote/{quoteid}")]
+        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicleByQuoteID(int quoteid)
+        {
+
+            var vehiclequote = await _context.Vehicles.Where(v => v.QuoteId == quoteid).ToListAsync();
+
+            if (vehiclequote == null)
+            {
+                return NotFound();
+            }
+
+            return vehiclequote;
+        }
+
+
+
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -100,6 +126,71 @@ namespace WebAgentPro.Api.Controllers
 
             return NoContent();
         }
+
+        /* ------------------------------------------------
+         * 
+         * 
+         * Delete Vehicle by QuoteID
+         * 
+         * 
+         * ------------------------------------------------*/
+
+        [HttpDelete("{quoteid}/byQuotesID")]
+        public async Task<IActionResult> DeleteVehiclebyQuoteID(int quoteid)
+        {
+            var vehiclelist = _context.Vehicles.Where(v => v.QuoteId == quoteid).ToList();
+
+            if (vehiclelist.Count == 0)
+            {
+                return NotFound();
+            }
+
+            for (int i = 0; i < vehiclelist.Count; i++)
+            {
+
+                _context.Vehicles.Remove(vehiclelist[i]);
+
+            }
+
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+        /* ------------------------------------------------
+       * 
+       * 
+       * Delete Vehicle by QuoteID and VehicleID
+       * 
+       * 
+       * ------------------------------------------------*/
+
+        [HttpDelete("{quoteid}/byQuotesIDVehicleID")]
+        public async Task<IActionResult> DeleteVehiclebyQuoteIDVehicleID(int quoteid, int vehicleid)
+        {
+            var vehiclelist = _context.Vehicles.Where(v => v.QuoteId == quoteid && v.VehicleId == vehicleid).ToList();
+
+            if (vehiclelist.Count == 0)
+            {
+                return NotFound();
+            }
+
+            for (int i = 0; i < vehiclelist.Count; i++)
+            {
+
+                _context.Vehicles.Remove(vehiclelist[i]);
+
+            }
+
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
 
         private bool VehicleExists(int id)
         {

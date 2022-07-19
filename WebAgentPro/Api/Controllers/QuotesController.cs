@@ -46,6 +46,33 @@ namespace WebAgentPro.Api.Controllers
             return quote;
         }
 
+
+        /* ------------------------------------------------
+         * 
+         * 
+         * Get Quotes by CreatorEmail
+         * 
+         * 
+         * ------------------------------------------------*/
+
+        [HttpGet("{creatorEmail}/byCreatorEmail")]
+        public async Task<ActionResult<IEnumerable<Quote>>> GetQuoteByCreatorEmail(string creatorEmail)
+        {
+
+            var quotes = await _context.Quotes.Where(q => q.CreatorEmail == creatorEmail).ToListAsync();
+
+            if (quotes == null)
+            {
+                return NotFound();
+            }
+
+            return quotes;
+        }
+
+
+
+
+
         // PUT: api/Quotes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
