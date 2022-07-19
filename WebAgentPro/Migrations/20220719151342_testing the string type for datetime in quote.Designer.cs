@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAgentPro.Data;
 
 namespace WebAgentPro.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    partial class WapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220719151342_testing the string type for datetime in quote")]
+    partial class testingthestringtypefordatetimeinquote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,8 +221,8 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DateOfBirth")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DriverLicenseNumber")
                         .HasMaxLength(60)
@@ -245,8 +247,8 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("SSN")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<bool>("SafeDrivingSchool")
                         .HasColumnType("bit");
@@ -287,7 +289,8 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("DateOfBirth")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<decimal>("DaytimeRunningLights")
                         .HasColumnType("decimal(18,2)");
@@ -363,8 +366,8 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Ssn")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
                         .HasMaxLength(2)

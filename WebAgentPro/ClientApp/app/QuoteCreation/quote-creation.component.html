@@ -51,7 +51,7 @@
             </div>
               <div class="col-md-2 popup">
                 <label for="inputZip">Zip</label>
-                <input formControlName="zip" type="number" class="form-control" placeholder="ZIP">
+                <input formControlName="zip" type="text" class="form-control" placeholder="ZIP">
                 <span *ngIf="zip.invalid && zip.touched" class="popuptext" id="myPopup">ZipCode is required.</span>
                 </div>
             </div>
@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="formNavButtons">
-            <button class="btn btn-primary" (click)="continue()">Continue</button>
+            <button class="btn btn-primary" (click)="updateQuoteInfoFirstPage()">Continue</button>
         </div>
     </div>
     
