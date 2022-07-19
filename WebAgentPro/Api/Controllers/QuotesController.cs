@@ -18,10 +18,6 @@ namespace WebAgentPro.Api.Controllers
         private readonly WapDbContext _context;
 
 
-        // Adding other controllers 
-        private readonly DriversController driversController;
-        private readonly VehiclesController vehiclesController;
-
 
         public QuotesController(WapDbContext context)
         {
@@ -116,6 +112,13 @@ namespace WebAgentPro.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Quote>> CreateQuote(Quote newQuote)
         {
+
+            if (Convert.ToDateTime(newQuote.DateOfBirth).Year > DateTime.Now.Year - 20) // validating age 
+            {
+                ModelState.AddModelError("DateofBirth", "Candidate too Young");
+                return BadRequest(ModelState);
+            }
+
             _context.Quotes.Add(newQuote);
             await _context.SaveChangesAsync();
 
@@ -138,8 +141,6 @@ namespace WebAgentPro.Api.Controllers
 
             _context.Quotes.Remove(quote);
             await _context.SaveChangesAsync();
-
-            await vehiclesController.DeleteVehiclebyQuoteID(id); // deletes all vehicles with this quote id
 
             return NoContent();
         }

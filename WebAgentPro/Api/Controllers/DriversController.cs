@@ -45,6 +45,29 @@ namespace WebAgentPro.Api.Controllers
             return driver;
         }
 
+        /* ------------------------------------------------
+         * 
+         * 
+         * Get Driver by QuoteID
+         * 
+         * 
+         * ------------------------------------------------*/
+
+        [HttpGet("{quoteid}/getbyquote")]
+        public async Task<ActionResult<IEnumerable<Driver>>> GetDriverByQuoteID(int quoteid)
+        {
+
+            var drivers = await _context.Drivers.Where(d => d.QuoteId == quoteid).ToListAsync();
+
+            if (drivers == null)
+            {
+                return NotFound();
+            }
+
+            return drivers;
+        }
+
+
         // PUT: api/Drivers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -100,37 +123,7 @@ namespace WebAgentPro.Api.Controllers
             return CreatedAtAction("GetDriver", new { id = driver.DriverId }, driver);
         }
 
-        ////Create Vehicle that is belong to Driver
-        //[HttpPost]
-        //[Route("{id}/addvehicle")]
-        ////[Authorize(Roles = "Manager, Agent")]
-        //public async Task<ActionResult<Driver>> CreateVehicle(Vehicle newVehicle,int? id)
-        //{
-        //    var driverToUpdate = _context.Drivers.Find(id);
-        //    var vehicleToAdd = _context.Vehicles.Find(newVehicle.VehiceId);
-
-        //    if (driverToUpdate is null)
-        //    {
-        //        throw new InvalidOperationException("Driver does not exist");
-        //    }
-        //    driverToUpdate.VehicleId = vehicleToAdd.VehiceId;
-            
-        //    _context.Vehicles.Add(newVehicle);
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-
-        //    catch (DbUpdateException)
-        //    {
-
-        //        throw;
-
-        //    }
-
-        //    return CreatedAtAction("GetVehicle", new { id = newVehicle.VehiceId }, newVehicle);
-        //}
+ 
         // DELETE: api/Drivers/5
         [HttpDelete("{id}")]
         //[Authorize(Roles = "Manager, Agent")]
@@ -147,6 +140,42 @@ namespace WebAgentPro.Api.Controllers
 
             return NoContent();
         }
+
+        /* ------------------------------------------------
+         * 
+         * 
+         * Delete Drivers by QuoteID
+         * 
+         * 
+         * ------------------------------------------------*/
+
+        [HttpDelete("{quoteid}/byQuotesID")]
+        public async Task<IActionResult> DeleteDriversbyQuoteID(int quoteid)
+        {
+            var driverslist = _context.Drivers.Where(d => d.QuoteId == quoteid).ToList();
+
+            if (driverslist.Count == 0)
+            {
+                return NotFound();
+            }
+
+            for (int i = 0; i < driverslist.Count; i++)
+            {
+
+                _context.Drivers.Remove(driverslist[i]);
+
+            }
+
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+
+
+
+
 
         private bool DriverExists(int id)
         {
