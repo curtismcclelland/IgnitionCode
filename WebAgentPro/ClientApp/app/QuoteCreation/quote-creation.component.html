@@ -123,7 +123,7 @@
             </div>
             <div class="formNavButtons">
                 <button class="btn btn-primary" *ngIf="step != 1" (click)="previous()">Previous</button>
-                <button class="btn btn-primary" *ngIf="step != 6" (click)="continue()">Continue</button>
+                <button class="btn btn-primary" *ngIf="step != 6" (click)="updateQuoteInfoSecondPage()">Continue</button>
             </div>
         </div>
     </div>
@@ -207,7 +207,7 @@
             </div>
             <div class="formNavButtons">
                 <button class="btn btn-primary" (click)="previous()">Previous</button>
-                <button class="btn btn-primary" (click)="continue()">Continue</button>
+                <button class="btn btn-primary" (click)="updateDriverInfo()">Continue</button>
             </div>
         </div>
     </div>
@@ -323,7 +323,7 @@
         </div>
         <div class="formNavButtons">
             <a class="btn btn-primary" role="button" (click)="previous()">Previous</a>
-            <button class="btn btn-primary" (click)="continue()">Continue</button>
+            <button class="btn btn-primary" (click)="updateVehicleInfo()">Continue</button>
         </div>
     </div>
     

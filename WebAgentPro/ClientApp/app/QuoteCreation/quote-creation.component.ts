@@ -294,7 +294,9 @@ export class QuoteCreationComponent implements OnInit {
         this.quoteParamSubscription.unsubscribe();
     }
 
-    updateDriverInfo(){
+    updateDriverInfo() {
+        //this.fillDriverDefaults();
+        this.driver = new Driver;
       this.driver.firstName = this.driverFirstName.value;
       this.driver.lastName = this.driverLastName.value;
       this.driver.ssn = this.driverSSN.value;
@@ -303,9 +305,18 @@ export class QuoteCreationComponent implements OnInit {
       this.driver.dateOfBirth = this.driverDOB.value;
       this.driver.safeDrivingSchool = this.driverSafeDrivingSchool.value;
       this.driver.quoteMultiplier = this.driverQuoteMultiplier.value;
-      // this.driver.quoteId = this.quote.quoteId; REPEAT THIS FOR VEHICLE
+        this.driver.quoteId = this.quote.quoteId;
+        
+        this.postDriver(this.driver);
+        this.quote.drivers.push(this.driver);
+        this.putQuote(this.quote);
+        //putquote with driver object appended to array
+        //post driver object?
+        this.continue();
     }
     updateVehicleInfo() {
+        this.fillVehicleDefaults();
+
       this.vehicle.vin = this.vin.value;
       this.vehicle.make = this.make.value;
       this.vehicle.model = this.model.value;
@@ -319,8 +330,15 @@ export class QuoteCreationComponent implements OnInit {
       this.vehicle.daysDrivenPerWeek = this.daysDrivenPerWeek.value;
       this.vehicle.milesDrivenToWork = this.milesDrivenToWork.value;
       this.vehicle.reducedUsedDiscount = this.reduceUse.value;
-      this.vehicle.garageAddressDifferentFromResidence = this.garageAddressDifferent.value;
+        this.vehicle.garageAddressDifferentFromResidence = this.garageAddressDifferent.value;
+        this.vehicle.quoteId = this.quote.quoteId;
+
+        this.postVehicle(this.vehicle);
+        this.quote.vehicles.push(this.vehicle);
+        this.putQuote(this.quote);
+        this.continue();
     }
+
     updateQuoteInfoFirstPage(){
       this.quote.firstName = this.firstName.value;
       this.quote.lastName = this.lastName.value;
@@ -342,6 +360,7 @@ export class QuoteCreationComponent implements OnInit {
         this.quote.claimInLast5Years = this.claimInLast5Years.value;
         this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
         this.putQuote(this.quote);
+        this.continue();
         
     }
 
@@ -414,14 +433,12 @@ export class QuoteCreationComponent implements OnInit {
 
     }
 
-    driverPageSubmission() {
-        this.updateDriverInfo();
-        this.postDriver(this.driver);
+    fillDriverDefaults() {
+
     }
 
-    vehiclePageSubmission() {
-        this.updateVehicleInfo();
-        this.postVehicle(this.vehicle);
+    fillVehicleDefaults() {
+
     }
 
     getQuote(quoteId: number) {
@@ -457,20 +474,23 @@ export class QuoteCreationComponent implements OnInit {
     }
 
     postDriver(newDriver: Driver) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/drivers`, newDriver);
+        var httpRequest = this.http.post<Driver>(`${this.apiUrl}/drivers`, newDriver);
 
         httpRequest.subscribe(
             success => {
-                this.router.navigateByUrl("/quotes")
+                console.log(success);
+                this.driver = success
+                //this.router.navigateByUrl("/quotes")
             });
     }
 
     postVehicle(newVehicle: Vehicle) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/vehicles`, newVehicle);
+        var httpRequest = this.http.post<Vehicle>(`${this.apiUrl}/vehicles`, newVehicle);
 
         httpRequest.subscribe(
             success => {
-                this.router.navigateByUrl("/quotes")
+                this.vehicle = success
+                //this.router.navigateByUrl("/quotes")
             });
     }
 
