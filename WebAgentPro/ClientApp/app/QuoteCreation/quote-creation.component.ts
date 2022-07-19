@@ -454,8 +454,7 @@ export class QuoteCreationComponent implements OnInit {
           driverQuoteMultiplier *= 1.10;
         }
 
-        this.driverSubtotalCost = driverBaseCost *= driverQuoteMultiplier;
-        this.driverSubtotalCost.toFixed(2);
+        this.driverSubtotalCost = +((driverBaseCost *= driverQuoteMultiplier).toFixed(2));
 
       if (this.vehicle.annualMileage < 6000) {
           vehicleQuoteMultiplier *= .98;
@@ -483,9 +482,8 @@ export class QuoteCreationComponent implements OnInit {
       }
       if (this.vehicle.reducedUsedDiscount == true) {
           vehicleQuoteMultiplier *= .94
-      }
-        this.vehicleSubtotalCost = vehicleBaseCost *= vehicleQuoteMultiplier;
-        this.vehicleSubtotalCost.toFixed(2);
+        }
+        this.vehicleSubtotalCost = +((vehicleBaseCost *= vehicleQuoteMultiplier).toFixed(2));
         //policy base cost starts next line
 
         var policyCost = this.vehicleSubtotalCost + this.driverSubtotalCost + policyBaseCost;
@@ -508,7 +506,7 @@ export class QuoteCreationComponent implements OnInit {
       if (this.quote.previousCarrierPervasive) {
           currentQuoteQuoteMultiplier *= .97;
         }
-        this.policySubtotal = policyCost *= currentQuoteQuoteMultiplier;
+        this.policySubtotal = +((policyCost *= currentQuoteQuoteMultiplier).toFixed(2));
         this.totalCost = this.policySubtotal;
    
 
