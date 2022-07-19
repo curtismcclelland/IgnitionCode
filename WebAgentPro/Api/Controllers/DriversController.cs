@@ -53,7 +53,7 @@ namespace WebAgentPro.Api.Controllers
          * 
          * ------------------------------------------------*/
 
-        [HttpGet("{quoteid}/getbyquote")]
+        [HttpGet("{quoteid}/getbyQuoteID")]
         public async Task<ActionResult<IEnumerable<Driver>>> GetDriverByQuoteID(int quoteid)
         {
 
