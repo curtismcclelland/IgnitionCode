@@ -180,9 +180,9 @@ export class QuoteCreationComponent implements OnInit {
     this.address = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.city = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.state = new FormControl('', Validators.required);
-    this.zip = new FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.ssn = new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.required]);
-    this.dateOfBirth = new FormControl(null, [Validators.required]);
+    this.zip = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.ssn = new FormControl('', [Validators.pattern("^[0-9]*$"), Validators.required]);
+    this.dateOfBirth = new FormControl('', [Validators.required]);
     this.customerInfo = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName,
@@ -196,7 +196,7 @@ export class QuoteCreationComponent implements OnInit {
 
     // CUSTOMER HISTORY - PG 2
     this.lessThan3YearsDriving = new FormControl(false, []);
-    this.previousCarrier = new FormControl(null, [Validators.required]);
+    this.previousCarrier = new FormControl('', [Validators.required]);
     this.movingViolationInLast5Years = new FormControl(false, []);
     this.claimInLast5Years = new FormControl(false, []);
     this.forceMultiCarDiscount = new FormControl(false, []);
@@ -213,10 +213,10 @@ export class QuoteCreationComponent implements OnInit {
     // DRIVER INFO - PG 3
     this.driverFirstName = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.driverLastName= new  FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.driverSSN= new  FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.driverLicenseNumber= new  FormControl(null, [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.driverSSN= new  FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.driverLicenseNumber= new  FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
     this.driverLicenseState= new  FormControl('', Validators.required);
-    this.driverDOB= new  FormControl(null, [Validators.required]);
+    this.driverDOB= new  FormControl('', [Validators.required]);
     this.driverSafeDrivingSchool= new  FormControl(false, []);
     // this.driverQuoteMultiplier= new  FormControl
     this.driverInfo = new FormGroup({
@@ -233,11 +233,11 @@ export class QuoteCreationComponent implements OnInit {
     this.vin = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.make = new FormControl('', [Validators.required, Validators.minLength(2)]);
     this.model = new FormControl('', [Validators.required, Validators.minLength(2)]);
-    this.year = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.currentValue = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.annualMileage = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.daysDrivenPerWeek = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
-    this.milesDrivenToWork = new FormControl('', [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.year = new FormControl(0, [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.currentValue = new FormControl(0, [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.annualMileage = new FormControl(0, [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.daysDrivenPerWeek = new FormControl(0, [Validators.pattern("^[0-9]*$"),Validators.required]);
+    this.milesDrivenToWork = new FormControl(0, [Validators.pattern("^[0-9]*$"),Validators.required]);
     this.vehicleInfo = new FormGroup({
       vin: this.vin,
       make: this.make,
@@ -328,9 +328,10 @@ export class QuoteCreationComponent implements OnInit {
       this.quote.city = this.city.value;
       this.quote.state = this.state.value;
       this.quote.zip = this.zip.value;
-      this.quote.ssn = this.ssn.value;
+        this.quote.ssn = this.ssn.value;
         this.quote.dateOfBirth = this.dateOfBirth.value;
         this.putQuote(this.quote);
+        this.continue();
         
     }
 
@@ -362,9 +363,55 @@ export class QuoteCreationComponent implements OnInit {
     
     initializeQuote() {
         this.quote = new Quote;
+        this.fillDefaults();
         this.postQuote(this.quote);
       this.driver = new Driver;
       this.vehicle = new Vehicle;
+    }
+
+    fillDefaults() {
+        this.quote.creatorEmail = "";
+        this.quote.roleID = "";
+        this.quote.firstName = "";
+        this.quote.lastName = "";
+        this.quote.address = "";
+        this.quote.city = "";
+        this.quote.state = "AA";
+        this.quote.zip = "11111";
+        this.quote.ssn = "1234567890";
+        this.quote.dateOfBirth = "";
+        this.quote.lessThan3YearsDriving = false;
+        this.quote.previousCarrier = "";
+        this.quote.movingViolationInLast5Years = false;
+        this.quote.claimInLast5Years = false;
+        this.quote.forceMultiCarDiscount = false;
+        this.quote.drivers = [];
+        this.quote.vehicles = [];
+
+        this.quote.daytimeRunningLights = 1;
+        this.quote.antilockBrakes = 1;
+        this.quote.lowAnnualMileage = 1;
+        this.quote.passiveRestraints = 1;
+        this.quote.antitheftInstalled = 1;
+        this.quote.highDaysDrivenPerWeek = 1;
+        this.quote.lowMilesDrivenToWork = 1;
+        this.quote.reduceUse = 1;
+        this.quote.garageAddressDifferent = 1;
+        this.quote.lowDrivingExperience = 1;
+        this.quote.previousCarrierLizard = 1;
+        this.quote.previousCarrierPervasive = 1;
+        this.quote.recentMovingViolations = 1;
+        this.quote.recentClaims = 1;
+        this.quote.multiCar = 1;
+        this.quote.youngDriver = 1;
+        this.quote.safeDrivingSchool = 1;
+        this.quote.totalQuoteMultiplier = 1;
+        this.quote.quotePrice = 1;
+        this.quote.status = "st";
+
+
+
+
     }
 
     driverPageSubmission() {
@@ -393,7 +440,7 @@ export class QuoteCreationComponent implements OnInit {
       httpRequest.subscribe(
           success => {
               console.log(success)
-              this.router.navigateByUrl("/quotes")
+              //this.router.navigateByUrl("/quotes")
           });
     }
 
@@ -403,6 +450,8 @@ export class QuoteCreationComponent implements OnInit {
       httpRequest.subscribe(
           success => {
               this.quote = success
+              console.log(this.quote)
+              //console.log(typeof (this.quote.quoteId))
               //console.log(this.quote)
           });
     }

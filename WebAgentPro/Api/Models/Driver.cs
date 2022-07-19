@@ -18,13 +18,13 @@ namespace WebAgentPro.Api.Models
         public string FirstName { get; set; }
         [StringLength(60)]
         public string LastName { get; set; }
-        [StringLength(10)]
+        [StringLength(15)]
         public string SSN { get; set; }
         [StringLength(60)]
         public string DriverLicenseNumber { get; set; }      
         [StringLength(60)]
         public string DriverLicenseState { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public bool SafeDrivingSchool { get; set; }
         public decimal QuoteMultiplier { get; set; }
 

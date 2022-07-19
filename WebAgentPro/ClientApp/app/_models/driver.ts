@@ -9,7 +9,7 @@ export class Driver {
     ssn: string;
     driverLicenseNumber: string;
     driverLicenseState: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     safeDrivingSchool: boolean;
     quoteMultiplier: number;
 }

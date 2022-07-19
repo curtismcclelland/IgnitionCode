@@ -14,7 +14,7 @@ namespace WebAgentPro.Api.Models
         [Key]
         [Required]
         public int QuoteId { get; set; }
-        public DateTime QuoteDateTime { get; set; }
+        public DateTime QuoteDateTime { get; set; } = DateTime.Now;
         [StringLength(60)]
         public string CreatorEmail { get; set; }
         [StringLength(60)]
@@ -33,10 +33,9 @@ namespace WebAgentPro.Api.Models
         [MinLength(5)]
         [MaxLength(9)]
         public string Zip { get; set; }
-        [MinLength(10)]
-        [MaxLength(10)]
+        [StringLength(15)]
         public string Ssn { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public bool LessThan3YearsDriving { get; set; }
         [StringLength(60)]
         public string PreviousCarrier { get; set; }
