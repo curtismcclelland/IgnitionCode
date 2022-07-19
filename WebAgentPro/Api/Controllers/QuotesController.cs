@@ -17,6 +17,12 @@ namespace WebAgentPro.Api.Controllers
     {
         private readonly WapDbContext _context;
 
+
+        // Adding other controllers 
+        private readonly DriversController driversController;
+        private readonly VehiclesController vehiclesController;
+
+
         public QuotesController(WapDbContext context)
         {
             _context = context;
@@ -132,6 +138,8 @@ namespace WebAgentPro.Api.Controllers
 
             _context.Quotes.Remove(quote);
             await _context.SaveChangesAsync();
+
+            await vehiclesController.DeleteVehiclebyQuoteID(id); // deletes all vehicles with this quote id
 
             return NoContent();
         }
