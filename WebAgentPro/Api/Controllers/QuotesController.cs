@@ -112,7 +112,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Quote>> CreateQuote(Quote newQuote)
         {
-            if (newQuote.CreatorEmail != null)
+            /*if (newQuote.CreatorEmail != null)
             {
 
                 if (Convert.ToDateTime(newQuote.DateOfBirth).Year > DateTime.Now.Year - 20) // validating age 
@@ -121,7 +121,8 @@ namespace WebAgentPro.Api.Controllers
                     return BadRequest(ModelState);
                 }
 
-            }
+            } */
+
             _context.Quotes.Add(newQuote);
             await _context.SaveChangesAsync();
 
