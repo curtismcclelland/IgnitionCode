@@ -22,8 +22,8 @@ export class QuoteCreationComponent implements OnInit {
   quoteParamSubscription: Subscription
   quote: Quote
   driver: Driver
-    vehicle: Vehicle
-    currentDiscount: Discount
+  vehicle: Vehicle
+  currentDiscount: Discount
   action: string
   step: any = 1;
 
@@ -112,63 +112,66 @@ export class QuoteCreationComponent implements OnInit {
   policySubtotal: number = 0;
 
 
-  // Maybe this can be stored in the DB
-  listOfStates: string[] = [
-    "AL",
-    "Alabama",
-    "Arkansas",
-    "American Samoa",
-    "Arizona",
-    "California",
-    "Colorado",
-    "Connecticut",
-    "District of Columbia",
-    "Delaware",
-    "Florida",
-    "Georgia",
-    "Guam",
-    "Hawaii",
-    "Iowa",
-    "Idaho",
-    "Illinois",
-    "Indiana",
-    "Kansas",
-    "Kentucky",
-    "Louisiana",
-    "Massachusetts",
-    "Maryland",
-    "Maine",
-    "Michigan",
-    "Minnesota",
-    "Missouri",
-    "Mississippi",
-    "Montana",
-    "North Carolina,",
-    "North Dakota",
-    "Nebraska",
-    "New Hampshire",
-    "New Jersey",
-    "New Mexico",
-    "Nevada",
-    "New York",
-    "Ohio",
-    "Oklahoma",
-    "Oregon",
-    "Pennsylvania",
-    "Puerto Rico",
-    "Rhode Island",
-    "South Carolina",
-    "South Dakota",
-    "Tennessee",
-    "Texas",
-    "Utah",
-    "Virginia",
-    "Virgin Islands",
-    "Vermont",
-    "Washington",
-    "Wisconsin",
-    "West Virginia",
-    "Wyoming"
+  listOfStatesObj = [
+    { abbr: "AL", name: "Alabama" },
+    { abbr: "AK", name: "Alaska" },
+    { abbr: "AS", name: "American Samoa" },
+    { abbr: 'AZ', name: 'Arizona' },
+    { abbr: 'AR', name: 'Akasas' },
+    { abbr: 'CA', name: 'California' },
+    { abbr: 'CO', name: 'Colorado' },
+    { abbr: 'CT', name: 'Connecticut' },
+    { abbr: 'DE', name: 'Delaware' },
+    { abbr: 'DC', name: 'District Of Columbia' },
+    { abbr: 'FM', name: 'Federated States Of Micronesia' },
+    { abbr: 'FL', name: 'Florida' },
+    { abbr: 'GA', name: 'Georgia' },
+    { abbr: 'GU', name: 'Guam' },
+    { abbr: 'HI', name: 'Hawaii' },
+    { abbr: 'ID', name: 'Idaho' },
+    { abbr: 'IL', name: 'Illinois' },
+    { abbr: 'IN', name: 'Indiana' },
+    { abbr: 'IA', name: 'Iowa' },
+    { abbr: 'KS', name: 'Kansas' },
+    { abbr: 'KY', name: 'Kentucky' },
+    { abbr: 'LA', name: 'Louisiana' },
+    { abbr: 'ME', name: 'Maine' },
+    { abbr: 'MH', name: 'Marshall Islands' },
+    { abbr: 'MD', name: 'Maryland' },
+    { abbr: 'MA', name: 'Massachusetts' },
+    { abbr: 'MI', name: 'Michigan' },
+    { abbr: 'MN', name: 'Minnesota' },
+    { abbr: 'MS', name: 'Mississippi' },
+    { abbr: 'MO', name: 'Missouri' },
+    { abbr: 'MT', name: 'Montana' },
+    { abbr: 'NE', name: 'Nebraska' },
+    { abbr: 'NV', name: 'Nevada' },
+    { abbr: 'NH', name: 'New Hampshire' },
+    { abbr: 'NJ', name: 'New Jersey' },
+    { abbr: 'NM', name: 'New Mexico' },
+    { abbr: 'NY', name: 'New York' },
+    { abbr: 'NC', name: 'North Carolina' },
+    { abbr: 'ND', name: 'North Dakota' },
+    { abbr: 'MP', name: 'Northern Mariana Islands' },
+    { abbr: 'OH', name: 'Ohio' },
+    { abbr: 'OK', name: 'Oklahoma' },
+    { abbr: 'OR', name: 'Oregon' },
+    { abbr: 'PW', name: 'Palau' },
+    { abbr: 'PA', name: 'Pennsylvania' },
+    { abbr: 'PR', name: 'Puerto Rico' },
+    { abbr: 'RI', name: 'Rhode Island' },
+    { abbr: 'SC', name: 'South Carolina' },
+    { abbr: 'SD', name: 'South Dakota' },
+    { abbr: 'TN', name: 'Tennessee' },
+    { abbr: 'TX', name: 'Texas' },
+    { abbr: 'UT', name: 'Utah' },
+    { abbr: 'VT', name: 'Vermont' },
+    { abbr: 'VI', name: 'Virgin Islands' },
+    { abbr: 'VA', name: 'Virginia' },
+    { abbr: 'WA', name: 'Washington' },
+    { abbr: 'WV', name: 'West Virginia' },
+    { abbr: 'WI', name: 'Wisconsin' },
+    { abbr: 'WY', name: 'Wyoming' },
   ]
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
@@ -335,8 +338,6 @@ export class QuoteCreationComponent implements OnInit {
     this.postDriver(this.driver);
     this.quote.drivers.push(this.driver);
     this.putQuote(this.quote);
-    //putquote with driver object appended to array
-    //post driver object?
     this.continue();
   }
   updateVehicleInfo() {
@@ -360,7 +361,7 @@ export class QuoteCreationComponent implements OnInit {
 
     this.postVehicle(this.vehicle);
     this.quote.vehicles.push(this.vehicle);
-      this.putQuote(this.quote);
+    this.putQuote(this.quote);
     this.continue();
   }
 
@@ -372,88 +373,76 @@ export class QuoteCreationComponent implements OnInit {
     this.quote.state = this.state.value;
     this.quote.zip = this.zip.value;
     this.quote.ssn = this.ssn.value;
-      this.quote.dateOfBirth = this.dateOfBirth.value;
-      this.getDiscount(this.quote.state);
-      
-
+    this.quote.dateOfBirth = this.dateOfBirth.value;
+    this.getDiscount(this.quote.state);
     this.putQuote(this.quote);
     this.continue();
+  }
 
-    }
+  //Add
+  setQuoteDiscountValues() {
+    this.quote.daytimeRunningLights = this.currentDiscount.daytimeRunningLights;
+    this.quote.antilockBrakes = this.currentDiscount.antilockBrakes;
+    this.quote.lowAnnualMileage = this.currentDiscount.lowAnnualMileage;
+    this.quote.passiveRestraints = this.currentDiscount.passiveRestraints;
+    this.quote.antitheftInstalled = this.currentDiscount.antitheftInstalled;
+    this.quote.highDaysDrivenPerWeek = this.currentDiscount.highDaysDrivenPerWeek;
+    this.quote.lowMilesDrivenToWork = this.currentDiscount.lowMilesDrivenToWork;
+    this.quote.reduceUse = this.currentDiscount.reduceUse;
+    this.quote.garageAddressDifferent = this.currentDiscount.garageAddressDifferent;
+    this.quote.lowDrivingExperience = this.currentDiscount.lowDrivingExperience;
+    this.quote.previousCarrierLizard = this.currentDiscount.previousCarrierLizard;
+    this.quote.previousCarrierPervasive = this.currentDiscount.previousCarrierPervasive;
+    this.quote.recentMovingViolations = this.currentDiscount.recentMovingViolations;
+    this.quote.recentClaims = this.currentDiscount.recentClaims;
+    this.quote.multiCar = this.currentDiscount.multiCar;
+    this.quote.youngDriver = this.currentDiscount.youngDriver;
+    this.quote.safeDrivingSchool = this.currentDiscount.safeDrivingSchool;
+  }
 
-    //Add
-    setQuoteDiscountValues() {
-        this.quote.daytimeRunningLights = this.currentDiscount.daytimeRunningLights;
-        this.quote.antilockBrakes = this.currentDiscount.antilockBrakes;
-        this.quote.lowAnnualMileage = this.currentDiscount.lowAnnualMileage;
-        this.quote.passiveRestraints = this.currentDiscount.passiveRestraints;
-        this.quote.antitheftInstalled = this.currentDiscount.antitheftInstalled;
-        this.quote.highDaysDrivenPerWeek = this.currentDiscount.highDaysDrivenPerWeek;
-        this.quote.lowMilesDrivenToWork = this.currentDiscount.lowMilesDrivenToWork;
-        this.quote.reduceUse = this.currentDiscount.reduceUse;
-        this.quote.garageAddressDifferent = this.currentDiscount.garageAddressDifferent;
-        this.quote.lowDrivingExperience = this.currentDiscount.lowDrivingExperience;
-        this.quote.previousCarrierLizard = this.currentDiscount.previousCarrierLizard;
-        this.quote.previousCarrierPervasive = this.currentDiscount.previousCarrierPervasive;
-        this.quote.recentMovingViolations = this.currentDiscount.recentMovingViolations;
-        this.quote.recentClaims = this.currentDiscount.recentClaims;
-        this.quote.multiCar = this.currentDiscount.multiCar;
-        this.quote.youngDriver = this.currentDiscount.youngDriver;
-        this.quote.safeDrivingSchool = this.currentDiscount.safeDrivingSchool;
-    }
+  getDiscount(state: string) {
+    var httpRequest = this.http.get<Discount>(`${this.apiUrl}/discounts/${state}`);
 
-    getDiscount(state: string) {
-        var httpRequest = this.http.get<Discount>(`${this.apiUrl}/discounts/${state}`);
-
-        httpRequest.subscribe(
-            returnedDiscount => {
-                this.currentDiscount = returnedDiscount
-            }
-        );
-    }
+    httpRequest.subscribe(
+      returnedDiscount => {
+        this.currentDiscount = returnedDiscount
+      }
+    );
+  }
 
   updateQuoteInfoSecondPage() {
     this.quote.lessThan3YearsDriving = this.lessThan3YearsDriving.value;
     this.quote.previousCarrier = this.previousCarrier.value;
     this.quote.movingVioliationInLast5Years = this.movingVioliationInLast5Years.value;
     this.quote.claimInLast5Years = this.claimInLast5Years.value;
-      this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
-      this.setQuoteDiscountValues();
+    this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
+    this.setQuoteDiscountValues();
     this.putQuote(this.quote);
     this.continue();
-
   }
 
-  // Adjust for multiple Drivers and Vehicles later
+  // REDIRECT TO AGENT/MANAGER DASHBOARD
   submitForm() {
-    //this.updateDriverInfo();
-    //this.updateVehicleInfo();
-    //this.updateQuoteInfoFirstPage();
-    //this.updateQuoteInfoSecondPage();
-
-    //console.log(this.quote)
-    //console.log(this.driver)
-    //console.log(this.vehicle)
-
-    //this.calculateQuotePrice();
     this.continue();
-    }
+  }
 
-    createQuote() {
-        this.calculateQuotePrice();
-        this.continue();
-    }
+  // TAKES USER TO QUOTE SUMMARY PAGE
+  createQuote() {
+    this.calculateQuotePrice();
+    this.continue();
+  }
 
-
+  // INITIALIZE THE QUOTE MODEL OBJECT
   initializeQuote() {
     this.quote = new Quote;
     this.fillDefaults();
     this.postQuote(this.quote);
     this.driver = new Driver;
-      this.vehicle = new Vehicle;
-      this.currentDiscount = new Discount;
+    this.vehicle = new Vehicle;
+    this.currentDiscount = new Discount;
   }
 
+  // USED TO INITIALIZE QUOTE WITH DUMMY DATA
   fillDefaults() {
     this.quote.creatorEmail = "";
     this.quote.roleID = "";
@@ -493,20 +482,19 @@ export class QuoteCreationComponent implements OnInit {
     this.quote.totalQuoteMultiplier = 1;
     this.quote.quotePrice = 1;
     this.quote.status = "st";
-
-
-
-
   }
 
+  // USED TO INITIALIZE DRIVER WITH DUMMY DATA
   fillDriverDefaults() {
 
   }
 
+  // USED TO INITIALIZE VEHICLE WITH DUMMY DATA
   fillVehicleDefaults() {
 
   }
 
+  // USED TO FETCH QUOTE BASED ON QUOTE ID
   getQuote(quoteId: number) {
     var httpRequest = this.http.get<Quote>(`${this.apiUrl}/quotes/${quoteId}`);
 
@@ -517,6 +505,7 @@ export class QuoteCreationComponent implements OnInit {
     );
   }
 
+  // USED TO UPDATE PARTICULAR QUOTE
   putQuote(updatedQuote: Quote) {
     var httpRequest = this.http.put(`${this.apiUrl}/quotes/${updatedQuote.quoteId}`, updatedQuote)
 
@@ -527,6 +516,7 @@ export class QuoteCreationComponent implements OnInit {
       });
   }
 
+  // USED TO POST QUOTES
   postQuote(newQuote: Quote) {
     var httpRequest = this.http.post<Quote>(`${this.apiUrl}/quotes`, newQuote);
 
@@ -539,6 +529,7 @@ export class QuoteCreationComponent implements OnInit {
       });
   }
 
+  // USED TO POST DRIVE
   postDriver(newDriver: Driver) {
     var httpRequest = this.http.post<Driver>(`${this.apiUrl}/drivers`, newDriver);
 
@@ -550,6 +541,7 @@ export class QuoteCreationComponent implements OnInit {
       });
   }
 
+  // USED TO POST VEHICLE
   postVehicle(newVehicle: Vehicle) {
     var httpRequest = this.http.post<Vehicle>(`${this.apiUrl}/vehicles`, newVehicle);
 
@@ -561,102 +553,101 @@ export class QuoteCreationComponent implements OnInit {
   }
 
 
-  //These methods are used by the corresponding html to keep track
-  //of the page on which quote creation resides
+  // USED TO NAVIGATE BACK ONE STEP IN QUOTE CREATION PAGE
   previous() { this.step = this.step - 1; }
+
+  // USED TO NAVIGATE FORWARD ONE STEP IN QUOTE CREATION PAGE
   continue() { this.step = this.step + 1; }
 
-  //Quote pricing
+  // CALCULATE QUOTE PRICES
+  calculateQuotePrice() {
+    var driverBaseCost = 200;
+    var vehicleBaseCost = this.vehicle.currentValue * 0.03;
+    var policyBaseCost = 100;
+    var driverQuoteMultiplier = 1;
+    var vehicleQuoteMultiplier = 1;
+    var currentQuoteQuoteMultiplier = 1;
 
-    
-    calculateQuotePrice() {
-        var driverBaseCost = 200;
-        var vehicleBaseCost = this.vehicle.currentValue * 0.03;
-        var policyBaseCost = 100;
-        var driverQuoteMultiplier = 1;
-        var vehicleQuoteMultiplier = 1;
-        var currentQuoteQuoteMultiplier = 1;
-
-        if (this.driver.safeDrivingSchool == true) {
-            driverQuoteMultiplier *= 1 + this.quote.safeDrivingSchool;
-        }
-
-        var date = new Date();
-        date.setDate(date.getDate());
-        date.setMonth(date.getMonth());
-        date.setFullYear(date.getFullYear() - 23);
-
-        const birthDateasNumber = this.driver.dateOfBirth;
-        const dateArray = birthDateasNumber.split('-');
-        const year = Number(dateArray[0]);
-        const month = Number(dateArray[1]);
-        const day = Number(dateArray[2]);
-        const dateOfBirthAsDate = new Date();
-        dateOfBirthAsDate.setFullYear(year, month, day);
-
-        if ((dateOfBirthAsDate.getTime()) > date.getTime()) {
-            driverQuoteMultiplier *= 1 + this.quote.youngDriver;
-        }
-
-        this.driverSubtotalCost = +((driverBaseCost *= driverQuoteMultiplier).toFixed(2));
-
-        if (this.vehicle.annualMileage < 6000) {
-            vehicleQuoteMultiplier *= 1 + this.quote.lowAnnualMileage;
-        }
-        if (this.vehicle.antiTheft == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.antitheftInstalled;
-        }
-        if (this.vehicle.antiLockBrakes == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.antilockBrakes;
-        }
-        if (this.vehicle.daysDrivenPerWeek > 4) {
-            vehicleQuoteMultiplier *= 1 + this.quote.highDaysDrivenPerWeek;
-        }
-        if (this.vehicle.milesDrivenToWork < 25) {
-            vehicleQuoteMultiplier *= 1 + this.quote.lowMilesDrivenToWork;
-        }
-        if (this.vehicle.daytimeRunningLights == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.daytimeRunningLights;
-        }
-        if (this.vehicle.garageAddressDifferentFromResidence == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.garageAddressDifferent;
-        }
-        if (this.vehicle.passiveRestraints == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.passiveRestraints;
-        }
-        if (this.vehicle.reducedUsedDiscount == true) {
-            vehicleQuoteMultiplier *= 1 + this.quote.reduceUse;
-        }
-        this.vehicleSubtotalCost = +((vehicleBaseCost *= vehicleQuoteMultiplier).toFixed(2));
-        //policy base cost starts here
-        var policyCost = this.vehicleSubtotalCost + this.driverSubtotalCost + policyBaseCost;
-
-        if (this.quote.claimInLast5Years == true) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.recentClaims;
-        }
-        if (this.quote.forceMultiCarDiscount == true) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.multiCar;
-        }
-        if (this.quote.lessThan3YearsDriving == true) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.lowDrivingExperience;
-        }
-        if (this.quote.movingVioliationInLast5Years == true) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.recentMovingViolations;
-        }
-        if (this.quote.previousCarrierLizard) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierLizard;
-        }
-        if (this.quote.previousCarrierPervasive) {
-            currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierPervasive;
-        }
-        this.policySubtotal = +((policyCost *= currentQuoteQuoteMultiplier).toFixed(2));
-        this.totalCost = this.policySubtotal;
-        this.quote.quotePrice = this.totalCost;
-        this.putQuote(this.quote);
-
-        console.log("Your total vehicle cost is: ", this.vehicleSubtotalCost);
-        console.log("Your total driver cost is: ", this.driverSubtotalCost);
-        console.log("You total policy cost is: ", this.totalCost);
+    if (this.driver.safeDrivingSchool == true) {
+      driverQuoteMultiplier *= 1 + this.quote.safeDrivingSchool;
     }
+
+    var date = new Date();
+    date.setDate(date.getDate());
+    date.setMonth(date.getMonth());
+    date.setFullYear(date.getFullYear() - 23);
+
+    const birthDateasNumber = this.driver.dateOfBirth;
+    const dateArray = birthDateasNumber.split('-');
+    const year = Number(dateArray[0]);
+    const month = Number(dateArray[1]);
+    const day = Number(dateArray[2]);
+    const dateOfBirthAsDate = new Date();
+    dateOfBirthAsDate.setFullYear(year, month, day);
+
+    if ((dateOfBirthAsDate.getTime()) > date.getTime()) {
+      driverQuoteMultiplier *= 1 + this.quote.youngDriver;
+    }
+
+    this.driverSubtotalCost = +((driverBaseCost *= driverQuoteMultiplier).toFixed(2));
+
+    if (this.vehicle.annualMileage < 6000) {
+      vehicleQuoteMultiplier *= 1 + this.quote.lowAnnualMileage;
+    }
+    if (this.vehicle.antiTheft == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.antitheftInstalled;
+    }
+    if (this.vehicle.antiLockBrakes == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.antilockBrakes;
+    }
+    if (this.vehicle.daysDrivenPerWeek > 4) {
+      vehicleQuoteMultiplier *= 1 + this.quote.highDaysDrivenPerWeek;
+    }
+    if (this.vehicle.milesDrivenToWork < 25) {
+      vehicleQuoteMultiplier *= 1 + this.quote.lowMilesDrivenToWork;
+    }
+    if (this.vehicle.daytimeRunningLights == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.daytimeRunningLights;
+    }
+    if (this.vehicle.garageAddressDifferentFromResidence == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.garageAddressDifferent;
+    }
+    if (this.vehicle.passiveRestraints == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.passiveRestraints;
+    }
+    if (this.vehicle.reducedUsedDiscount == true) {
+      vehicleQuoteMultiplier *= 1 + this.quote.reduceUse;
+    }
+    this.vehicleSubtotalCost = +((vehicleBaseCost *= vehicleQuoteMultiplier).toFixed(2));
+    //policy base cost starts here
+    var policyCost = this.vehicleSubtotalCost + this.driverSubtotalCost + policyBaseCost;
+
+    if (this.quote.claimInLast5Years == true) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.recentClaims;
+    }
+    if (this.quote.forceMultiCarDiscount == true) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.multiCar;
+    }
+    if (this.quote.lessThan3YearsDriving == true) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.lowDrivingExperience;
+    }
+    if (this.quote.movingVioliationInLast5Years == true) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.recentMovingViolations;
+    }
+    if (this.quote.previousCarrierLizard) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierLizard;
+    }
+    if (this.quote.previousCarrierPervasive) {
+      currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierPervasive;
+    }
+    this.policySubtotal = +((policyCost *= currentQuoteQuoteMultiplier).toFixed(2));
+    this.totalCost = this.policySubtotal;
+    this.quote.quotePrice = this.totalCost;
+    this.putQuote(this.quote);
+
+    console.log("Your total vehicle cost is: ", this.vehicleSubtotalCost);
+    console.log("Your total driver cost is: ", this.driverSubtotalCost);
+    console.log("You total policy cost is: ", this.totalCost);
+  }
 
 }

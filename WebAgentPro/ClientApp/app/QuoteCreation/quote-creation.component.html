@@ -34,7 +34,7 @@
                 <div class="col-md-6 popup form-group">
                     <label for="firstName" class="form-label">
                         First Name<i *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
-                                     class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="firstName" type="text" class="form-control" placeholder="First Name" />
                     <span *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
@@ -49,7 +49,7 @@
                 <div class=" col-md-6 popup">
                     <label for="lastName" class="form-label">
                         Last Name<i *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
-                                    class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="lastName" type="text" class="form-control" placeholder="Last Name" />
                     <span *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
@@ -65,10 +65,10 @@
             <div class="popup">
                 <label for="inputAddress" class="form-label">
                     Address<i *ngIf="address.invalid && (address.dirty || address.touched)"
-                              class="bi bi-exclamation-triangle-fill"></i>
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="address" type="text" name="address" class="form-control" id="inputAddress"
-                       placeholder="Address">
+                    placeholder="Address">
                 <span *ngIf="address.invalid && (address.dirty || address.touched)">
                     <span *ngIf="address.errors?.required" class="popuptext">
                         Address is required.
@@ -82,7 +82,7 @@
                 <div class="col-md-6 popup">
                     <label for="inputCity">
                         City<i *ngIf="city.invalid && (city.dirty || city.touched)"
-                               class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="city" type="text" name="city" class="form-control" placeholder="City">
                     <span *ngIf="city.invalid && (city.dirty || city.touched)">
@@ -97,10 +97,10 @@
                 <div class="col-md-4 popup">
                     <label for="inputState" class="form-label">
                         State<i *ngIf="state.invalid && (state.dirty || state.touched)"
-                                class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <select formControlName="state" name="state" class="form-control" required>
-                        <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
                     </select>
                     <span *ngIf="state.invalid && (state.dirty || state.touched)">
                         <span *ngIf="state.errors?.required" class="popuptext">
@@ -111,7 +111,7 @@
                 <div class="col-md-2 popup">
                     <label for="inputZip">
                         Zip<i *ngIf="zip.invalid && (zip.dirty || zip.touched)"
-                              class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="zip" type="text" class="form-control" placeholder="ZIP">
                     <span *ngIf="zip.invalid && (zip.dirty || zip.touched)">
@@ -127,7 +127,7 @@
             <div class="popup">
                 <label for="ssn" class="form-label">
                     Social Security Nunber<i *ngIf="ssn.invalid && (ssn.dirty || ssn.touched)"
-                                             class="bi bi-exclamation-triangle-fill"></i>
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="ssn" type="text" class="form-control" placeholder="###-##-####">
                 <span *ngIf="ssn.invalid && (ssn.dirty || ssn.touched)">
@@ -147,8 +147,9 @@
             </div>
             <div class="popup">
                 <label for="dateOfBirth" class="form-label">
-                    Date of Birth (MM/DD/YYYY)<i *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
-                                                 class="bi bi-exclamation-triangle-fill"></i>
+                    Date of Birth (MM/DD/YYYY)<i
+                        *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="dateOfBirth" type="date" class="form-control" placeholder="MM/DD/YYY">
                 <span *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)">
@@ -162,8 +163,7 @@
             </div>
         </div>
         <div class="formNavButtons">
-            <button class="btn btn-primary" [disabled]="!customerInfo.valid"
-                    (click)="updateQuoteInfoFirstPage()">
+            <button class="btn btn-primary" [disabled]="!customerInfo.valid" (click)="updateQuoteInfoFirstPage()">
                 Continue
             </button>
         </div>
@@ -178,8 +178,9 @@
         <div class="stepForm" formGroupName="customerHistory">
             <div class="form-group">
                 <label class="questions">
-                    Select previous carrier<i *ngIf="previousCarrier.invalid && (previousCarrier.dirty || previousCarrier.touched)"
-                                              class="bi bi-exclamation-triangle-fill"></i>
+                    Select previous carrier<i
+                        *ngIf="previousCarrier.invalid && (previousCarrier.dirty || previousCarrier.touched)"
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <select formControlName="previousCarrier" required>
                     <option value="Lizard">Lizard Insurance</option>
@@ -224,7 +225,7 @@
             <div class="formNavButtons">
                 <button class="btn btn-primary" *ngIf="step != 1" (click)="previous()">Previous</button>
                 <button class="btn btn-primary" *ngIf="step != 6" [disabled]="!customerHistory.valid"
-                        (click)="updateQuoteInfoSecondPage()">
+                    (click)="updateQuoteInfoSecondPage()">
                     Continue
                 </button>
             </div>
@@ -242,14 +243,14 @@
                 <div class="form-group col-md-4">
                     <label for="inputAddress" class="form-label">Driver's License #</label>
                     <input formControlName="driverFirstName" type="text" name="dlNum" class="form-control"
-                           id="inputAddress" placeholder="########" required maxlength="60">
+                        id="inputAddress" placeholder="########" required maxlength="60">
                 </div>
                 <div class="form-group col-md-4 col-2-in-one">
                     <label for="inputState" class="form-label">Driver's License State</label>
                     <select formControlName="driverLicenseState" id="inputState" name="state" class="form-control"
-                            required>
+                        required>
                         <option selected>Choose...</option>
-                        <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
                     </select>
                 </div>
             </div>
@@ -276,8 +277,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6 popup">
                     <label for="driverFirstName" class="form-label">
-                        First Name<i *ngIf="driverFirstName.invalid && (driverFirstName.dirty || driverFirstName.touched)"
-                                     class="bi bi-exclamation-triangle-fill"></i>
+                        First Name<i
+                            *ngIf="driverFirstName.invalid && (driverFirstName.dirty || driverFirstName.touched)"
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="driverFirstName" type="text" class="form-control" placeholder="First Name">
                     <span *ngIf="driverFirstName.invalid && (driverFirstName.dirty || driverFirstName.touched)">
@@ -292,10 +294,10 @@
                 <div class="form-group col-md-6 popup">
                     <label for="driverLastName" class="form-label">
                         Last Name<i *ngIf="driverLastName.invalid && (driverLastName.dirty || driverLastName.touched)"
-                                    class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="driverLastName" type="text" name="lastName" class="form-control"
-                           id="lastname" placeholder="Last Name">
+                        id="lastname" placeholder="Last Name">
                     <span *ngIf="driverLastName.invalid && (driverLastName.dirty || driverLastName.touched)">
                         <span *ngIf="driverLastName.errors?.required" class="popuptext">
                             Last name is required.
@@ -306,10 +308,10 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group popup">
                 <label for="ssn" class="form-label">
                     Social Security Nunber<i *ngIf="driverSSN.invalid && (driverSSN.dirty || driverSSN.touched)"
-                                             class="bi bi-exclamation-triangle-fill"></i>
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="driverSSN" type="text" class="form-control" placeholder="###-##-####">
                 <span *ngIf="driverSSN.invalid && (driverSSN.dirty || driverSSN.touched)">
@@ -321,10 +323,10 @@
                     </span>
                 </span>
             </div>
-            <div class="form-group">
+            <div class="form-group popup">
                 <label for="dateOfBirth" class="form-label">
                     Date of Birth (MM/DD/YYYY)<i *ngIf="driverDOB.invalid && (driverDOB.dirty || driverDOB.touched)"
-                                                 class="bi bi-exclamation-triangle-fill"></i>
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="driverDOB" type="date" class="form-control" placeholder="MM/DD/YYY">
                 <span *ngIf="driverDOB.invalid && (driverDOB.dirty || driverDOB.touched)">
@@ -336,15 +338,17 @@
                     </span>
                 </span>
             </div>
-            <div class="form-row">
+            <div class="form-row popup">
                 <div class="form-group col-md-4">
                     <label for="driverLicenseNumber" class="form-label">
-                        Driver's License #<i *ngIf="driverLicenseNumber.invalid && (driverLicenseNumber.dirty || driverLicenseNumber.touched)"
-                                             class="bi bi-exclamation-triangle-fill"></i>
+                        Driver's License #<i
+                            *ngIf="driverLicenseNumber.invalid && (driverLicenseNumber.dirty || driverLicenseNumber.touched)"
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="driverLicenseNumber" type="text" name="dlNum" class="form-control"
-                           placeholder="########">
-                    <span *ngIf="driverLicenseNumber.invalid && (driverLicenseNumber.dirty || driverLicenseNumber.touched)">
+                        placeholder="########">
+                    <span
+                        *ngIf="driverLicenseNumber.invalid && (driverLicenseNumber.dirty || driverLicenseNumber.touched)">
                         <span *ngIf="driverLicenseNumber.errors?.required" class="popuptext">
                             Date of Birth is required.
                         </span>
@@ -353,15 +357,17 @@
                         </span>
                     </span>
                 </div>
-                <div class="form-group col-md-4 col-2-in-one">
+                <div class="form-group col-md-4 col-2-in-one popup">
                     <label for="inputState" class="form-label">
-                        Driver's License State<i *ngIf="driverLicenseState.invalid && (driverLicenseState.dirty || driverLicenseState.touched)"
-                                                 class="bi bi-exclamation-triangle-fill"></i>
+                        Driver's License State<i
+                            *ngIf="driverLicenseState.invalid && (driverLicenseState.dirty || driverLicenseState.touched)"
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <select formControlName="driverLicenseState" id="inputState" name="state" class="form-control">
-                        <option *ngFor="let states of listOfStates" [value]="states">{{states}}</option>
+                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
                     </select>
-                    <span *ngIf="driverLicenseState.invalid && (driverLicenseState.dirty || driverLicenseState.touched)">
+                    <span
+                        *ngIf="driverLicenseState.invalid && (driverLicenseState.dirty || driverLicenseState.touched)">
                         <span *ngIf="driverLicenseState.errors?.required" class="popuptext">
                             Please select a state.
                         </span>
@@ -374,7 +380,8 @@
             </div>
             <div class="formNavButtons">
                 <button class="btn btn-primary" (click)="previous()">Previous</button>
-                <button class="btn btn-primary" [disabled]="!driverInfo.valid" (click)="updateDriverInfo()">Continue</button>
+                <button class="btn btn-primary" [disabled]="!driverInfo.valid"
+                    (click)="updateDriverInfo()">Continue</button>
             </div>
         </div>
     </div>
@@ -390,10 +397,10 @@
                 <div class="form-group col-md-6">
                     <label for="make" class="form-label">
                         Vin #<i *ngIf="vin.invalid && (vin.dirty || vin.touched)"
-                                class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="vin" name="make" type="text" class="form-control"
-                           placeholder="4Y1SL65848Z411439">
+                        placeholder="4Y1SL65848Z411439">
                     <span *ngIf="vin.invalid && (vin.dirty || vin.touched)">
                         <span *ngIf="vin.errors?.required" class="popuptext">
                             Please enter the vehicle vin #.
@@ -408,7 +415,7 @@
                 <div class="form-group col-md-6">
                     <label for="make" class="form-label">
                         Make<i *ngIf="make.invalid && (make.dirty || make.touched)"
-                               class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="make" name="make" type="text" class="form-control" placeholder="Toyota">
                     <span *ngIf="make.invalid && (make.dirty || make.touched)">
@@ -425,7 +432,7 @@
                 <div class="form-group col-md-6">
                     <label for="model" class="form-label">
                         Model<i *ngIf="model.invalid && (model.dirty || model.touched)"
-                                class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="model" name="model" type="text" class="form-control" placeholder="Corolla">
                     <span *ngIf="model.invalid && (model.dirty || model.touched)">
@@ -442,7 +449,7 @@
                 <div class="form-group col-md-6">
                     <label for="year" class="form-label">
                         Year<i *ngIf="year.invalid && (year.dirty || year.touched)"
-                               class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="year" name="year" type="text" class="form-control" placeholder="2019">
                     <span *ngIf="year.invalid && (year.dirty || year.touched)">
@@ -459,12 +466,12 @@
                 <div class="form-group col-md-6">
                     <label for="currentvalue" class="form-label">
                         Current Value<i *ngIf="currentValue.invalid && (currentValue.dirty || currentValue.touched)"
-                                        class="bi bi-exclamation-triangle-fill"></i>
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
                         <input formControlName="currentValue" name="current_value" type="text" class="form-control"
-                               id="currentvalue" placeholder="$12,345">
+                            id="currentvalue" placeholder="$12,345">
                         <span *ngIf="currentValue.invalid && (currentValue.dirty || currentValue.touched)">
                             <span *ngIf="currentValue.errors?.required" class="popuptext">
                                 Current vehicle value is required.
@@ -479,11 +486,12 @@
             <div class="form-row popup">
                 <div class="form-group col-md-6">
                     <label for="annualmileage" class="form-label">
-                        Annual Mileage (Miles)<i *ngIf="annualMileage.invalid && (annualMileage.dirty || annualMileage.touched)"
-                                                 class="bi bi-exclamation-triangle-fill"></i>
+                        Annual Mileage (Miles)<i
+                            *ngIf="annualMileage.invalid && (annualMileage.dirty || annualMileage.touched)"
+                            class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <input formControlName="annualMileage" name="annual_mileage" type="text" class="form-control"
-                           id="annualmileage" placeholder="12345">
+                        id="annualmileage" placeholder="12345">
                     <span *ngIf="annualMileage.invalid && (annualMileage.dirty || annualMileage.touched)">
                         <span *ngIf="annualMileage.errors?.required" class="popuptext">
                             Annual mileage is required.
@@ -496,8 +504,9 @@
             </div>
             <div class="form-group popup">
                 <label for="daysDriven" class="form-label">
-                    Days Driven per Week<i *ngIf="daysDrivenPerWeek.invalid && (daysDrivenPerWeek.dirty || daysDrivenPerWeek.touched)"
-                                           class="bi bi-exclamation-triangle-fill"></i>
+                    Days Driven per Week<i
+                        *ngIf="daysDrivenPerWeek.invalid && (daysDrivenPerWeek.dirty || daysDrivenPerWeek.touched)"
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <select formControlName="daysDrivenPerWeek" id="daysDriven" name="DaysDriven" class="form-control">
                     <option value="1">1</option>
@@ -519,11 +528,12 @@
             </div>
             <div class="form-group popup">
                 <label for="DriventoWork">
-                    Miles Driven to Work<i *ngIf="milesDrivenToWork.invalid && (milesDrivenToWork.dirty || milesDrivenToWork.touched)"
-                                           class="bi bi-exclamation-triangle-fill"></i>
+                    Miles Driven to Work<i
+                        *ngIf="milesDrivenToWork.invalid && (milesDrivenToWork.dirty || milesDrivenToWork.touched)"
+                        class="bi bi-exclamation-triangle-fill"></i>
                 </label>
                 <input formControlName="milesDrivenToWork" type="number" name="work" class="form-control"
-                       id="DriventoWork" placeholder="40">
+                    id="DriventoWork" placeholder="40">
                 <span *ngIf="milesDrivenToWork.invalid && (milesDrivenToWork.dirty || milesDrivenToWork.touched)">
                     <span *ngIf="milesDrivenToWork.errors?.required" class="popuptext">
                         Please enter miles driven to work with {{make.value}} {{model.value}}.
@@ -637,28 +647,25 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Claims in the last 5 years?</label>
-                                <input type="checkbox" formControlName="claimInLast5Years" id="" [disabled]="true" />
+                                <input type="checkbox" formControlName="claimInLast5Years" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Any moving violations in the last 5 years? </label>
-                                <input type="checkbox" formControlName="movingVioliationInLast5Years" id=""
-                                       [disabled]="true" />
+                                <input type="checkbox" formControlName="movingVioliationInLast5Years" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Less than 3 years driving?</label>
-                                <input type="checkbox" formControlName="lessThan3YearsDriving" id=""
-                                       [disabled]="true" />
+                                <input type="checkbox" formControlName="lessThan3YearsDriving" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Force multi-car discount?</label>
-                                <input type="checkbox" id="" formControlName="forceMultiCarDiscount" id=""
-                                       [disabled]="true" />
+                                <input type="checkbox" id="" formControlName="forceMultiCarDiscount" id="" disabled />
                             </div>
                         </div>
                     </div>
@@ -673,10 +680,6 @@
                         <div class="col">
                             <span class="fieldSection">Name</span>
                             <p>{{driverFirstName.value}} {{driverLastName.value}}</p>
-                        </div>
-                        <div class="col">
-                            <span class="fieldSection">Address</span>
-                            <p></p>
                         </div>
                     </div>
                     <div class="row">
@@ -701,7 +704,7 @@
                     </div>
                     <div class="form-group">
                         <label class="" for="">Attended Safe Driving School?</label>
-                        <input class="" formControlName="driverSafeDrivingSchool" type="checkbox" />
+                        <input class="" formControlName="driverSafeDrivingSchool" type="checkbox" disabled />
                     </div>
                 </div>
                 <!-- VEHICLE INFORMATION -->
@@ -755,37 +758,37 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Anti-theft alarms</label>
-                                <input formControlName="antiTheftAlarms" type="checkbox" id="" />
+                                <input formControlName="antiTheftAlarms" type="checkbox" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Anti-lock Brakes </label>
-                                <input formControlName="antiLockBrakes" type="checkbox" id="" />
+                                <input formControlName="antiLockBrakes" type="checkbox" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Daytime Running Lights</label>
-                                <input formControlName="daytimeRunningLights" type="checkbox" id="" />
+                                <input formControlName="daytimeRunningLights" type="checkbox" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Garage Address Different</label>
-                                <input formControlName="garageAddressDifferent" type="checkbox" id="" />
+                                <input formControlName="garageAddressDifferent" type="checkbox" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Passive Restraints </label>
-                                <input formControlName="passiveRestraints" type="checkbox" id="" />
+                                <input formControlName="passiveRestraints" type="checkbox" id="" disabled />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="">Reduced Use Discount</label>
-                                <input formControlName="reduceUse" type="checkbox" id="" />
+                                <input formControlName="reduceUse" type="checkbox" id="" disabled />
                             </div>
                         </div>
                     </div>
@@ -806,7 +809,7 @@
 
         <div class="quotePrice">
             <p class="quotePriceLabel">Quote Price</p>
-            <p class="quotePriceTotal">$492</p>
+            <p class="quotePriceTotal">${{totalCost}}</p>
             <!-- <h1 class="quotePriceTotal">{{policySubtotal}}</h1> -->
         </div>
         <div class="quoteSummaryCustInfo">
@@ -817,60 +820,53 @@
             <div class="row">
                 <div class="col">
                     <span class="fieldSection">Name</span>
-                    <p>Jonathan Doe</p>
-                    <!-- <p>{{firstName.value}} {{lastName.value}}</p> -->
+                    <p>{{firstName.value}} {{lastName.value}}</p>
                 </div>
                 <div class="col">
                     <span class="fieldSection">Address</span>
-                    <p>1234 White St New York, NY 1000</p>
-                    <!-- <p>{{address.value}}</p> -->
+                    <p>{{address.value}} {{city.value}}, {{state.value}}, {{zip.value}}</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <span class="fieldSection">SSN</span>
-                    <p>111-11-1111</p>
-                    <!-- <p>{{ssn.value}}</p> -->
+                    <p>{{ssn.value}}</p>
                 </div>
                 <div class="col">
                     <span class="fieldSection">Date Of Birth</span>
-                    <p>04/17/1983</p>
-                    <!-- <p>{{dateOfBirth.value}}</p> -->
+                    <p>{{dateOfBirth.value}}</p>
                 </div>
             </div>
         </div>
         <div class="driverInfo" formGroupName="driverInfo">
             <div class="row reviewPageSectionHeader2">
                 <p clsas="col sectionTitle">Drivers</p>
-                <p class="col sectionSubTitle">$246</p>
-                <!-- <p class="col">{{driverSubtotalCost}}</p> -->
+                <p class="col sectionSubTitle">${{driverSubtotalCost}}</p>
             </div>
             <div class="infoCard">
                 <div class="row">
                     <div class="col">
-                        <span class="quoteSummaryFieldSection">Jonathan Doe</span>
-                        <!-- <p>{{driverFirstName.value}} {{driverLastName.value}}</p> -->
+                        <span class="quoteSummaryFieldSection">{{driverFirstName.value}} {{driverLastName.value}}</span>
                     </div>
                 </div>
                 <div class="subSectionCard">
                     <div class="">
-                        <p class="mainInfoQuoteSummary">123409817234, NY</p>
-                        <!-- <p>{{driverLicenseNumber.value}}</p> -->
-                        <p class="subInfoQuoteSummary">04/17/1983</p>
+                        <p class="mainInfoQuoteSummary">{{driverLicenseNumber.value}}, {{driverLicenseState.value}}</p>
+                        <p class="subInfoQuoteSummary">{{driverDOB.value}}</p>
                     </div>
                 </div>
                 <div class="row form-group totalTotal">
                     <p class="col driverTotalLabel" for="">Driver Total</p>
-                    <p class="col driverTotalCost">$123</p>
+                    <p class="col driverTotalCost">${{driverSubtotalCost}}</p>
                 </div>
             </div>
         </div>
+
         <!-- VEHICLE INFORMATION -->
-        <div class="vehicleInfo" formGroupName="vehicleInfo">
+        <div class="driverInfo" formGroupName="driverInfo">
             <div class="row reviewPageSectionHeader2">
-                <p clsas="col sectionTitle">Vehicles</p>
-                <p class="col sectionSubTitle">$246</p>
-                <!-- <p class="col">{{driverSubtotalCost}}</p> -->
+                <p class="col sectionTitle">Vehicles</p>
+                <p class="col sectionSubTitle">${{vehicleSubtotalCost}}</p>
             </div>
             <div class="infoCard">
                 <div class="row">
@@ -879,23 +875,23 @@
                             {{make.value}}, {{model.value}},
                             {{year.value}}
                         </span>
-                        <!-- <p>{{driverFirstName.value}} {{driverLastName.value}}</p> -->
                     </div>
                 </div>
-                <div class="subSectionCard">
+                <!-- <div class="subSectionCard">
                     <div class="">
-                        <p class="mainInfoQuoteSummary">123409817234, NY</p>
-                        <!-- <p>{{driverLicenseNumber.value}}</p> -->
-                        <p class="subInfoQuoteSummary">04/17/1983</p>
+                        <p class="mainInfoQuoteSummary">{{driverLicenseNumber.value}}, {{driverLicenseState.value}}</p>
+                        <p class="subInfoQuoteSummary">{{driverDOB.value}}</p>
                     </div>
-                </div>
+                </div> -->
                 <div class="row form-group totalTotal">
                     <p class="col driverTotalLabel" for="">Vehicle Total</p>
-                    <p class="col driverTotalCost">$123</p>
+                    <p class="col driverTotalCost">${{vehicleSubtotalCost}}</p>
                 </div>
             </div>
         </div>
+
         <hr />
+        <!-- TOTAL TABLE -->
         <div>
             <table class="totalBreakdown">
                 <tr>
@@ -908,7 +904,7 @@
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td>${{policySubtotal}}</td>
+                    <td>${{totalCost}}</td>
                 </tr>
             </table>
         </div>
