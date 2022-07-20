@@ -18,6 +18,7 @@ import { Discount } from '../_models/discount';
 
 export class QuoteCreationComponent implements OnInit {
 
+  currentUser: string = JSON.parse(localStorage.getItem('currentUser')).userName;
   apiUrl: string = environment.apiUrl
   quoteParamSubscription: Subscription
   quote: Quote
@@ -444,7 +445,7 @@ export class QuoteCreationComponent implements OnInit {
 
   // USED TO INITIALIZE QUOTE WITH DUMMY DATA
   fillDefaults() {
-    this.quote.creatorEmail = "";
+    this.quote.creatorEmail = this.currentUser;
     this.quote.roleID = "";
     this.quote.firstName = "";
     this.quote.lastName = "";
