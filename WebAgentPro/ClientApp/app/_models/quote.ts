@@ -18,7 +18,7 @@ export class Quote {
     dateOfBirth: string;
     lessThan3YearsDriving: boolean;
     previousCarrier: string;
-    movingViolationInLast5Years: boolean;
+    movingVioliationInLast5Years: boolean;
     claimInLast5Years: boolean;
     forceMultiCarDiscount: boolean;
     drivers: Array<Driver>;

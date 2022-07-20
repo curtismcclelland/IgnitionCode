@@ -7,6 +7,7 @@ import { Driver } from '@app/_models/driver';
 import { Vehicle } from '@app/_models/vehicle';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Discount } from '../_models/discount';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class QuoteCreationComponent implements OnInit {
   quoteParamSubscription: Subscription
   quote: Quote
   driver: Driver
-  vehicle: Vehicle
+    vehicle: Vehicle
+    currentDiscount: Discount
   action: string
   step: any = 1;
 
@@ -42,7 +44,7 @@ export class QuoteCreationComponent implements OnInit {
   public customerHistory: FormGroup;
   lessThan3YearsDriving: FormControl;
   previousCarrier: FormControl;
-  movingViolationInLast5Years: FormControl;
+  movingVioliationInLast5Years: FormControl;
   claimInLast5Years: FormControl;
   forceMultiCarDiscount: FormControl;
   isCustomerDriver: FormControl;
@@ -197,14 +199,14 @@ export class QuoteCreationComponent implements OnInit {
     // CUSTOMER HISTORY - PG 2
     this.lessThan3YearsDriving = new FormControl(false, []);
     this.previousCarrier = new FormControl('', [Validators.required]);
-    this.movingViolationInLast5Years = new FormControl(false, []);
+    this.movingVioliationInLast5Years = new FormControl(false, []);
     this.claimInLast5Years = new FormControl(false, []);
     this.forceMultiCarDiscount = new FormControl(false, []);
     this.isCustomerDriver = new FormControl(false, []);
     this.customerHistory = new FormGroup({
       lessThan3YearsDriving: this.lessThan3YearsDriving,
       previousCarrier: this.previousCarrier,
-      movingViolationInLast5Years: this.movingViolationInLast5Years,
+      movingVioliationInLast5Years: this.movingVioliationInLast5Years,
       claimInLast5Years: this.claimInLast5Years,
       forceMultiCarDiscount: this.forceMultiCarDiscount,
       isCustomerDriver: this.isCustomerDriver,
@@ -370,19 +372,53 @@ export class QuoteCreationComponent implements OnInit {
     this.quote.state = this.state.value;
     this.quote.zip = this.zip.value;
     this.quote.ssn = this.ssn.value;
-    this.quote.dateOfBirth = this.dateOfBirth.value;
-    console.log(this.dateOfBirth.value);
+      this.quote.dateOfBirth = this.dateOfBirth.value;
+      this.getDiscount(this.quote.state);
+      
+
     this.putQuote(this.quote);
     this.continue();
 
-  }
+    }
+
+    //Add
+    setQuoteDiscountValues() {
+        this.quote.daytimeRunningLights = this.currentDiscount.daytimeRunningLights;
+        this.quote.antilockBrakes = this.currentDiscount.antilockBrakes;
+        this.quote.lowAnnualMileage = this.currentDiscount.lowAnnualMileage;
+        this.quote.passiveRestraints = this.currentDiscount.passiveRestraints;
+        this.quote.antitheftInstalled = this.currentDiscount.antitheftInstalled;
+        this.quote.highDaysDrivenPerWeek = this.currentDiscount.highDaysDrivenPerWeek;
+        this.quote.lowMilesDrivenToWork = this.currentDiscount.lowMilesDrivenToWork;
+        this.quote.reduceUse = this.currentDiscount.reduceUse;
+        this.quote.garageAddressDifferent = this.currentDiscount.garageAddressDifferent;
+        this.quote.lowDrivingExperience = this.currentDiscount.lowDrivingExperience;
+        this.quote.previousCarrierLizard = this.currentDiscount.previousCarrierLizard;
+        this.quote.previousCarrierPervasive = this.currentDiscount.previousCarrierPervasive;
+        this.quote.recentMovingViolations = this.currentDiscount.recentMovingViolations;
+        this.quote.recentClaims = this.currentDiscount.recentClaims;
+        this.quote.multiCar = this.currentDiscount.multiCar;
+        this.quote.youngDriver = this.currentDiscount.youngDriver;
+        this.quote.safeDrivingSchool = this.currentDiscount.safeDrivingSchool;
+    }
+
+    getDiscount(state: string) {
+        var httpRequest = this.http.get<Discount>(`${this.apiUrl}/discounts/${state}`);
+
+        httpRequest.subscribe(
+            returnedDiscount => {
+                this.currentDiscount = returnedDiscount
+            }
+        );
+    }
 
   updateQuoteInfoSecondPage() {
     this.quote.lessThan3YearsDriving = this.lessThan3YearsDriving.value;
     this.quote.previousCarrier = this.previousCarrier.value;
-    this.quote.movingViolationInLast5Years = this.movingViolationInLast5Years.value;
+    this.quote.movingVioliationInLast5Years = this.movingVioliationInLast5Years.value;
     this.quote.claimInLast5Years = this.claimInLast5Years.value;
-    this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
+      this.quote.forceMultiCarDiscount = this.forceMultiCarDiscount.value;
+      this.setQuoteDiscountValues();
     this.putQuote(this.quote);
     this.continue();
 
@@ -413,7 +449,8 @@ export class QuoteCreationComponent implements OnInit {
     this.fillDefaults();
     this.postQuote(this.quote);
     this.driver = new Driver;
-    this.vehicle = new Vehicle;
+      this.vehicle = new Vehicle;
+      this.currentDiscount = new Discount;
   }
 
   fillDefaults() {
@@ -429,7 +466,7 @@ export class QuoteCreationComponent implements OnInit {
     this.quote.dateOfBirth = "";
     this.quote.lessThan3YearsDriving = false;
     this.quote.previousCarrier = "";
-    this.quote.movingViolationInLast5Years = false;
+    this.quote.movingVioliationInLast5Years = false;
     this.quote.claimInLast5Years = false;
     this.quote.forceMultiCarDiscount = false;
     this.quote.drivers = [];
@@ -594,7 +631,7 @@ export class QuoteCreationComponent implements OnInit {
     if (this.quote.lessThan3YearsDriving == true) {
       currentQuoteQuoteMultiplier *= 1.15;
     }
-    if (this.quote.movingViolationInLast5Years == true) {
+    if (this.quote.movingVioliationInLast5Years == true) {
       currentQuoteQuoteMultiplier *= 1.20;
     }
     if (this.quote.previousCarrierLizard) {
