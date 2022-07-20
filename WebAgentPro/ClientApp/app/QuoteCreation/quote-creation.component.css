@@ -1,4 +1,4 @@
-.progressBar{
+.progressBar {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -8,12 +8,10 @@
     margin-bottom: 10%;
 }
 
-.progress-step{
+.progress-step {
     box-sizing: border-box;
-
     width: 16px;
     height: 16px;
-
     /* Dark Blue */
 
     background: #adadad;
@@ -23,10 +21,9 @@
     border-radius: 50%;
 }
 
-.current-step{
+.current-step {
     width: 14px;
     height: 14px;
-
     background: #0025CB;
     border-radius: 50%;
 }
@@ -35,6 +32,14 @@
     width: 325px;
     background: #0025CB;
     border-radius: 20px;
+}
+
+.btn-secondary {
+    width: 325px;
+    background: #d1d1d1;
+    border-radius: 20px;
+    border: 2px solid #0025CB;
+    color: #0025CB;
 }
 
 .formNavButtons {
@@ -49,6 +54,7 @@
 
 .quoteForm {
     justify-content: center;
+    margin: 10px;
 }
 
 h1 {
@@ -96,14 +102,13 @@ select {
     align-items: center;
     padding: 10px 15px;
     gap: 6.69px;
-    width: 325px;
     height: 41px;
+    width: 100%;
     /* White */
 
     background: #FFFFFF;
     /* Dark Gray */
 
-    border: 2px solid #2F2F2F;
     border-radius: 8px;
     /* Inside auto layout */
 
@@ -125,28 +130,28 @@ input[type="checkbox"] {
     color: white;
 }
 
-input[type="checkbox"]:checked {
-    background-color: #000000;
-    color: #FFFFFF;
-}
+    input[type="checkbox"]:checked {
+        background-color: #000000;
+        color: #FFFFFF;
+    }
 
-input[type="checkbox"]:after {
-    content: ' ';
-    position: absolute;
-    height: 18px;
-    width: 20px;
-    left: 2px;
-    top: 3px;
-    border-radius: 0px;
-    border: #FFFFFF;
-    border-width: 0 2px 2px 0;
-    transform: rotate(50deg);
-    display: none;
-}
+    input[type="checkbox"]:after {
+        content: ' ';
+        position: absolute;
+        height: 18px;
+        width: 20px;
+        left: 2px;
+        top: 3px;
+        border-radius: 0px;
+        border: #FFFFFF;
+        border-width: 0 2px 2px 0;
+        transform: rotate(50deg);
+        display: none;
+    }
 
-input[type="checkbox"]:checked:after {
-    display: block;
-}
+    input[type="checkbox"]:checked:after {
+        display: block;
+    }
 
 label .questions {
     font-style: normal;
@@ -161,36 +166,38 @@ label .questions {
     position: relative;
     display: inline-block;
     cursor: pointer;
+    width: 100%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-/* The actual popup */
-.popup .popuptext {
-    font-family: 'Barlow';
-    font-style: normal;
-    width: 160px;
-    background-color: #D63E3E;
-    color: #fff;
-    text-align: center;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    left: 10%;
-    border-radius: 7px;
-}
+    /* The actual popup */
+    .popup .popuptext {
+        font-family: 'Barlow';
+        font-style: normal;
+        width: 220px;
+        background-color: #D63E3E;
+        color: #fff;
+        text-align: center;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 1;
+        right: 10%;
+        border-radius: 7px;
+    }
 
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: -9px;
+            left: 10px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #D63E3E transparent;
+        }
 
 input[type="checkbox"] {
     float: right;
@@ -212,19 +219,19 @@ input[type="checkbox"] {
     padding-bottom: 10px;
 }
 
-.reviewPageSectionHeader > .editBtn {
-    text-align: right;
-    color: #757575;
-}
+    .reviewPageSectionHeader > .editBtn {
+        text-align: right;
+        color: #757575;
+    }
 
-.reviewPageSectionHeader > .sectionTitle {
-    text-align: left;
-    /* Dark Gray */
-    font-weight: bold;
-    font-size: 18px;
-    text-transform: capitalize;
-    color: #2F2F2F;
-}
+    .reviewPageSectionHeader > .sectionTitle {
+        text-align: left;
+        /* Dark Gray */
+        font-weight: bold;
+        font-size: 18px;
+        text-transform: capitalize;
+        color: #2F2F2F;
+    }
 
 .form-control {
     padding: 9.4517px 14.1775px;
@@ -235,7 +242,7 @@ input[type="checkbox"] {
     height: 42px;
 }
 
-.fieldSection{
+.fieldSection {
     color: #757575;
     font-family: 'Barlow';
     font-style: normal;
@@ -243,8 +250,140 @@ input[type="checkbox"] {
     font-size: 12px;
 }
 
-.reviewInfoPage > p{
+.reviewInfoPage > p {
     font-family: 'DM Sans';
     font-style: normal;
     color: #2F2F2F;
+}
+
+.bi-exclamation-triangle-fill {
+    color: #D63E3E;
+    margin-left: 5px;
+}
+
+.quotePrice {
+    font-family: 'Barlow';
+    font-style: normal;
+    /* identical to box height */
+}
+
+.quotePriceLabel {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin-bottom: 2px;
+}
+
+.quotePriceTotal {
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 52px;
+    /* identical to box height */
+    /* Dark Gray */
+    color: #161616;
+}
+
+.quoteSummaryPageTitle {
+    text-align: center;
+}
+
+.quoteSummaryFieldSection {
+    width: 225px;
+    height: 23px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 23px;
+    /* Dark Blue */
+
+    color: #0025CB;
+}
+
+.quoteSummaryCustInfo {
+    margin-bottom: 20px;
+}
+
+.infoCard {
+    border: 2px solid black;
+    border-radius: 8px;
+    margin: 2px;
+    padding: 10px;
+    margin-top: 4px;
+    height: 140px;
+    margin-bottom: 20px;
+}
+
+.subSectionCard {
+    display: flex;
+    font-family: 'Barlow';
+    font-style: normal;
+}
+
+.mainInfoQuoteSummary {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #757575;
+}
+
+.subInfoQuoteSummary {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: #757575;
+}
+
+.reviewPageSectionHeader2 {
+    font-family: 'DM Sans';
+    font-style: normal;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 23px;
+    color: #161616;
+    border-bottom: 2px solid rgb(97, 97, 97);
+}
+
+    .reviewPageSectionHeader2 > .sectionSubTitle {
+        text-align: right;
+    }
+
+    .reviewPageSectionHeader2 > .sectionTitle {
+        text-align: left;
+        /* Dark Gray */
+        font-weight: bold;
+        text-transform: capitalize;
+        font-weight: 900;
+    }
+
+.totalTotal {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #161616;
+}
+
+    .totalTotal > .driverTotalCost {
+        text-align: right;
+    }
+
+    .totalTotal > .driverTotalLabel {
+        text-align: left;
+        /* Dark Gray */
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+.totalBreakdown {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    width: 80%;
 }
