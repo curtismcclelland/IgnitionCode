@@ -10,10 +10,12 @@ import { DiscountEditComponent } from './discountmanagement/discount-edit/discou
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 import { QuoteCreationComponent } from './QuoteCreation/quote-creation.component';
 import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
+import { AgentDashboardComponent } from './AgentDashboard/agent-dashboard.component';
 
 const appRoutes: Routes = [
     { path: 'quoteSearch', component: QuoteSearchComponent },
     { path: 'quoteCreation', component: QuoteCreationComponent },
+    { path: 'agentDasboard', component: AgentDashboardComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },

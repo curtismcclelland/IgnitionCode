@@ -1,12 +1,12 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AppComponent }  from './app.component';
-import { routing }        from './app.routing';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 
-import { NgxPaginationModule } from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { JwtInterceptor, ErrorInterceptor } from './_security';
 import { UsersComponent } from './usermanagement/users/users.component';
@@ -17,9 +17,11 @@ import { DiscountEditComponent } from './discountmanagement/discount-edit/discou
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 import { QuoteCreationComponent } from './QuoteCreation/quote-creation.component';
 import { QuoteSearchComponent } from './QuoteSearch/quote-search.component';
+import { AgentDashboardComponent } from './AgentDashboard/agent-dashboard.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-  
+
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -39,7 +41,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         DiscountEditComponent,
         RoutenotfoundComponent,
         QuoteCreationComponent,
-        QuoteSearchComponent
+        QuoteSearchComponent,
+        AgentDashboardComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
