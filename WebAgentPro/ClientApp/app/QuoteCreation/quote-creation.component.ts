@@ -360,7 +360,7 @@ export class QuoteCreationComponent implements OnInit {
 
     this.postVehicle(this.vehicle);
     this.quote.vehicles.push(this.vehicle);
-    this.putQuote(this.quote);
+      this.putQuote(this.quote);
     this.continue();
   }
 
@@ -426,20 +426,21 @@ export class QuoteCreationComponent implements OnInit {
 
   // Adjust for multiple Drivers and Vehicles later
   submitForm() {
-    this.updateDriverInfo();
-    this.updateVehicleInfo();
-    this.updateQuoteInfoFirstPage();
-    this.updateQuoteInfoSecondPage();
+    //this.updateDriverInfo();
+    //this.updateVehicleInfo();
+    //this.updateQuoteInfoFirstPage();
+    //this.updateQuoteInfoSecondPage();
 
-    console.log(this.quote)
-    console.log(this.driver)
-    console.log(this.vehicle)
+    //console.log(this.quote)
+    //console.log(this.driver)
+    //console.log(this.vehicle)
 
-    this.calculateQuotePrice();
+    //this.calculateQuotePrice();
     this.continue();
     }
 
     createQuote() {
+        this.calculateQuotePrice();
         this.continue();
     }
 
@@ -567,85 +568,95 @@ export class QuoteCreationComponent implements OnInit {
 
   //Quote pricing
 
-  calculateQuotePrice() {
-    var driverBaseCost = 200;
-    var vehicleBaseCost = this.vehicle.currentValue * 0.03;
-    var policyBaseCost = 100;
-    var driverQuoteMultiplier = 1;
-    var vehicleQuoteMultiplier = 1;
-    var currentQuoteQuoteMultiplier = 1;
+    
+    calculateQuotePrice() {
+        var driverBaseCost = 200;
+        var vehicleBaseCost = this.vehicle.currentValue * 0.03;
+        var policyBaseCost = 100;
+        var driverQuoteMultiplier = 1;
+        var vehicleQuoteMultiplier = 1;
+        var currentQuoteQuoteMultiplier = 1;
 
-    if (this.driver.safeDrivingSchool == true) {
-      driverQuoteMultiplier *= .95;
+        if (this.driver.safeDrivingSchool == true) {
+            driverQuoteMultiplier *= 1 + this.quote.safeDrivingSchool;
+        }
+
+        var date = new Date();
+        date.setDate(date.getDate());
+        date.setMonth(date.getMonth());
+        date.setFullYear(date.getFullYear() - 23);
+
+        const birthDateasNumber = this.driver.dateOfBirth;
+        const dateArray = birthDateasNumber.split('-');
+        const year = Number(dateArray[0]);
+        const month = Number(dateArray[1]);
+        const day = Number(dateArray[2]);
+        const dateOfBirthAsDate = new Date();
+        dateOfBirthAsDate.setFullYear(year, month, day);
+
+        if ((dateOfBirthAsDate.getTime()) > date.getTime()) {
+            driverQuoteMultiplier *= 1 + this.quote.youngDriver;
+        }
+
+        this.driverSubtotalCost = +((driverBaseCost *= driverQuoteMultiplier).toFixed(2));
+
+        if (this.vehicle.annualMileage < 6000) {
+            vehicleQuoteMultiplier *= 1 + this.quote.lowAnnualMileage;
+        }
+        if (this.vehicle.antiTheft == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.antitheftInstalled;
+        }
+        if (this.vehicle.antiLockBrakes == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.antilockBrakes;
+        }
+        if (this.vehicle.daysDrivenPerWeek > 4) {
+            vehicleQuoteMultiplier *= 1 + this.quote.highDaysDrivenPerWeek;
+        }
+        if (this.vehicle.milesDrivenToWork < 25) {
+            vehicleQuoteMultiplier *= 1 + this.quote.lowMilesDrivenToWork;
+        }
+        if (this.vehicle.daytimeRunningLights == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.daytimeRunningLights;
+        }
+        if (this.vehicle.garageAddressDifferentFromResidence == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.garageAddressDifferent;
+        }
+        if (this.vehicle.passiveRestraints == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.passiveRestraints;
+        }
+        if (this.vehicle.reducedUsedDiscount == true) {
+            vehicleQuoteMultiplier *= 1 + this.quote.reduceUse;
+        }
+        this.vehicleSubtotalCost = +((vehicleBaseCost *= vehicleQuoteMultiplier).toFixed(2));
+        //policy base cost starts here
+        var policyCost = this.vehicleSubtotalCost + this.driverSubtotalCost + policyBaseCost;
+
+        if (this.quote.claimInLast5Years == true) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.recentClaims;
+        }
+        if (this.quote.forceMultiCarDiscount == true) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.multiCar;
+        }
+        if (this.quote.lessThan3YearsDriving == true) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.lowDrivingExperience;
+        }
+        if (this.quote.movingVioliationInLast5Years == true) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.recentMovingViolations;
+        }
+        if (this.quote.previousCarrierLizard) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierLizard;
+        }
+        if (this.quote.previousCarrierPervasive) {
+            currentQuoteQuoteMultiplier *= 1 + this.quote.previousCarrierPervasive;
+        }
+        this.policySubtotal = +((policyCost *= currentQuoteQuoteMultiplier).toFixed(2));
+        this.totalCost = this.policySubtotal;
+        this.quote.quotePrice = this.totalCost;
+        this.putQuote(this.quote);
+
+        console.log("Your total vehicle cost is: ", this.vehicleSubtotalCost);
+        console.log("Your total driver cost is: ", this.driverSubtotalCost);
+        console.log("You total policy cost is: ", this.totalCost);
     }
 
-    var date = new Date();
-    date.setDate(date.getDate());
-    date.setMonth(date.getMonth());
-    date.setFullYear(date.getFullYear() - 23);
-
-    if ((new Date(this.driver.dateOfBirth).getTime()) > date.getTime()) {
-      driverQuoteMultiplier *= 1.10;
-    }
-
-    this.driverSubtotalCost = +((driverBaseCost *= driverQuoteMultiplier).toFixed(2));
-
-    if (this.vehicle.annualMileage < 6000) {
-      vehicleQuoteMultiplier *= .98;
-    }
-    if (this.vehicle.antiTheft == true) {
-      vehicleQuoteMultiplier *= .97;
-    }
-    if (this.vehicle.antiLockBrakes == true) {
-      vehicleQuoteMultiplier *= .98;
-    }
-    if (this.vehicle.daysDrivenPerWeek > 4) {
-      vehicleQuoteMultiplier *= 1.02;
-    }
-    if (this.vehicle.milesDrivenToWork < 25) {
-      vehicleQuoteMultiplier *= .98;
-    }
-    if (this.vehicle.daytimeRunningLights == true) {
-      vehicleQuoteMultiplier *= .99;
-    }
-    if (this.vehicle.garageAddressDifferentFromResidence == true) {
-      vehicleQuoteMultiplier *= 1.03;
-    }
-    if (this.vehicle.passiveRestraints == true) {
-      vehicleQuoteMultiplier *= .97;
-    }
-    if (this.vehicle.reducedUsedDiscount == true) {
-      vehicleQuoteMultiplier *= .94
-    }
-    this.vehicleSubtotalCost = +((vehicleBaseCost *= vehicleQuoteMultiplier).toFixed(2));
-    //policy base cost starts next line
-
-    var policyCost = this.vehicleSubtotalCost + this.driverSubtotalCost + policyBaseCost;
-
-    if (this.quote.claimInLast5Years == true) {
-      currentQuoteQuoteMultiplier *= 1.2;
-    }
-    if (this.quote.forceMultiCarDiscount == true) {
-      currentQuoteQuoteMultiplier *= .95;
-    }
-    if (this.quote.lessThan3YearsDriving == true) {
-      currentQuoteQuoteMultiplier *= 1.15;
-    }
-    if (this.quote.movingVioliationInLast5Years == true) {
-      currentQuoteQuoteMultiplier *= 1.20;
-    }
-    if (this.quote.previousCarrierLizard) {
-      currentQuoteQuoteMultiplier *= 1.05;
-    }
-    if (this.quote.previousCarrierPervasive) {
-      currentQuoteQuoteMultiplier *= .97;
-    }
-    this.policySubtotal = +((policyCost *= currentQuoteQuoteMultiplier).toFixed(2));
-    this.totalCost = this.policySubtotal;
-
-
-    console.log("Your total vehicle cost is: ", this.vehicleSubtotalCost);
-    console.log("Your total driver cost is: ", this.driverSubtotalCost);
-    console.log("You total policy cost is: ", this.totalCost);
-  }
 }
