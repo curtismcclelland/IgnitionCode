@@ -100,7 +100,9 @@
                             class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <select formControlName="state" name="state" class="form-control" required>
-                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
+                        <!-- <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option> -->
+                        <option value="CA">California</option>
+                        <option value="VT">Vermont</option>
                     </select>
                     <span *ngIf="state.invalid && (state.dirty || state.touched)">
                         <span *ngIf="state.errors?.required" class="popuptext">
@@ -249,8 +251,8 @@
                     <label for="inputState" class="form-label">Driver's License State</label>
                     <select formControlName="driverLicenseState" id="inputState" name="state" class="form-control"
                         required>
-                        <option selected>Choose...</option>
-                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
+                        <option value="CA">California</option>
+                        <option value="VT">Vermont</option>
                     </select>
                 </div>
             </div>
@@ -364,7 +366,9 @@
                             class="bi bi-exclamation-triangle-fill"></i>
                     </label>
                     <select formControlName="driverLicenseState" id="inputState" name="state" class="form-control">
-                        <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option>
+                        <!-- <option *ngFor="let states of listOfStatesObj" [value]="states.abbr">{{states.name}}</option> -->
+                        <option value="CA">California</option>
+                        <option value="VT">Vermont</option>
                     </select>
                     <span
                         *ngIf="driverLicenseState.invalid && (driverLicenseState.dirty || driverLicenseState.touched)">
@@ -912,11 +916,11 @@
         <div class="formNavButtons">
             <a class="btn btn-secondary" role="button" (click)="declineForm()">Decline</a>
             <a routerLink="/agentDashboard" routerLinkActive="active">
-            <button type="submit" class="btn btn-primary" (click)="continue()">
-                Submit
+                <button type="submit" class="btn btn-primary" (click)="continue()">
+                    Submit
                 </button>
             </a>
-           
+
         </div>
     </div>
 </form>
