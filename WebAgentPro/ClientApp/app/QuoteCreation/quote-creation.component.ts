@@ -26,7 +26,7 @@ export class QuoteCreationComponent implements OnInit {
   vehicle: Vehicle
   currentDiscount: Discount
   action: string
-  step: any = 7;
+  step: any = 1;
 
   public userForm: FormGroup;
 
