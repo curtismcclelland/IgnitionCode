@@ -427,7 +427,7 @@ export class QuoteCreationComponent implements OnInit {
   }
 
   // REDIRECT TO AGENT/MANAGER DASHBOARD
-  submitForm() {
+    submitForm() {
     this.continue();
   }
 

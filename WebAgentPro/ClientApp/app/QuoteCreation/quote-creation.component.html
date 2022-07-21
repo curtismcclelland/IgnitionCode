@@ -911,7 +911,12 @@
         <hr />
         <div class="formNavButtons">
             <a class="btn btn-secondary" role="button" (click)="declineForm()">Decline</a>
-            <button type="submit" class="btn btn-primary" (click)="continue()">Submit</button>
+            <a routerLink="/agentDashboard" routerLinkActive="active">
+            <button type="submit" class="btn btn-primary" (click)="continue()">
+                Submit
+                </button>
+            </a>
+           
         </div>
     </div>
 </form>
