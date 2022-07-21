@@ -15,7 +15,7 @@ import { AgentDashboardComponent } from './AgentDashboard/agent-dashboard.compon
 const appRoutes: Routes = [
     { path: 'quoteSearch', component: QuoteSearchComponent },
     { path: 'quoteCreation', component: QuoteCreationComponent },
-    { path: 'agentDasboard', component: AgentDashboardComponent },
+    { path: 'agentDashboard', component: AgentDashboardComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
