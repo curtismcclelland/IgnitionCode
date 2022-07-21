@@ -806,7 +806,15 @@
     </div>
 
     <!-- DISPLAY QUOTE COSTS -->
-    <div *ngIf="step == 7" class="quoteSummaryPage">
+    <div *ngIf="step == 7" class="quoteSummaryPage" id="print-section">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col leftAlign">
+                <a><i class="bi bi-envelope-fill" style="padding-right: 5px;"></i></a>
+                <a (click)="print()"><i class="bi bi-printer-fill"></i></a>
+            </div>
+        </div>
         <div class="quoteSummaryPageTitle">
             <h3 clsas="">Quote Summary</h3>
         </div>
@@ -915,12 +923,10 @@
         <hr />
         <div class="formNavButtons">
             <a class="btn btn-secondary" role="button" (click)="declineForm()">Decline</a>
-            <a routerLink="/agentDashboard" routerLinkActive="active">
-                <button type="submit" class="btn btn-primary" (click)="continue()">
-                    Submit
-                </button>
-            </a>
-
+            <button type="submit" routerLink="/agentDashboard" routerLinkActive="active" class="btn btn-primary"
+                (click)="continue()">
+                Submit
+            </button>
         </div>
     </div>
 </form>

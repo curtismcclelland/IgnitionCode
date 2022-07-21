@@ -26,7 +26,7 @@ export class QuoteCreationComponent implements OnInit {
   vehicle: Vehicle
   currentDiscount: Discount
   action: string
-  step: any = 1;
+  step: any = 7;
 
   public userForm: FormGroup;
 
@@ -310,11 +310,11 @@ export class QuoteCreationComponent implements OnInit {
     };
   }
 
-    ngOnInit(): void {
-        this.quoteParamSubscription = this.route.params.subscribe(
-            params => {
+  ngOnInit(): void {
+    this.quoteParamSubscription = this.route.params.subscribe(
+      params => {
 
-            });
+      });
     this.createFormControls();
     this.createForm();
 
@@ -427,7 +427,7 @@ export class QuoteCreationComponent implements OnInit {
   }
 
   // REDIRECT TO AGENT/MANAGER DASHBOARD
-    submitForm() {
+  submitForm() {
     this.continue();
   }
 
@@ -564,6 +564,20 @@ export class QuoteCreationComponent implements OnInit {
   // USED TO NAVIGATE FORWARD ONE STEP IN QUOTE CREATION PAGE
   continue() { this.step = this.step + 1; }
 
+  print(): void {
+    let printContents, popupWin;
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`<html>
+      <head>
+        <title>Print tab</title>
+        </head>
+            <body onload="window.print();window.close()">${printContents}</body>
+        </html>`);
+    popupWin.document.close();
+  }
+
   // CALCULATE QUOTE PRICES
   calculateQuotePrice() {
     var driverBaseCost = 200;
@@ -576,6 +590,7 @@ export class QuoteCreationComponent implements OnInit {
     if (this.driver.safeDrivingSchool == true) {
       driverQuoteMultiplier *= 1 + this.quote.safeDrivingSchool;
     }
+
 
     var date = new Date();
     date.setDate(date.getDate());
