@@ -37,8 +37,8 @@ namespace WebAgentPro.Api.Controllers
         //[Authorize(Roles = "Manager, Agent")]
         public async Task<ActionResult<Quote>> GetQuote(int id)
         {
-            //var quote = await _context.Quotes.FindAsync(id);]
-            var quote = await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p=>p.Driver).AsNoTracking().SingleOrDefaultAsync(p => p.QuoteId == id);
+            var quote = await _context.Quotes.FindAsync(id);
+            //var quote = await _context.Quotes.Include(p => p.Drivers).Include(p => p.Vehicles).ThenInclude(p=>p.Driver).AsNoTracking().SingleOrDefaultAsync(p => p.QuoteId == id);
 
             if (quote == null)
             {

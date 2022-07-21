@@ -33,8 +33,8 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
-            //var vehicle = await _context.Vehicles.FindAsync(id);
-            var vehicle = await _context.Vehicles.Include(p => p.PrimaryDriverId).AsNoTracking().SingleOrDefaultAsync(p => p.VehicleId == id);
+            var vehicle = await _context.Vehicles.FindAsync(id);
+            //var vehicle = await _context.Vehicles.Include(p => p.PrimaryDriverId).AsNoTracking().SingleOrDefaultAsync(p => p.VehicleId == id);
 
             if (vehicle == null)
             {
